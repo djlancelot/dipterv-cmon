@@ -1,0 +1,27 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: diploma.aux
+A level-1 auxiliary file: titlepage.aux
+A level-1 auxiliary file: declaration.aux
+A level-1 auxiliary file: abstract.aux
+A level-1 auxiliary file: introduction.aux
+A level-1 auxiliary file: chapter1.aux
+A level-1 auxiliary file: chapter2.aux
+A level-1 auxiliary file: chapter3.aux
+A level-1 auxiliary file: acknowledgement.aux
+The style file: plain.bst
+A level-1 auxiliary file: appendices.aux
+Database file #1: mybib.bib
+Warning--entry type for "sensorml" isn't style-file defined
+--line 8 of file mybib.bib
+Warning--entry type for "mapserver" isn't style-file defined
+--line 19 of file mybib.bib
+Warning--entry type for "istsos" isn't style-file defined
+--line 26 of file mybib.bib
+Warning--entry type for "52north" isn't style-file defined
+--line 33 of file mybib.bib
+Warning--entry type for "jena" isn't style-file defined
+--line 40 of file mybib.bib
+Warning--entry type for "rdf" isn't style-file defined
+--line 47 of file mybib.bib
+Warning--entry type for "v8" isn't style-file defined
+--line 54 of file mybib.bib
+(There were 7 warnings)

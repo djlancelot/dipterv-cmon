@@ -1,0 +1,31 @@
+\begin{thebibliography}{1}
+
+\bibitem{52north}
+52north org.
+\newblock Sensor observation service.
+
+\bibitem{sensorml}
+Mike Botts.
+\newblock Ogc sensorml: Model and xml encoding standard.
+
+\bibitem{mapserver}
+MapServer Community.
+\newblock Mapserver webpage.
+
+\bibitem{jena}
+Apache Foundation.
+\newblock Getting started.
+
+\bibitem{v8}
+Google.
+\newblock Chrome v8.
+
+\bibitem{rdf}
+RDF~Working Group.
+\newblock Resource description framework (rdf).
+
+\bibitem{istsos}
+istSOS Community.
+\newblock istsos webpage.
+
+\end{thebibliography}
