@@ -1,11 +1,13 @@
 %----------------------------------------------------------------------------
-\chapter{The actual use case of SensorML and sensor ontology}
+\chapter{The Implementation}
 %----------------------------------------------------------------------------
-\section{Usage of the designed software}
+\section{Goal of the implementation}
 
-The designed monitoring software is made to be part of the system created for the Future Internet Research, Services and Technology project started by ETIK organization. The system is a prototype of a sensor network where the output of sensors can be used to create so called virtual sensors and store the data in a central data store. The system can reason using the ontology built on the sensors. A detailed introduction can be found in this chapter.
+After introducing the two different data types, in this part a sample application is shown that can handle connection to both data types.
 
-\section{Goal of the project}
+The goal was to show how a connection can be created from third party applications. In further chapters the integration of the different types will be shown. The meaning of this phase is to seek for new ways to implement web application using the connectors provided and measure the needs for such a web application. A whole test system were created to enable this.
+
+\section{The test environment}
 
 A new virtual machine has been created for the test environment. It is using free and open source tools that run the application.
 Ubuntu 13.10 is used as the operating system. The virtual machine has a limited 512 MB of RAM, and a max. 10 GB storage. It's network card is hidden behind a NAT provided by the host computer. This makes easier to work on a laptop on different locations. Java Runtime Environment is installed on the virtual machine for Stardog and SOS. For the web application NodeJS has been set up.
