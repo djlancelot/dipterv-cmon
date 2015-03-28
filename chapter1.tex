@@ -42,11 +42,25 @@ Most phyisical quantities are measured with great accuracy on very basic devices
  	 \end{itemize}
  \end{itemize}
 
-The examples show that a standard way to retrieve the measurements should include not only the measurement, but the type of the sensor, the measured unit, the location of the sensor and many additional information like this. This is done using the SensorML.
+The examples show that a standard way to retrieve the measurements should include not only the measurement, but the type of the sensor, the measured unit, the location of the sensor and many additional information like this. 
+
+Storing and retrieving this information is done using the SensorML format.
 
 \section{The SensorML}
 
 The Open Geospatial Consortium approved the SensorML language to be able to describe all the necessary information about measured data\cite{sensorml}. This is an XML based language that is used to describe the sensors, add, update, delete or retrieve information. The SensorML is able to solve the above mentioned problems. It is an abstract definition of the sensor information.
+
+To have a general structure for the data, there is an abstract hierarchy that represents sensors and measurements. They have their own concepts which is described in as follows \cite{g2d2}:
+\begin{itemize}
+\item FeatureOfInterest: additional constraints provided for the measurement, e.g. time or location of measurement.
+\item ObservedProperty: what type of physical property is measured, e.g. speed, temperature.
+\item Procedure: the virtual or real sensor itself that is providing the data.
+\item Offering: the property itself that has been measured, e.g. wind speed, air humidity, traffic size. 
+\item Result: the output of the procedure.
+\end{itemize}
+
+This way gives as enough abstraction to separate the measured properties, the physical properties, the actual sensors and the results from each other.
+
 It is able to define the location of the sensor, the timestamp of the measurement and the sensor data itself, with many additional information. The data can be stored in SOS servers that can retrieve the data on different interfaces.
  
 \section{Server Observation Service}
@@ -67,24 +81,51 @@ All SOS servers and the whole SensorML standard is missing the semantic informat
 
 \section{52north SOS server}
 
-This implementation is done by the non profit organization with the identical name. The software supports many interfaces to query the information needed. The standard SOAP can be used to work with Java Web services. There are KVP and POX to retrieve or add data using standard GET queries. A big advantage is that 52north SOS supports JSON interface. It enables RESTful JSON queries to retrieve information efficiently in JavaScript, PHP, Python or other modern scripting languages.
+This implementation is done by the non profit organization with the identical name. The software supports many interfaces to query the information needed. The standard SOAP can be used to work with Java Web services. There are KVP and POX to retrieve or add data using standard GET queries. A big advantage is that 52north SOS supports JSON interface. It enables JSON queries to retrieve information efficiently in JavaScript, PHP, Python or other modern scripting languages.
 
 The new 4.2 version is easy to install, it has a graphical user interface to set up the database connection and initialize the database. PostgreSQL with PostGIS is required.  The basic usage is described on  52north webpage, but sample queries are shown in the built in test client. 
 
 The project is built with Maven and uses Spring framework too. The included unit tests ensure that the software's architecture is still consistent after compilation. The project was chosen to be part of Google's Summer of Code 2014 and the project gained a lot improvements from that. 
 
-A request can be sent using the connector of each interface. This used to be done by adding the interface name to the application url but in recent versions the service automatically detects the interface from the HTTP metadata. For example http://152.66.253.152:8080/52n-sos-webapp/service is the url where all interface can be reached. The first part is the host of the server. The tomcat application server is listening on port 8080. 52n-sos-webapp is the default name of the web application, service it the default connector for the webservice. The sent HTTP content-type header marks the interface. For example application/json stands for the JSON and application/soap+xml stands for SOAP interface.
+A request can be sent using the connector of each interface. This used to be done by adding the interface name to the application url but in recent versions the service automatically detects the interface from the HTTP metadata. For example http://152.66.253.152:8080/52n-sos-webapp/service is the url where all interface can be reached. The first part is the host of the server. The tomcat application server is listening on port 8080. 52n-sos-webapp is the default name of the web application, service it the default connector for the webservice. The sent HTTP content-type header marks the interface. A detailed description of the interfaces can be seen on table \ref{tab:services}.
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{| l | l | p{8cm} |}
+\hline
+Interface  & Content type & Description \\ \hline \hline
+SOAP & application/soap+xml & Standard SOAP request mostly used in JAVA, it is sending the request in XML format using POST request. \\ \hline
+POX & application/xml & Very similar to SOAP but has a different XML format. \\ \hline
+KVP & application/xml & This is a GET request, meaning that all request parameters are encoded in the URL. The answer is in XML format. \\ \hline
+JSON & applicaton/json & This is a POST request which sends and receives information using JSON objects. Most programming languages can easily parse this type of request.\\ \hline
+\end{tabular}
+\caption{Interfaces for 52n SOS server\label{tab:services}}
+\end{center}
+\end{table}
+
 
 \section{SOS commands}
-There are many commands to query or manipulate the SOS server. There are only two important commands that should be described in details. These are GetCapabilities and GetObservations.
+There are many commands to query or manipulate the SOS server. In this section some of them will be shown using the JSON interface. 
 
-GetCapabilities command allows the clients to retrieve a list of the reachable sensors of the server and their configuration. This call does not have any required parameters, only if the details of the response should be controlled.
+The GetCapabilities command allows the clients to retrieve a list of the reachable sensors of the server and their configuration. This command lists all the available measurements on the server too. This call does not have any required parameters, only if the details of the response should be controlled. Such detail is the section to be displayed. There are 4 different sections:
+\begin{itemize}
+\item ServiceIdentification: the list of profiles that the server has been using. These profiles describe the format that the data is represented in.
+\item ServiceProvider: in this section is the contact information for the operator of the SOS service.
+\item OperationMetadata: this section provides the available options and their possible values.
+\item FilterCapabilities: what fields are available for filtering. Can be spatial filtering for location or temporal filtering for time range.
+\item Contents: summary of the type and FOI of each procedure. 
+\end{itemize}
+
+It is also possible to skip those parameters to get a shorter minimalist response. If the procedure is known the DescribeSensor command will describe the measurements of the selected sensor.
 
 \begin{lstlisting}[caption={JSON getCapabilities POST request\label{lst:getcap}}]
 {
   "request": "GetCapabilities",
   "service": "SOS",
   "sections": [
+    "ServiceIdentification",
+    "ServiceProvider",
+    "OperationsMetadata",
+    "FilterCapabilities",
     "Contents"
   ]
 }
