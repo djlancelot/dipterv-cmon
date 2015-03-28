@@ -5,7 +5,7 @@
 %----------------------------------------------------------------------------
 Most phyisical quantities are measured with great accuracy on very basic devices. From the most basic sound measurements with microphone, to the nowadays popular inertial measurement units every data can be measured. There are also weather sensors and solar sensors available for everyone.
 
- With the evolution of sensor fusion algrorithms these data can be merged together to give an even better accuracy or a general knowledge of our environment. This data can be used to predict weather conditions by merging a neighborhoods sensors into one. It can be used to make predictions based on the weather conditions in an area and the direction of the wind on the location.
+ With the evolution of sensor fusion algorithms these data can be merged together to give an even better accuracy or a general knowledge of our environment. This data can be used to predict weather conditions by merging neighborhood sensors into one. It can be used to make predictions based on the weather conditions in an area and the direction of the wind on the location.
  
  \begin{figure}[h]
  \centering
@@ -51,29 +51,29 @@ It is able to define the location of the sensor, the timestamp of the measuremen
  
 \section{Server Observation Service}
 
-Server Observation Servers store SensorML data and let others query, manipulate and add sensors to the database. These sensors can be derived sensors. Such derived sensors are called procedures. A procedure can be a traffic information based on the CCTV camera. An SOS server should be able to handle dependencies based on which procedure requires other procedures to provide data.
+Server Observation Servers store SensorML data and let others query, manipulate and add sensors to the database. These sensors can be derived sensors. Such derived sensors are called procedures. A procedure can be a traffic information based on the CCTV camera. An SOS server should be able to handle dependencies based on which procedure requires other procedures to provide data. Sometimes derived sensors are also called virtual sensors, because they don't do physical measurement but provide a derived value.
 
 There are many closed and open source implementations of SOS servers. Some open source implementations are introduced here.
 
-The MapServer is written in C, C++, however it can be extended in many other languages\cite{mapserver}. It has a built in GUI to view data, however it is not yet available for the SOS implementation. The server can only be reached by one interface.
+The MapServer is written in C, C++, however it can be extended in many other languages\cite{mapserver}. It has a built in GUI to view data, however it is not yet available for the SOS implementation. The server can only be reached by one interface. It was originally developed by University of Minnesota. In the time of writing the paper the code is maintained and supported by the Open Source Geospatial Foundation. It is mostly used for mapping not for serving data for derived sensors. It was used in some projects between NASA and the University of Minnesota. 
 
-istSOS is another implementation in Python\cite{istsos}. It runs its scripts from Apache web server just like MapServer. It uses PostgreSQL database backend to store values. It has a nice GUI for administration. Only supports standard SensorML interface to retrieve data.
+istSOS is another implementation in Python\cite{istsos}. It runs its scripts from Apache web server just like MapServer. It uses PostgreSQL database backend to store values. It has a nice GUI for administration. Only supports standard SensorML interface to retrieve data. It is a project of the SUPSI University in Switzerland.
 
-OOSThetys is a basic toolkit for enabling SensorML communication. It is written in Perl and Java. It is fairly documentated. 
+OOSThetys is a basic toolkit for enabling SensorML communication. It is written in Perl and Java. It is fairly documentated and seems to be abandoned because there has been no new release since the February of 2012.
 
 52north SOS is a sample implementation written in Java\cite{52north}. It runs as a web service from Apache tomcat to serve requests. It also uses PostgreSQL with PostGIS extension. The application is used in the sample implementation and it is covered in details later.
 
-All SOS servers and the whole SensorML standard is missing the semantic information about the sensors.
+All SOS servers and the whole SensorML standard is missing the semantic information about the sensors meaning that all sensor data are stored in such a database and all properties can be described for the sensors but no connection between the concepts can be described for the sensor.
 
 \section{52north SOS server}
 
-This implementation is done by the non profit organization with the identical name. The software supports many interfaces to query the information needed. The standard SOAP can be used to work with Java Web services. There are KVP and POX to retrieve or add data using standard GET queries. A big advantage is that 52north SOS supports JSON interface. It enables RESTful JSON queries to retrieve information efficiently in JavaScript, PHP, Python or other modern scripting languages, however this is only available in the beta releases and still under heavy development.
+This implementation is done by the non profit organization with the identical name. The software supports many interfaces to query the information needed. The standard SOAP can be used to work with Java Web services. There are KVP and POX to retrieve or add data using standard GET queries. A big advantage is that 52north SOS supports JSON interface. It enables RESTful JSON queries to retrieve information efficiently in JavaScript, PHP, Python or other modern scripting languages.
 
-The new 4.0 version is easy to install, it has a graphical user interface to set up the database connection and initialize the database. PostgreSQL with PostGIS is required.  The basic usage is described on  52north webpage, but sample queries are shown in the built in test client. 
+The new 4.2 version is easy to install, it has a graphical user interface to set up the database connection and initialize the database. PostgreSQL with PostGIS is required.  The basic usage is described on  52north webpage, but sample queries are shown in the built in test client. 
 
-The project is built with Maven and uses Spring framework too. The included unit tests ensure that the software's architecture is still cosistent after compilation.
+The project is built with Maven and uses Spring framework too. The included unit tests ensure that the software's architecture is still consistent after compilation. The project was chosen to be part of Google's Summer of Code 2014 and the project gained a lot improvements from that. 
 
-A request can be sent using the connector of each interface. This is done by adding the interface name to the application url. For example http://152.66.253.152:8080/52n-sos-webapp/sos/json is the url where JSON interface can be reached. The first part is the host of the server. The tomcat application server is listening on port 8080. 52n-sos-webapp is the default name of the web application, sos is the connector for the queries and the final part switches between the interfaces. This can be either json, kvp pox or soap.
+A request can be sent using the connector of each interface. This used to be done by adding the interface name to the application url but in recent versions the service automatically detects the interface from the HTTP metadata. For example http://152.66.253.152:8080/52n-sos-webapp/service is the url where all interface can be reached. The first part is the host of the server. The tomcat application server is listening on port 8080. 52n-sos-webapp is the default name of the web application, service it the default connector for the webservice. The sent HTTP content-type header marks the interface. For example application/json stands for the JSON and application/soap+xml stands for SOAP interface.
 
 \section{SOS commands}
 There are many commands to query or manipulate the SOS server. There are only two important commands that should be described in details. These are GetCapabilities and GetObservations.
