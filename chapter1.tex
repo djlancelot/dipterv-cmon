@@ -115,8 +115,6 @@ The GetCapabilities command allows the clients to retrieve a list of the reachab
 \item Contents: summary of the type and FOI of each procedure. 
 \end{itemize}
 
-It is also possible to skip those parameters to get a shorter minimalist response. If the procedure is known the DescribeSensor command will describe the measurements of the selected sensor.
-
 \begin{lstlisting}[caption={JSON getCapabilities POST request\label{lst:getcap}}]
 {
   "request": "GetCapabilities",
@@ -131,31 +129,80 @@ It is also possible to skip those parameters to get a shorter minimalist respons
 }
 \end{lstlisting}
 
+ If the procedure is known the DescribeSensor command will describe the measurements of the selected sensor. The response will include a description field which contains the details about the sensor in the standard XML based SensorML format. 
+
+\begin{lstlisting}[caption={JSON DescribeSensor POST request\label{lst:descsens}}]
+{
+  "request": "DescribeSensor",
+  "service": "SOS",
+  "version": "2.0.0",
+  "procedure": "http://www.52north.org/test/procedure/1",
+  "procedureDescriptionFormat": "http://www.opengis.net/sensorML/1.0.1"
+}
+\end{lstlisting}
+
+After knowing the necessary parameters the getObservation property can be called. This command shows the measured values for some given observations. The input can be complex, it can contain multiple sensors, their multiple ...
+
+\begin{lstlisting}[caption={JSON DescribeSensor POST response\label{lst:getobs}}]
+{
+  "request": "GetObservation",
+  "service": "SOS",
+  "version": "2.0.0",
+  "procedure": [
+    "http://www.52north.org/test/procedure/6",
+    "http://www.52north.org/test/procedure/1"
+  ],
+  "offering": [
+    "http://www.52north.org/test/offering/6",
+    "http://www.52north.org/test/offering/1"
+  ],
+  "observedProperty": [
+    "http://www.52north.org/test/observableProperty/1",
+    "http://www.52north.org/test/observableProperty/6"
+  ],
+  "featureOfInterest": [
+    "http://www.52north.org/test/featureOfInterest/6",
+    "http://www.52north.org/test/featureOfInterest/1"
+  ],
+  "spatialFilter": {
+    "bbox": {
+      "ref": "om:featureOfInterest/sams:SF_SpatialSamplingFeature/sams:shape",
+      "value": {
+        "type": "Polygon",
+        "coordinates": [
+          [ [ 50, 7 ],
+            [ 53, 7 ],
+            [ 53, 10],
+            [ 50, 10],
+            [ 50, 7 ]
+          ]
+        ]
+      }
+    }
+  },
+  "temporalFilter": [
+    {
+      "during": {
+        "ref": "om:phenomenonTime",
+        "value": [
+          "2012-11-19T14:00:00+01:00",
+          "2012-11-19T14:05:00+01:00"
+        ]
+      }
+    },
+    {
+      "equals": {
+        "ref": "om:phenomenonTime",
+        "value": "2012-11-19T14:08:00+01:00"
+      }
+    }
+  ]
+}
+\end{lstlisting}
+
+
 The GetObservation retrieves the stored measurements. The timerange and the procedure (sensor) id shall be specified. The answer differs on each interfaces, but data is usually given as ASCII characters separated by previously specified markers.
 
-\begin{lstlisting}[caption={SOAP getObservationById POST request\label{lst:getobs}}]
-<?xml version="1.0" encoding="UTF-8"?>
-<env:Envelope
-    xmlns:env="http://www.w3.org/2003/05/soap-envelope"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-     xsi:schemaLocation="http://www.w3.org/2003/05/soap-envelope
-      http://www.w3.org/2003/05/soap-envelope/soap-envelope.xsd">
-    <env:Body>
-        <sos:GetObservationById
-            xmlns:sos="http://www.opengis.net/sos/2.0"
-             service="SOS" version="2.0.0"
-              xsi:schemaLocation="http://www.opengis.net/sos/2.0
-               http://schemas.opengis.net/sos/2.0/sos.xsd">
-            <sos:observation>
-            http://www.52north.org/test/observation/1
-            </sos:observation>
-            <sos:observation>
-            http://www.52north.org/test/observation/2
-            </sos:observation>
-        </sos:GetObservationById>
-    </env:Body>
-</env:Envelope>
-\end{lstlisting}
 Such commands are used by the client softwares to display information.
 
 \section{SOS client applications}
