@@ -6,6 +6,7 @@ A level-1 auxiliary file: introduction.aux
 A level-1 auxiliary file: chapter1.aux
 A level-1 auxiliary file: chapter2.aux
 A level-1 auxiliary file: chapter3.aux
+A level-1 auxiliary file: chapter4.aux
 A level-1 auxiliary file: acknowledgement.aux
 The style file: plain.bst
 A level-1 auxiliary file: appendices.aux
@@ -24,4 +25,6 @@ Warning--entry type for "rdf" isn't style-file defined
 --line 47 of file mybib.bib
 Warning--entry type for "v8" isn't style-file defined
 --line 54 of file mybib.bib
-(There were 7 warnings)
+Warning--entry type for "g2d2" isn't style-file defined
+--line 61 of file mybib.bib
+(There were 8 warnings)

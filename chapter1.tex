@@ -3,7 +3,7 @@
 %----------------------------------------------------------------------------
 \section{Goals of observation gathering}
 %----------------------------------------------------------------------------
-Most phyisical quantities are measured with great accuracy on very basic devices. From the most basic sound measurements with microphone, to the nowadays popular inertial measurement units every data can be measured. There are also weather sensors and solar sensors available for everyone.
+Most physical quantities are measured with great accuracy on very basic devices. From the most basic sound measurements with microphone, to the nowadays popular inertial measurement units every data can be measured. There are also weather sensors and solar sensors available for everyone.
 
  With the evolution of sensor fusion algorithms these data can be merged together to give an even better accuracy or a general knowledge of our environment. This data can be used to predict weather conditions by merging neighborhood sensors into one. It can be used to make predictions based on the weather conditions in an area and the direction of the wind on the location.
  
@@ -19,7 +19,7 @@ Most phyisical quantities are measured with great accuracy on very basic devices
  
  \section{Types of sensors}
  
- Sensors are all around us. We have sensors in our cell phones or any handheld devices. Most of them are connected to the internet or a network. The measurements of all of these devices can be stored and queried from a database. The usable data in some devices are:
+ Sensors are all around us. We have sensors in our cell phones or any handheld devices. Most of them are connected to the Internet or a network. The measurements of all of these devices can be stored and queried from a database. The usable data in some devices are:
  
  \begin{itemize}
  	\item Smartphone
@@ -32,7 +32,7 @@ Most phyisical quantities are measured with great accuracy on very basic devices
  	 \end{itemize}
  	 \item Weather sensor
  	 \begin{itemize}
- 	 \item Tempareture sensor: Inner and outer temperature.
+ 	 \item Temperature sensor: Inner and outer temperature.
  	 \item Humidity sensor: percentage of humidity.
  	 \item Barometer: Air pressure.
  	 \end{itemize}
@@ -209,7 +209,7 @@ The response (on listing \ref{lst:sendobs}) will contain the usual header which 
     "service": "SOS",
     "observations": [
         {
-            "type": "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
+            "type": "http://www.og.net/def/observationType/OGC-OM/2.0/OM_Measurement",
             "procedure": "http://www.52north.org/test/procedure/6",
             "offering": "http://www.52north.org/test/offering/6",
             "observableProperty": "http://www.52north.org/test/observableProperty/6",
@@ -235,7 +235,7 @@ The response (on listing \ref{lst:sendobs}) will contain the usual header which 
             }
         },
         {
-            "type": "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
+            "type": "http://www.og.net/def/observationType/OGC-OM/2.0/OM_Measurement",
             "procedure": "http://www.52north.org/test/procedure/6",
             "offering": "http://www.52north.org/test/offering/6",
             "observableProperty": "http://www.52north.org/test/observableProperty/6",
@@ -284,15 +284,30 @@ The response will be a list of values of the last measurement for the queried pr
     "request": "GetResult",
     "version": "2.0.0",
     "service": "SOS",
-    "resultValues": "10#2012-11-19T13:00:00.000Z,2012-11-19T13:00:00.000Z,2.0#2012-11-19T13:01:00.000Z,2012-11-19T13:01:00.000Z,2.1#2012-11-19T13:02:00.000Z,2012-11-19T13:02:00.000Z,2.2#2012-11-19T13:03:00.000Z,2012-11-19T13:03:00.000Z,2.3#2012-11-19T13:04:00.000Z,2012-11-19T13:04:00.000Z,2.4#2012-11-19T13:05:00.000Z,2012-11-19T13:05:00.000Z,2.5#2012-11-19T13:06:00.000Z,2012-11-19T13:06:00.000Z,2.6#2012-11-19T13:07:00.000Z,2012-11-19T13:07:00.000Z,2.7#2012-11-19T13:08:00.000Z,2012-11-19T13:08:00.000Z,2.8#2012-11-19T13:09:00.000Z,2012-11-19T13:09:00.000Z,2.9"
+    "resultValues": "10#2012-11-19T13:00:00.000Z,2012-11-19T13:00:00.000Z,
+    2.0#2012-11-19T13:01:00.000Z,2012-11-19T13:01:00.000Z,
+    2.1#2012-11-19T13:02:00.000Z,2012-11-19T13:02:00.000Z,
+    2.2#2012-11-19T13:03:00.000Z,2012-11-19T13:03:00.000Z,
+    2.3#2012-11-19T13:04:00.000Z,2012-11-19T13:04:00.000Z,
+    2.4#2012-11-19T13:05:00.000Z,2012-11-19T13:05:00.000Z,
+    2.5#2012-11-19T13:06:00.000Z,2012-11-19T13:06:00.000Z,
+    2.6#2012-11-19T13:07:00.000Z,2012-11-19T13:07:00.000Z,
+    2.7#2012-11-19T13:08:00.000Z,2012-11-19T13:08:00.000Z,
+    2.8#2012-11-19T13:09:00.000Z,2012-11-19T13:09:00.000Z,
+    2.9"
 }
 \end{lstlisting}
 
 There are other commands that manipulate the database, like InsertSensor, DeleteSensor to add or remove sensors. There are commands to add observable properties, and add results to the database too. 
 
+Client applications use these services to communicate with the servers. These applications show the user a user friendly interface to read the measured data or their locations on a map. Such systems are described in the following sections.
+
 \section{SOS client applications}
 
-52north has a client application for the SOS server called 52n Sensorweb Client. This is a Java web application that can be configured to connect to multiple hosts and display their sensor data on maps and charts. It is developed using the same tools as the SOS server. This client is a web application which is can be opened in a web browser, but some parts run on the web server. This is a relatively complex application that does not yet understand semantic connections between the procedures. A screenshot can be seen on figure \ref{fig:sweclient}.
+As the format introduced before is hard to decode for human there are various tools to display stored data in a user friendly way. With these tools measurements can be plotted in time, compared with each other and sensor locations can be displayed using a map. Even measurements can be plotted to a map giving a nice visual aid for processing the measured data. 
+
+52north has an official client application for the SOS server called 52n Sensorweb Client. This is a Java web application that can be configured to connect to multiple hosts and display their sensor data on maps and charts. It is developed using the same tools as the SOS server. 
+This means that the application can be installed next to the SOS server without any extra needs. This client can be opened in a web browser, but some parts run on the backend. This is a relatively complex application that does not yet understand semantic connections between the procedures. A screenshot can be seen on figure \ref{fig:sweclient}.
 
 \begin{figure}[h]
 \centering
@@ -301,7 +316,7 @@ There are other commands that manipulate the database, like InsertSensor, Delete
 \caption{Screenshot of SWE Client 3\label{fig:sweclient}}
 \end{figure}
 
-There is a JavaScript framework that enables users to use only client side tools to connect to SOS servers and display data called SOS.js. Unfortunately, because of security restrictions on JavaScript cross-site request the data cannot be retrieved from the SOS server directly, the client has to be served from the same domain as the server. This is often not doable. That is why this application needs a proxy that forwards the data to the same domain to bypass this restriction. Screenshot can be seen on figure \ref{fig:sos-js}.
+There is a JavaScript framework that enables users to use only client side tools to connect to SOS servers and display data called SOS.js. Unfortunately, because of security restrictions on JavaScript cross-site request the data cannot be retrieved from the SOS server directly, the client has to be served from the same domain as the server. This is often not doable. That is why this application needs a proxy that forwards the data to the same domain to bypass this restriction. If the proxy is working, the framework can display everything just using the browser. Screenshot can be seen on figure \ref{fig:sos-js}.
 
 \begin{figure}[h]
 \centering
@@ -310,8 +325,9 @@ There is a JavaScript framework that enables users to use only client side tools
 \caption{Screenshot of sos.js\label{fig:sos-js}}
 \end{figure}
 
-There are external softwares that can display their own measurements but not the SensorML standard. To make them usable with 52north SOS the developers created tools to extend such existing softwares to be able to import data from SOS. Such extension is the ArcGIS extension which makes SOS data available to ArcGIS server. This is also available to other programs such as $\mu$Dig. 
+There are external softwares that can display their own measurements but not the SensorML standard. To make them usable with 52north SOS the developers created tools to extend such existing softwares to be able to import data from SOS.
+Such extension is the ArcGIS extension which makes SOS data available to ArcGIS server. This is also available to other programs such as $\mu$Dig. 
 
-There are other tools to export data to R language or to use with other Geographic Information Systems (GIS) softwares. However, the problem is that no client software has the ability to make search available by semantic connections. A client has to be extended with such information to enable convenient filtering when monitoring a cyberphisical system.
+There are other tools to export data to R language which is used to process large dataset for scientific purposes or to use with other Geographic Information Systems (GIS) softwares. However, the problem is that no client software has the ability to make search available by semantic connections. A client has to be extended with such information to enable convenient filtering when monitoring a cyberphisical system.
 
-
+Fortunately there are standards to describe such systems and convert knowledge from one way to the other. This is described in the next chapter.
