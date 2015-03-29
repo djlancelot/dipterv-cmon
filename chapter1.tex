@@ -106,7 +106,7 @@ JSON & applicaton/json & This is a POST request which sends and receives informa
 \section{SOS commands}
 There are many commands to query or manipulate the SOS server. In this section some of them will be shown using the JSON interface. 
 
-The GetCapabilities command allows the clients to retrieve a list of the reachable sensors of the server and their configuration. This command lists all the available measurements on the server too. This call does not have any required parameters, only if the details of the response should be controlled. Such detail is the section to be displayed. There are 4 different sections:
+The GetCapabilities command (shown on listing \ref{lst:getcap}) allows the clients to retrieve a list of the reachable sensors of the server and their configuration. This command lists all the available measurements on the server too. This call does not have any required parameters, only if the details of the response should be controlled. Such detail is the section to be displayed. There are 4 different sections:
 \begin{itemize}
 \item ServiceIdentification: the list of profiles that the server has been using. These profiles describe the format that the data is represented in.
 \item ServiceProvider: in this section is the contact information for the operator of the SOS service.
@@ -129,7 +129,7 @@ The GetCapabilities command allows the clients to retrieve a list of the reachab
 }
 \end{lstlisting}
 
- If the procedure is known the DescribeSensor command will describe the measurements of the selected sensor. The response will include a description field which contains the details about the sensor in the standard XML based SensorML format. 
+ If the procedure is known the DescribeSensor command will describe the measurements of the selected sensor. The response will include a description field which contains the details about the sensor in the standard XML based SensorML format. The sample request code can be seen on listing \ref{lst:descsens}.
 
 \begin{lstlisting}[caption={JSON DescribeSensor POST request\label{lst:descsens}}]
 {
@@ -141,9 +141,9 @@ The GetCapabilities command allows the clients to retrieve a list of the reachab
 }
 \end{lstlisting}
 
-After knowing the necessary parameters the getObservation property can be called. This command shows the measured values for some given observations. The input can be complex, it can contain multiple sensors, their multiple ...
+After knowing the necessary parameters the getObservation property can be called. This command shows the measured values for some given observations. The input can be complex, it can filter based on procedures, offerings, observed properties, on any feature of interest or temporal or spatial filters. A sample can be read from listing \ref{lst:getobs}.
 
-\begin{lstlisting}[caption={JSON DescribeSensor POST response\label{lst:getobs}}]
+\begin{lstlisting}[caption={JSON GetObservation POST request with all filters\label{lst:getobs}}]
 {
   "request": "GetObservation",
   "service": "SOS",
@@ -190,7 +190,7 @@ After knowing the necessary parameters the getObservation property can be called
         ]
       }
     },
-    {
+    { 
       "equals": {
         "ref": "om:phenomenonTime",
         "value": "2012-11-19T14:08:00+01:00"
@@ -200,10 +200,95 @@ After knowing the necessary parameters the getObservation property can be called
 }
 \end{lstlisting}
 
+The response (on listing \ref{lst:sendobs}) will contain the usual header which is contained by all the responses. It tells the requester the version of the response. After that comes the list of the observations that fit the conditions given. In the observation objects there are the procedures that measured the result, the feature of interests and the observable property that has been measured. The result object contains the uom field which is an abbreviation for the unit of measurement and the specific value. It can be an integer value, floating point or some encoded binary data.
 
-The GetObservation retrieves the stored measurements. The timerange and the procedure (sensor) id shall be specified. The answer differs on each interfaces, but data is usually given as ASCII characters separated by previously specified markers.
+\begin{lstlisting}[caption={JSON GetObservation response\label{lst:sendobs}}]
+{
+    "request": "GetObservation",
+    "version": "2.0.0",
+    "service": "SOS",
+    "observations": [
+        {
+            "type": "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
+            "procedure": "http://www.52north.org/test/procedure/6",
+            "offering": "http://www.52north.org/test/offering/6",
+            "observableProperty": "http://www.52north.org/test/observableProperty/6",
+            "featureOfInterest": {
+                "identifier": {
+                    "codespace": "http://www.opengis.net/def/nil/OGC/0/unknown",
+                    "value": "http://www.52north.org/test/featureOfInterest/6"
+                },
+                "sampledFeature": "http://www.52north.org/test/featureOfInterest/world",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        51.447722,
+                        7.270806
+                    ]
+                }
+            },
+            "phenomenonTime": "2012-11-19T13:09:00.000Z",
+            "resultTime": "2012-11-19T13:09:00.000Z",
+            "result": {
+                "uom": "test_unit_6",
+                "value": 2.9
+            }
+        },
+        {
+            "type": "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement",
+            "procedure": "http://www.52north.org/test/procedure/6",
+            "offering": "http://www.52north.org/test/offering/6",
+            "observableProperty": "http://www.52north.org/test/observableProperty/6",
+            "featureOfInterest": {
+                "identifier": {
+                    "codespace": "http://www.opengis.net/def/nil/OGC/0/unknown",
+                    "value": "http://www.52north.org/test/featureOfInterest/6"
+                },
+                "sampledFeature": "http://www.52north.org/test/featureOfInterest/world",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        51.447722,
+                        7.270806
+                    ]
+                }
+            },
+            "phenomenonTime": "2012-11-19T13:03:00.000Z",
+            "resultTime": "2012-11-19T13:03:00.000Z",
+            "result": {
+                "uom": "test_unit_6",
+                "value": 2.3
+            }
+        }
+    ]
+}
+\end{lstlisting}
 
-Such commands are used by the client softwares to display information.
+If only the result fields are important to the user the shorter GetResult command can be used. It is shown on figure \ref{lst:getresult}.
+
+\begin{lstlisting}[caption={JSON minimal GetResult POST request\label{lst:getresult}}]
+
+{
+  "request": "GetResult",
+  "service": "SOS",
+  "version": "2.0.0",
+  "offering": "http://www.52north.org/test/offering/6",
+  "observedProperty": "http://www.52north.org/test/observableProperty/6"
+}
+\end{lstlisting}
+
+The response will be a list of values of the last measurement for the queried properties. The results will be given as a concatenated string where each measurement is separated by a comma and in each measurement the value and its timestamp is separated by a hash mark. It can be seen on figure \ref{lst:sendresult}.
+
+\begin{lstlisting}[caption={JSON GetResult response\label{lst:sendresult}}]
+{
+    "request": "GetResult",
+    "version": "2.0.0",
+    "service": "SOS",
+    "resultValues": "10#2012-11-19T13:00:00.000Z,2012-11-19T13:00:00.000Z,2.0#2012-11-19T13:01:00.000Z,2012-11-19T13:01:00.000Z,2.1#2012-11-19T13:02:00.000Z,2012-11-19T13:02:00.000Z,2.2#2012-11-19T13:03:00.000Z,2012-11-19T13:03:00.000Z,2.3#2012-11-19T13:04:00.000Z,2012-11-19T13:04:00.000Z,2.4#2012-11-19T13:05:00.000Z,2012-11-19T13:05:00.000Z,2.5#2012-11-19T13:06:00.000Z,2012-11-19T13:06:00.000Z,2.6#2012-11-19T13:07:00.000Z,2012-11-19T13:07:00.000Z,2.7#2012-11-19T13:08:00.000Z,2012-11-19T13:08:00.000Z,2.8#2012-11-19T13:09:00.000Z,2012-11-19T13:09:00.000Z,2.9"
+}
+\end{lstlisting}
+
+There are other commands that manipulate the database, like InsertSensor, DeleteSensor to add or remove sensors. There are commands to add observable properties, and add results to the database too. 
 
 \section{SOS client applications}
 
