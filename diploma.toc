@@ -12,8 +12,9 @@
 \select@language {english} \contentsline {chapter}{\numberline {2}Semantic Connection}{23}{chapter.2}
 \select@language {english} \contentsline {section}{\numberline {2.1}Advantages of semantic information}{23}{section.2.1}
 \select@language {english} \contentsline {section}{\numberline {2.2}Resource Definition Framework}{24}{section.2.2}
-\select@language {english} \contentsline {section}{\numberline {2.3}Some open souce RDF databases}{25}{section.2.3}
+\select@language {english} \contentsline {section}{\numberline {2.3}Some open source RDF databases}{25}{section.2.3}
 \select@language {english} \contentsline {section}{\numberline {2.4}SPARQL for the queries}{25}{section.2.4}
+\select@language {english} \contentsline {section}{\numberline {2.5}The Sensor Instance Semantic Registry Ontology}{26}{section.2.5}
 \select@language {english} \contentsline {chapter}{\numberline {3}The actual use case of SensorML and sensor ontology}{27}{chapter.3}
 \select@language {english} \contentsline {section}{\numberline {3.1}Usage of the designed software}{27}{section.3.1}
 \select@language {english} \contentsline {section}{\numberline {3.2}Goal of the project}{27}{section.3.2}

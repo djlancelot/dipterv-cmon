@@ -35,7 +35,6 @@ Such recursive data can be represented in graph databases, where reasoning is on
 
 \section{Some open source RDF databases} 
 
-%TODO: ADD Apache MARMOtta
 Apache Jena is an open source RDF datastore supported by the Apache foundation. It is written in Java\cite{jena}. It has many interfaces and supports many database backends. It can be used with in memory databases, SQL RDBs, triplestores. There is a built-in reasoner in the datastore, however it can be changed to other external reasoners too. The architecture of the software is shown on figure \ref{fig:jena}.
 
 OpenRDF Sesame is another tool for storing RDF triples. It is also written in Java. It has three different interfaces for communication: the SAIL API, the RIO interface and an HTTP client. The whole application runs from a Java container like Tomcat.
@@ -53,7 +52,7 @@ There is an out of the box tool that contains better reasoners, has a basic GUI 
 
 \section{SPARQL for the queries}
 
-To retrieve the neccessary metadata the SPARQL query language is used in the RDF databases. These queries are less human readable than standard SQL queries, although they look similar. The language builds on the subject-predicate-object triples. In a result all matching data is responded. 
+To retrieve the necessary metadata the SPARQL query language is used in the RDF databases. These queries are less human readable than standard SQL queries, although they look similar. The language builds on the subject-predicate-object triples. In a result all matching data is responded. 
 A SPARQL query usually has a selection part and a filtering part. 
 The selection part shows which parameters should be returned. The filtering part shows which attributes are defined and it can also apply built-in functions for example language selection. 
 Multiple conditions are separated with dots or commas. Commas are only used when the condition is about the same object as the previous query.  A sample SPARQL query is shown in listing \ref{lst:sparql}.
@@ -62,4 +61,7 @@ Multiple conditions are separated with dots or commas. Commas are only used when
 select ?s { <uri#filterable> <uri#subPropertyOf> ?s }
 \end{lstlisting}
 
-With  
+With such technology the triples can be stored and retrieved. However, the ontology behind the measurement is still missing. For that there is a standard ontology for sensors maintained by the Semantic Sensor Network Incubator Group. The underlying system which will be introduced in the next chapter is using this ontology in a somewhat customized way\cite{g2d2}.  The ontology is described in the next section.
+
+\section{The Sensor Instance Semantic Registry Ontology}
+
