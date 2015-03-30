@@ -18,8 +18,8 @@ The most widespread ontology storage standards are the RDF databases.
 The RDF standard\cite{rdf} is created to be used with the Semantic Web approach to expand web pages with additional meanings that makes machines capable of understanding and reasoning about a web page. For example a web store can be easily understand by a customer: it has items, prices, shipping information, etc. However, for machines without saying explicitly that the value in one field is the price in USD it can be easily confused by the dimensions or the performance. Although nowadays these problems can be solved by machine learning, it is still a resource intensive process. To solve this problem an XML based standard has been introduced. This is done by using triples. 
 
 The triple describes \textit{which} page or entity is connected on \textit{what} property to \textit{which} other page or entity. These triples are separate three unique values. 
-Each value could have another triple describing it. 
-Each unique identifier is a fully qualified domain name and a hash tag and a unique name, like a URL with an anchor on a web page. The first part is called the subject, the second one is the predicate, the third one is the object. 
+Each value could have another triple describing it. The first (which) part is the resource  which we make statements from. The second parameter (what) is the property of the resource that represents the attribute, aspect or connection. The third parameter is the value which can refer to other resources or it can be a value from a specific domain like a number.
+Each unique resource identifier is a fully qualified domain name and a hash tag and a unique name, like a URL with an anchor on a web page. The first part is called the subject, the second one is the predicate, the third one is the object. 
 The original idea behind the fully qualified domain name is that the approach was designed to give semantic meanings for web pages. 
 Pages could refer to each other and give a global knowledge that is understandable by computers too. 
 
