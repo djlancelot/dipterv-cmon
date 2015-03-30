@@ -63,5 +63,13 @@ select ?s { <uri#filterable> <uri#subPropertyOf> ?s }
 
 With such technology the triples can be stored and retrieved. However, the ontology behind the measurement is still missing. For that there is a standard ontology for sensors maintained by the Semantic Sensor Network Incubator Group. The underlying system which will be introduced in the next chapter is using this ontology in a somewhat customized way\cite{g2d2}.  The ontology is described in the next section.
 
-\section{The Sensor Instance Semantic Registry Ontology}
+\section{The Semantic Sensor Network Ontology}
 
+The Semantic Sensor Network Incubator Group is a W3C incubator project. These projects are ran for one year to work on an area, this project ran from March of 2009 to September of 2010. It has developed an ontology for the semantic annotation of the Sensor Web Enablement standard. The ontology is available at http://www.w3.org/2005/Incubator/ssn/ssnx/ssn website, and it is conceptually organized into 10 modules. This is only a conceptual representation, the implementation consists of 41 concepts and 39 object properties. It is built upon a lightweight ontology, the  DOLCE-UltraLite. This underlying ontology helps the the new one to connect with other semantic databases and to have a better understanding of the concepts behind the properties. 
+The ontology can be viewed from four different perspectives:
+\begin{itemize}
+\item A sensor perspective with focus on what and how it senses and what it sensed.
+\item An observation perspective which focuses on the observation and its environment.
+\item A system perspective in focus on the network itself and the deployment.
+\item A feature and property perspective which focuses on the physical properties and the subject of the observation. 
+\end{itemize}
