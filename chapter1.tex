@@ -106,7 +106,7 @@ JSON & applicaton/json & This is a POST request which sends and receives informa
 \section{SOS commands}
 There are many commands to query or manipulate the SOS server. In this section some of them will be shown using the JSON interface. 
 
-The GetCapabilities command (shown on listing \ref{lst:getcap}) allows the clients to retrieve a list of the reachable sensors of the server and their configuration. This command lists all the available measurements on the server too. This call does not have any required parameters, only if the details of the response should be controlled. Such detail is the section to be displayed. There are 4 different sections:
+The GetCapabilities command (shown on Listing \ref{lst:getcap}) allows the clients to retrieve a list of the reachable sensors of the server and their configuration. This command lists all the available measurements on the server too. This call does not have any required parameters, only if the details of the response should be controlled. Such detail is the section to be displayed. There are 4 different sections:
 \begin{itemize}
 \item ServiceIdentification: the list of profiles that the server has been using. These profiles describe the format that the data is represented in.
 \item ServiceProvider: in this section is the contact information for the operator of the SOS service.
@@ -129,7 +129,7 @@ The GetCapabilities command (shown on listing \ref{lst:getcap}) allows the clien
 }
 \end{lstlisting}
 
- If the procedure is known the DescribeSensor command will describe the measurements of the selected sensor. The response will include a description field which contains the details about the sensor in the standard XML based SensorML format. The sample request code can be seen on listing \ref{lst:descsens}.
+ If the procedure is known the DescribeSensor command will describe the measurements of the selected sensor. The response will include a description field which contains the details about the sensor in the standard XML based SensorML format. The sample request code can be seen on Listing \ref{lst:descsens}.
 
 \begin{lstlisting}[caption={JSON DescribeSensor POST request\label{lst:descsens}}]
 {
@@ -141,7 +141,7 @@ The GetCapabilities command (shown on listing \ref{lst:getcap}) allows the clien
 }
 \end{lstlisting}
 
-After knowing the necessary parameters the getObservation property can be called. This command shows the measured values for some given observations. The input can be complex, it can filter based on procedures, offerings, observed properties, on any feature of interest or temporal or spatial filters. A sample can be read from listing \ref{lst:getobs}.
+After knowing the necessary parameters the getObservation property can be called. This command shows the measured values for some given observations. The input can be complex, it can filter based on procedures, offerings, observed properties, on any feature of interest or temporal or spatial filters. A sample can be read from Listing \ref{lst:getobs}.
 
 \begin{lstlisting}[caption={JSON GetObservation POST request with all filters\label{lst:getobs}}]
 {
@@ -200,7 +200,7 @@ After knowing the necessary parameters the getObservation property can be called
 }
 \end{lstlisting}
 
-The response (on listing \ref{lst:sendobs}) will contain the usual header which is contained by all the responses. It tells the requester the version of the response. After that comes the list of the observations that fit the conditions given. In the observation objects there are the procedures that measured the result, the feature of interests and the observable property that has been measured. The result object contains the uom field which is an abbreviation for the unit of measurement and the specific value. It can be an integer value, floating point or some encoded binary data.
+The response (on Listing \ref{lst:sendobs}) will contain the usual header which is contained by all the responses. It tells the requester the version of the response. After that comes the list of the observations that fit the conditions given. In the observation objects there are the procedures that measured the result, the feature of interests and the observable property that has been measured. The result object contains the uom field which is an abbreviation for the unit of measurement and the specific value. It can be an integer value, floating point or some encoded binary data.
 
 \begin{lstlisting}[caption={JSON GetObservation response\label{lst:sendobs}}]
 {
@@ -264,7 +264,7 @@ The response (on listing \ref{lst:sendobs}) will contain the usual header which 
 }
 \end{lstlisting}
 
-If only the result fields are important to the user the shorter GetResult command can be used. It is shown on figure \ref{lst:getresult}.
+If only the result fields are important to the user the shorter GetResult command can be used. It is shown on Figure \ref{lst:getresult}.
 
 \begin{lstlisting}[caption={JSON minimal GetResult POST request\label{lst:getresult}}]
 
@@ -277,7 +277,7 @@ If only the result fields are important to the user the shorter GetResult comman
 }
 \end{lstlisting}
 
-The response will be a list of values of the last measurement for the queried properties. The results will be given as a concatenated string where each measurement is separated by a comma and in each measurement the value and its timestamp is separated by a hash mark. It can be seen on figure \ref{lst:sendresult}.
+The response will be a list of values of the last measurement for the queried properties. The results will be given as a concatenated string where each measurement is separated by a comma and in each measurement the value and its timestamp is separated by a hash mark. It can be seen on Figure \ref{lst:sendresult}.
 
 \begin{lstlisting}[caption={JSON GetResult response\label{lst:sendresult}}]
 {
@@ -307,7 +307,7 @@ Client applications use these services to communicate with the servers. These ap
 As the format introduced before is hard to decode for human there are various tools to display stored data in a user friendly way. With these tools measurements can be plotted in time, compared with each other and sensor locations can be displayed using a map. Even measurements can be plotted to a map giving a nice visual aid for processing the measured data. 
 
 52north has an official client application for the SOS server called 52n Sensorweb Client. This is a Java web application that can be configured to connect to multiple hosts and display their sensor data on maps and charts. It is developed using the same tools as the SOS server. 
-This means that the application can be installed next to the SOS server without any extra needs. This client can be opened in a web browser, but some parts run on the backend. This is a relatively complex application that does not yet understand semantic connections between the procedures. A screenshot can be seen on figure \ref{fig:sweclient}.
+This means that the application can be installed next to the SOS server without any extra needs. This client can be opened in a web browser, but some parts run on the backend. This is a relatively complex application that does not yet understand semantic connections between the procedures. A screenshot can be seen on Figure \ref{fig:sweclient}.
 
 \begin{figure}[h]
 \centering
@@ -316,7 +316,7 @@ This means that the application can be installed next to the SOS server without 
 \caption{Screenshot of SWE Client 3\label{fig:sweclient}}
 \end{figure}
 
-There is a JavaScript framework that enables users to use only client side tools to connect to SOS servers and display data called SOS.js. Unfortunately, because of security restrictions on JavaScript cross-site request the data cannot be retrieved from the SOS server directly, the client has to be served from the same domain as the server. This is often not doable. That is why this application needs a proxy that forwards the data to the same domain to bypass this restriction. If the proxy is working, the framework can display everything just using the browser. Screenshot can be seen on figure \ref{fig:sos-js}.
+There is a JavaScript framework that enables users to use only client side tools to connect to SOS servers and display data called SOS.js. Unfortunately, because of security restrictions on JavaScript cross-site request the data cannot be retrieved from the SOS server directly, the client has to be served from the same domain as the server. This is often not doable. That is why this application needs a proxy that forwards the data to the same domain to bypass this restriction. If the proxy is working, the framework can display everything just using the browser. Screenshot can be seen on Figure \ref{fig:sos-js}.
 
 \begin{figure}[h]
 \centering
