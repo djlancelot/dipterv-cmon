@@ -15,26 +15,20 @@
 \select@language {english} \contentsline {section}{\numberline {2.3}Some open source RDF databases}{26}{section.2.3}
 \select@language {english} \contentsline {section}{\numberline {2.4}SPARQL for the queries}{26}{section.2.4}
 \select@language {english} \contentsline {section}{\numberline {2.5}The Semantic Sensor Network Ontology}{27}{section.2.5}
-\select@language {english} \contentsline {chapter}{\numberline {3}The actual use case of SensorML and sensor ontology}{31}{chapter.3}
+\select@language {english} \contentsline {chapter}{\numberline {3}The used cyberphysical system}{31}{chapter.3}
 \select@language {english} \contentsline {section}{\numberline {3.1}Usage of the designed software}{31}{section.3.1}
 \select@language {english} \contentsline {section}{\numberline {3.2}Goal of the project}{31}{section.3.2}
-\select@language {english} \contentsline {section}{\numberline {3.3}NodeJS: The base of the connector application}{32}{section.3.3}
-\select@language {english} \contentsline {section}{\numberline {3.4}Dependent modules}{32}{section.3.4}
-\select@language {english} \contentsline {section}{\numberline {3.5}RDF representation of the SOS data}{33}{section.3.5}
-\select@language {english} \contentsline {section}{\numberline {3.6}Using the RDF database}{34}{section.3.6}
-\select@language {english} \contentsline {section}{\numberline {3.7}Connecting the SOS server}{34}{section.3.7}
-\select@language {english} \contentsline {section}{\numberline {3.8}Solving the challenge}{34}{section.3.8}
-\select@language {english} \contentsline {section}{\numberline {3.9}Using the Software}{35}{section.3.9}
-\select@language {english} \contentsline {chapter}{\numberline {4}The Implementation}{37}{chapter.4}
-\select@language {english} \contentsline {section}{\numberline {4.1}Goal of the implementation}{37}{section.4.1}
-\select@language {english} \contentsline {section}{\numberline {4.2}The test environment}{37}{section.4.2}
-\select@language {english} \contentsline {section}{\numberline {4.3}NodeJS: The base of the connector application}{38}{section.4.3}
-\select@language {english} \contentsline {section}{\numberline {4.4}Dependent modules}{38}{section.4.4}
-\select@language {english} \contentsline {section}{\numberline {4.5}RDF representation of the SOS data}{39}{section.4.5}
-\select@language {english} \contentsline {section}{\numberline {4.6}Using the RDF database}{40}{section.4.6}
-\select@language {english} \contentsline {section}{\numberline {4.7}Connecting the SOS server}{40}{section.4.7}
-\select@language {english} \contentsline {section}{\numberline {4.8}Solving the challenge}{40}{section.4.8}
-\select@language {english} \contentsline {section}{\numberline {4.9}Using the Software}{40}{section.4.9}
-\select@language {english} \contentsline {chapter}{Acknowledgement}{43}{chapter*.17}
-\select@language {english} \contentsline {chapter}{Bibliography}{45}{chapter*.18}
-\select@language {english} \contentsline {chapter}{Acknowledgement}{47}{appendix*.19}
+\select@language {english} \contentsline {section}{\numberline {3.3}System architecture}{31}{section.3.3}
+\select@language {english} \contentsline {chapter}{\numberline {4}The monitoring system}{33}{chapter.4}
+\select@language {english} \contentsline {section}{\numberline {4.1}Goal of the implementation}{33}{section.4.1}
+\select@language {english} \contentsline {section}{\numberline {4.2}The test environment}{33}{section.4.2}
+\select@language {english} \contentsline {section}{\numberline {4.3}NodeJS: The base of the connector application}{34}{section.4.3}
+\select@language {english} \contentsline {section}{\numberline {4.4}Dependent modules}{34}{section.4.4}
+\select@language {english} \contentsline {section}{\numberline {4.5}RDF representation of the SOS data}{35}{section.4.5}
+\select@language {english} \contentsline {section}{\numberline {4.6}Using the RDF database}{36}{section.4.6}
+\select@language {english} \contentsline {section}{\numberline {4.7}Connecting the SOS server}{36}{section.4.7}
+\select@language {english} \contentsline {section}{\numberline {4.8}Solving the challenge}{36}{section.4.8}
+\select@language {english} \contentsline {section}{\numberline {4.9}Using the Software}{36}{section.4.9}
+\select@language {english} \contentsline {chapter}{Acknowledgement}{39}{chapter*.16}
+\select@language {english} \contentsline {chapter}{Bibliography}{41}{chapter*.17}
+\select@language {english} \contentsline {chapter}{Acknowledgement}{43}{appendix*.18}

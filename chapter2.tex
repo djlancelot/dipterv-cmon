@@ -128,8 +128,16 @@ The condition part starts with the WHERE keyword. After that comes a multiple li
 A SPARQL query can also provide other answers than returning a list of the answers. SELECT can be replaced by CONSTRUCT for creating new triples or by ASK which will check if the value exists in the repository. 
 
 
-\begin{lstlisting}[caption={Sample SPARQL that queries all filterable objects\label{lst:sparql}}]
-select ?s { <uri#filterable> <uri#subPropertyOf> ?s }
+\begin{lstlisting}[caption={Sample complex SPARQL which shows top 5 countries based on population using DBpedia\label{lst:sparqlcomplex}}]
+PREFIX type: <http://dbpedia.org/class/yago/>
+PREFIX prop: <http://dbpedia.org/property/>
+SELECT ?country_name ?population
+WHERE {
+?country a type:LandlockedCountries ;
+rdfs:label ?country_name ;
+prop:populationEstimate ?population .
+FILTER (?population > 15000000 && langMatches(lang(?country_name), "en")) .
+} ORDER BY DESC(?population) LIMIT 5
 \end{lstlisting}
 
 With such technology the triples can be stored and retrieved. However, the ontology behind the measurement is still missing. For that there is a standard ontology for sensors maintained by the Semantic Sensor Network Incubator Group. The underlying system which will be introduced in the next chapter is using this ontology in a somewhat customized way\cite{g2d2}.  The ontology is described in the next section.
@@ -153,7 +161,8 @@ The ontology can be viewed from four different perspectives:
 \item A system perspective in focus on the network itself and the deployment.
 \item A feature and property perspective which focuses on the physical properties and the subject of the observation. 
 \end{itemize}
-This makes it available not just to deduct that for example wind sensor is a kind of sensor but that wind speed is a speed measurement. The connections between each object of the SSN ontology using reasoning can be seen on Figure \ref{fig:ssninfer}. 
+This makes it possible not just to deduct that for example wind sensor is a kind of sensor but that wind speed is a speed measurement. The connections between each object of the SSN ontology using reasoning can be seen on Figure \ref{fig:ssninfer}. 
+In every ontology the ancestor is the Thing object. Its descendants are the Entities and the Input and Output objects. An entity can be an Event, like a measurement (sensor input), a process or an action. A sensor input is triggered by a Stimulus (stimulation of the sensor). The properties of the sensors are also Entities. There are two kind of properties, one is the property of the measurement and the other is the property of the sensor itself.
 
 \begin{figure}[h]
 	\centering
