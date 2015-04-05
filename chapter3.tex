@@ -29,6 +29,22 @@ The status of the system can be seen on the implemented monitoring system.
 \section{Sensors and resources}
 The system is using different devices with different capabilities. There are simple microcontrollers and high performance mobile phones integrated in the system. 
 
-The most simple solution is the Arduino Uno board with ethernet controller. The card has an AVR based microcontroller working inside. It is good for simple measurement. 
+The most simple solution is the Arduino Uno board with Ethernet controller. The card has an AVR based microcontroller working inside. It is good for simple measurement. It contains 14 general purpose inputs and outputs from which 6 can be PWM output. It's computing speed is 16Mhz.
 
-The next in computational power is the Beagle Board. 
+The next in computational power is the Raspberry PI computer. This computer was designed to be cheap, reliable and compact, so poor people in developing countries can afford it. There are two models, both of them are fully working desktop computer with 700Mhz ARM cpu. It has:
+\begin{itemize}
+	\item 3 USB port
+	\item 1 CSI port for raw camera input
+	\item 1 Composite video output
+	\item 1 HDMI output
+	\item 1 SD/MMC/SDIO card reader
+	\item 8 GPIO port (for UART, SPI, I2C, I2S audio)
+\end{itemize} 
+ It can run multiple operating systems, like Arch Linux, Raspbian OS, Debian, Slackware, etc. The more expensive model which costs around 35 dollars has a built in ethernet port.  
+
+The most expensive embedded computer is the BeagleBone in the project. This computer was developed by Texas instruments. It has a 600Mhz ARM Cortex 8 processor with 128 MB of RAM. It has built in features for sound and video processing. It costs around 150 USD. 
+
+\section{The Sensor Observation Service}
+
+The sensors communicate with the 52n SOS server using POX GET requests. To reach the service the sensors have to be in the same network or VPN to make the connection secure. The service has its own client installed next to it.
+ 
