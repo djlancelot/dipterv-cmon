@@ -21,6 +21,7 @@
 \select@language {english} \contentsline {section}{\numberline {3.3}System architecture}{31}{section.3.3}
 \select@language {english} \contentsline {section}{\numberline {3.4}Sensors and resources}{32}{section.3.4}
 \select@language {english} \contentsline {section}{\numberline {3.5}The Sensor Observation Service}{33}{section.3.5}
+\select@language {english} \contentsline {section}{\numberline {3.6}RDF store}{33}{section.3.6}
 \select@language {english} \contentsline {chapter}{\numberline {4}The monitoring system}{35}{chapter.4}
 \select@language {english} \contentsline {section}{\numberline {4.1}Goal of the implementation}{35}{section.4.1}
 \select@language {english} \contentsline {section}{\numberline {4.2}The test environment}{35}{section.4.2}

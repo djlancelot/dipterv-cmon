@@ -40,11 +40,27 @@ The next in computational power is the Raspberry PI computer. This computer was 
 	\item 1 SD/MMC/SDIO card reader
 	\item 8 GPIO port (for UART, SPI, I2C, I2S audio)
 \end{itemize} 
- It can run multiple operating systems, like Arch Linux, Raspbian OS, Debian, Slackware, etc. The more expensive model which costs around 35 dollars has a built in ethernet port.  
+ It can run multiple operating systems, like Arch Linux, Raspbian OS, Debian, Slackware, etc. The more expensive model which costs around 35 dollars has a built in Ethernet port.  
 
 The most expensive embedded computer is the BeagleBone in the project. This computer was developed by Texas instruments. It has a 600Mhz ARM Cortex 8 processor with 128 MB of RAM. It has built in features for sound and video processing. It costs around 150 USD. 
 
 \section{The Sensor Observation Service}
 
 The sensors communicate with the 52n SOS server using POX GET requests. To reach the service the sensors have to be in the same network or VPN to make the connection secure. The service has its own client installed next to it.
- 
+
+\section{RDF store}
+
+The ontology is stored in an RDF database. It is based on the ontology introduced in the previous Chapter. The SSN Ontology has been extended for the custom use cases. The introduced ontology is called SISRO. It extends the original ontology in two ways:
+\begin{itemize}
+	\item It describes concepts and relations present in SensorML (and missing from SSN)
+	\item It contains hardware details of the sensor devices
+\end{itemize}
+The Sensor Instance Semantic Registry Service which is built on SISRO is supported by the following interfaces:
+\begin{itemize}
+	\item Collection of Sensor Metadata. This interface contains the metadata for discovering sensors.
+	\item System Discovery Interface. This interface is responsible for discovering sensors, searching in them using semantic connections.
+	\item Sensor Status Interface. This interface manages the status information of the sensors. This interface makes it possible to search based on Status Information and change states.
+	\item Sensor and hardware interconnection interface. Sensors does not have hardware description in SensorML. This interface supports application installation information and reconfiguration.
+	\item SPARQL interface. This interface let's users to interact with the database on a low level.
+	  
+\end{itemize}
