@@ -55,12 +55,26 @@ The ontology is stored in an RDF database. It is based on the ontology introduce
 	\item It describes concepts and relations present in SensorML (and missing from SSN)
 	\item It contains hardware details of the sensor devices
 \end{itemize}
-The Sensor Instance Semantic Registry Service which is built on SISRO is supported by the following interfaces:
+
+
+For easy communication with the sensors and the SOS server, the system can be reached using a custom service.
+This Sensor Instance Semantic Registry Service contains the following interfaces:
 \begin{itemize}
 	\item Collection of Sensor Metadata. This interface contains the metadata for discovering sensors.
 	\item System Discovery Interface. This interface is responsible for discovering sensors, searching in them using semantic connections.
 	\item Sensor Status Interface. This interface manages the status information of the sensors. This interface makes it possible to search based on Status Information and change states.
 	\item Sensor and hardware interconnection interface. Sensors does not have hardware description in SensorML. This interface supports application installation information and reconfiguration.
-	\item SPARQL interface. This interface let's users to interact with the database on a low level.
-	  
+	\item SPARQL interface. This interface lets users to interact with the database on a low level.	  
+\end{itemize}
+The layer architecture can be seen on Figure \ref{fig:sisrserv}.	
+
+\begin{figure}[h]
+	\centering
+	%custom
+	\includegraphics[width=0.6\textwidth]{figures/sisrserv.png}
+	\caption{SISR service layers\label{fig:sisrserv}}
+\end{figure}
+The custom API has the following functions:
+\begin{itemize}
+\item GetCapabilities()
 \end{itemize}
