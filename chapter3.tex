@@ -76,5 +76,14 @@ The layer architecture can be seen on Figure \ref{fig:sisrserv}.
 \end{figure}
 The custom API has the following functions:
 \begin{itemize}
-\item GetCapabilities()
+\item GetCapabilities(): This function returns the sensor metadata from the database.
+\item SearchSensor(): This function makes it possible to query the sensors based on temporal, spatial or topical properties.
+\item DescribeSensor(): This function returns the SISRO ontology of a chosen sensor.
+\item UpdateSensorInfo(): This function enables modification of sensor metadata.
+\item GetSensorStatus(): This function retrieves sensor statuses.
+\item SetSensorStatus(): This function lets the users modify sensor statuses.
+\item AssignSensor(): This function assigns a sensor to a specific device.
+\item RemoveSensor(): This function removes a sensor from the device.
 \end{itemize}
+
+\section{Planner}
