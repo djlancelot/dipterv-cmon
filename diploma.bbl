@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{52north}
 52north org.
@@ -35,5 +35,10 @@ RDF~Working Group.
 \bibitem{istsos}
 istSOS Community.
 \newblock istsos webpage.
+
+\bibitem{g6d1}
+Erd?s Csanád Dr. Dabóczi Tamás Wacha Gábor Kovács Kristóf~András
+  Szarvas~Attila, Dr. Kovácsházy~Tamás.
+\newblock Mintaalkalmazás fejlesztése kiberfizikai rendszerekhez ii.
 
 \end{thebibliography}

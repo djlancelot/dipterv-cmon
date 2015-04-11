@@ -88,3 +88,54 @@ The custom API has the following functions:
 
 \section{Planner}
 The planer is a separate module that is capable of deploying different applications to the different resources. It is not used in the monitoring only its results, the deployed application.
+
+\section{Image processing example application}
+
+In the following example a a real life use case of the built cyberphisical system is solved. This example has been implemented in the project itself\cite{g6d1}. 
+
+The goal was to check visual signals in a server room. There was a switch in the room what had blinking LED lights for indicating network connection. In this scenario we would like to monitor these connections only by using the LED indicators. The application is capturing a live video stream from the server room. In the video stream, the LEDs are seen. The user can specify the position of the monitored LEDs. The observations are categorized into 3 different categories:
+\begin{itemize}
+	\item Switched off - The LED hasn't been turned on since 5 seconds
+	\item Blinking
+	\item Turned on - The LED hasn't been turned off in the past 5 second
+\end{itemize}
+
+\begin{figure}[h]
+	\centering
+	%custom
+	\includegraphics[width=0.6\textwidth]{figures/switchwork.png}
+	\caption{Input image and corresponding output vectors\label{fig:switchwork}}
+\end{figure}
+
+The measurements are accumulated into a vector which projects each LED's state. Then the state vector is forwarded into the SOS database. The system also recognizes human interaction. If high movement is detected the system does not send the state vector but a marker signal that tells the system that human movement is detected. If there has been no movement for a long time, the system should automatically recover and show the state of the LEDs. The sensor input is stored in a plain text file.
+
+The video capturing is done by a Raspberry PI device. The stream is sent to a Beagleboard computer which is running the the image processing application. It has the text file with the configuration. The text file contain 5 different lines:
+\begin{itemize}
+	\item[server] the URL of the video stream.
+	\item[username] username for password protected streams.
+	\item[password] password for the protected stream.
+	\item[sos] URL for the POX endpoint of the SOS database.
+	\item[point] there can be multiple of this descriptor, which sets the X and Y coordinates of the LEDs
+\end{itemize}	
+The input image and the output state vector can be seen on Figure \ref{fig:switchwork}.
+
+\section{RDF representation of node load indicator}
+
+As presented before. The performance and load indicators are stored in the RDF store and the SOS server. To gather the information from the database we have to query some custom properties. These properties are introduced in this section. 
+
+The observable properties are the descriptors of the system property, like cpu load or free memory. A table of these can be read from Table .All custom URI starts with http://mit.bme.hu/sensorweb.
+\begin{table}[h]
+	\begin{center}
+		\begin{tabular}{| l | p{8cm} |}
+			\hline
+			URI end  &  Description \\ \hline \hline
+			observableProperty/node\_utilization\_cpu\_us &  CPU load for user level processes in percentage.\\ \hline
+			observableProperty/node\_utilization\_cpu\_sy &  CPU load for system level processes in percentage.\\ \hline
+			observableProperty/node\_utilization\_cpu\_tw &  Ratio of the idle (twiddling) process compared to systems overall performance.\\ \hline
+			observableProperty/node\_utilization\_cpu\_wa &  Ratio of waiting for IO processes compared to overall performance.\\ \hline
+			observableProperty/node\_utilization\_mem\_free &  Free memory in bytes.\\ \hline			
+			\\TODO we have to finish this part.
+		\end{tabular}
+		\caption{Observable properties\label{tab:obsprop}}
+	\end{center}
+\end{table}
