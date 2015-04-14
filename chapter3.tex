@@ -121,21 +121,45 @@ The input image and the output state vector can be seen on Figure \ref{fig:switc
 
 \section{RDF representation of node load indicator}
 
-As presented before. The performance and load indicators are stored in the RDF store and the SOS server. To gather the information from the database we have to query some custom properties. These properties are introduced in this section. 
+As presented before the performance and load indicators are stored in the RDF store and the SOS server. The RDF store contains application and device descriptions too. Each node is uploading it's properties and applications to the store separately. The actual data is described in this section.
 
-The observable properties are the descriptors of the system property, like cpu load or free memory. A table of these can be read from Table .All custom URI starts with http://mit.bme.hu/sensorweb.
-\begin{table}[h]
-	\begin{center}
-		\begin{tabular}{| l | p{8cm} |}
-			\hline
-			URI end  &  Description \\ \hline \hline
-			observableProperty/node\_utilization\_cpu\_us &  CPU load for user level processes in percentage.\\ \hline
-			observableProperty/node\_utilization\_cpu\_sy &  CPU load for system level processes in percentage.\\ \hline
-			observableProperty/node\_utilization\_cpu\_tw &  Ratio of the idle (twiddling) process compared to systems overall performance.\\ \hline
-			observableProperty/node\_utilization\_cpu\_wa &  Ratio of waiting for IO processes compared to overall performance.\\ \hline
-			observableProperty/node\_utilization\_mem\_free &  Free memory in bytes.\\ \hline			
-			%TODO we have to finish this part.
-		\end{tabular}
-		\caption{Observable properties\label{tab:obsprop}}
-	\end{center}
-\end{table}
+\subsection{Inserting Device description}
+
+
+\begin{lstlisting}[caption={Template for Device information\label{lst:tempdev}}]
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dedo: <http://purl.org/net/sisr/owl/dedo#>
+PREFIX : <http://localhost:5820/sisro/data#>
+
+# Inserting the device into the store
+INSERT DATA
+{ 
+:DEVICEID rdf:type dedo:Device ;
+rdf:type owl:NamedIndividual ;
+dedo:device-type "DEVICETYPE"^^xsd:string .
+
+:DEVICEIDHardware rdf:type dedo:Hardware ;
+rdf:type owl:NamedIndividual ;
+dedo:isPartOf :DEVICEID .
+
+:DEVICEIDHardwareCPU rdf:type dedo:CPU ;
+rdf:type dedo:NamedIndividual ;
+dedo:isPartOf :DEVICEIDHardware ;
+dedo:cpu-description "CPUDESCRIPTION"^^xsd:string ;
+dedo:cpu-computing-power "MEEPS"^^xsd:double ;
+dedo:cpu-computing-power-unit "MIPS"^^xsd:string .
+
+:DEVICEIDHardwareMemory-RAM rdf:type dedo:OperationalMemory ;
+rdf:type owl:NamedIndividual ;
+dedo:isPartOf :DEVICEIDHardware ;
+dedo:operational-memory-capacity "MEMORY"^^xsd:double ;
+dedo:operational-memory-capacity-unit "MB"^^xsd:string .
+
+:DEVICEIDHardwareMemory-Store rdf:type dedo:Storage ;
+rdf:type owl:NamedIndividual ;
+dedo:isPartOf :DEVICEIDHardware ;
+dedo:storage-capacity "STORAGE"^^xsd:double ;
+dedo:storage-capacity-unit "GB"^^xsd:string .
+} 
+\end{lstlisting}
+
