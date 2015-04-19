@@ -92,9 +92,40 @@ However, these services does not contain the necessary features to build the sem
 \section{Planner}
 The planer is a separate module that is capable of deploying different applications to the different resources. It is not used in the monitoring only its results, the deployed application.
 
-\section{Use case}
+\section{Image processing example application}
 
-The use case is a typical home monitoring system. It consists of such devices that can be found in a regular home. It is a demo environment which have been built up in room IE322 and the third floor corridor at the University.
+In the following example a a real life use case of the built cyberphisical system is solved. This example has been implemented in the project itself\cite{g6d1}. 
+
+The goal was to check visual signals in a server room. There was a switch in the room what had blinking LED lights for indicating network connection. In this scenario we would like to monitor these connections only by using the LED indicators. The application is capturing a live video stream from the server room. In the video stream, the LEDs are seen. The user can specify the position of the monitored LEDs. The observations are categorized into 3 different categories:
+\begin{itemize}
+	\item Switched off - The LED hasn't been turned on since 5 seconds
+	\item Blinking
+	\item Turned on - The LED hasn't been turned off in the past 5 second
+\end{itemize}
+
+\begin{figure}[h]
+	\centering
+	%custom
+	\includegraphics[width=0.6\textwidth]{figures/switchwork.png}
+	\caption{Input image and corresponding output vectors\label{fig:switchwork}}
+\end{figure}
+
+The measurements are accumulated into a vector which projects each LED's state. Then the state vector is forwarded into the SOS database. The system also recognizes human interaction. If high movement is detected the system does not send the state vector but a marker signal that tells the system that human movement is detected. If there has been no movement for a long time, the system should automatically recover and show the state of the LEDs. The sensor input is stored in a plain text file.
+
+The video capturing is done by a Raspberry PI device. The stream is sent to a Beagleboard computer which is running the the image processing application. It has the text file with the configuration. The text file contain 5 different lines:
+\begin{itemize}
+	\item[server] the URL of the video stream.
+	\item[username] username for password protected streams.
+	\item[password] password for the protected stream.
+	\item[sos] URL for the POX endpoint of the SOS database.
+	\item[point] there can be multiple of this descriptor, which sets the X and Y coordinates of the LEDs
+\end{itemize}	
+The input image and the output state vector can be seen on Figure \ref{fig:switchwork}.
+
+
+\section{The building monitoring example application}
+
+The use case is a typical infrastructure monitoring system. It consists of such devices that can be used for intruder detection or measuring usage of certain rooms. It is a demo environment which have been built up in room IE322 and the third floor corridor at the University.
 Detailed description of the devices follows.
 
 \subsection*{Microphone}
@@ -121,3 +152,47 @@ Detailed description of the devices follows.
 \subsection*{Speech sensor}
 
 The speech sensor is the only virtual sensor in the system. It listens to the microphone stream and tries to decode the sentences that has been said in the monitored room. It gives the decoded text as answer.
+
+\section{RDF representation of node load indicator}
+
+As presented before the performance and load indicators are stored in the RDF store and the SOS server. The RDF store contains application and device descriptions too. Each node is uploading it's properties and applications to the store separately. The actual data is described in this section.
+
+\subsection{Inserting Device description}
+
+
+\begin{lstlisting}[caption={Template for Device information\label{lst:tempdev}}]
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dedo: <http://purl.org/net/sisr/owl/dedo#>
+PREFIX : <http://localhost:5820/sisro/data#>
+
+# Inserting the device into the store
+INSERT DATA
+{ 
+:DEVICEID rdf:type dedo:Device ;
+rdf:type owl:NamedIndividual ;
+dedo:device-type "DEVICETYPE"^^xsd:string .
+
+:DEVICEIDHardware rdf:type dedo:Hardware ;
+rdf:type owl:NamedIndividual ;
+dedo:isPartOf :DEVICEID .
+
+:DEVICEIDHardwareCPU rdf:type dedo:CPU ;
+rdf:type dedo:NamedIndividual ;
+dedo:isPartOf :DEVICEIDHardware ;
+dedo:cpu-description "CPUDESCRIPTION"^^xsd:string ;
+dedo:cpu-computing-power "MEEPS"^^xsd:double ;
+dedo:cpu-computing-power-unit "MIPS"^^xsd:string .
+
+:DEVICEIDHardwareMemory-RAM rdf:type dedo:OperationalMemory ;
+rdf:type owl:NamedIndividual ;
+dedo:isPartOf :DEVICEIDHardware ;
+dedo:operational-memory-capacity "MEMORY"^^xsd:double ;
+dedo:operational-memory-capacity-unit "MB"^^xsd:string .
+
+:DEVICEIDHardwareMemory-Store rdf:type dedo:Storage ;
+rdf:type owl:NamedIndividual ;
+dedo:isPartOf :DEVICEIDHardware ;
+dedo:storage-capacity "STORAGE"^^xsd:double ;
+dedo:storage-capacity-unit "GB"^^xsd:string .
+} 
+\end{lstlisting}
