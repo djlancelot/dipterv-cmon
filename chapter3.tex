@@ -153,46 +153,4 @@ Detailed description of the devices follows.
 
 The speech sensor is the only virtual sensor in the system. It listens to the microphone stream and tries to decode the sentences that has been said in the monitored room. It gives the decoded text as answer.
 
-\section{RDF representation of node load indicator}
 
-As presented before the performance and load indicators are stored in the RDF store and the SOS server. The RDF store contains application and device descriptions too. Each node is uploading it's properties and applications to the store separately. The actual data is described in this section.
-
-\subsection{Inserting Device description}
-
-
-\begin{lstlisting}[caption={Template for Device information\label{lst:tempdev}}]
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX dedo: <http://purl.org/net/sisr/owl/dedo#>
-PREFIX : <http://localhost:5820/sisro/data#>
-
-# Inserting the device into the store
-INSERT DATA
-{ 
-:DEVICEID rdf:type dedo:Device ;
-rdf:type owl:NamedIndividual ;
-dedo:device-type "DEVICETYPE"^^xsd:string .
-
-:DEVICEIDHardware rdf:type dedo:Hardware ;
-rdf:type owl:NamedIndividual ;
-dedo:isPartOf :DEVICEID .
-
-:DEVICEIDHardwareCPU rdf:type dedo:CPU ;
-rdf:type dedo:NamedIndividual ;
-dedo:isPartOf :DEVICEIDHardware ;
-dedo:cpu-description "CPUDESCRIPTION"^^xsd:string ;
-dedo:cpu-computing-power "MEEPS"^^xsd:double ;
-dedo:cpu-computing-power-unit "MIPS"^^xsd:string .
-
-:DEVICEIDHardwareMemory-RAM rdf:type dedo:OperationalMemory ;
-rdf:type owl:NamedIndividual ;
-dedo:isPartOf :DEVICEIDHardware ;
-dedo:operational-memory-capacity "MEMORY"^^xsd:double ;
-dedo:operational-memory-capacity-unit "MB"^^xsd:string .
-
-:DEVICEIDHardwareMemory-Store rdf:type dedo:Storage ;
-rdf:type owl:NamedIndividual ;
-dedo:isPartOf :DEVICEIDHardware ;
-dedo:storage-capacity "STORAGE"^^xsd:double ;
-dedo:storage-capacity-unit "GB"^^xsd:string .
-} 
-\end{lstlisting}

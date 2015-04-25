@@ -3,26 +3,36 @@
 %----------------------------------------------------------------------------
 \section{Goal of the implementation}
 
-After introducing the two different data types, in this part a sample application is shown that can handle connection to both data types.
+After introducing the data formats and the cyberphisical system implementation, in this part a sample application is shown that can handle connection to both data types.
 
-The goal was to show how a connection can be created from third party applications. In further chapters the integration of the different types will be shown. The meaning of this phase is to seek for new ways to implement web application using the connectors provided and measure the needs for such a web application. A whole test system were created to enable this.
+The goal was to show how a connection can be created from third party applications. In further chapters the integration of the different types will be shown. The meaning of this phase is to seek for new ways to implement a web application using the connectors provided and measure the needs for such a web application. A whole test system was created to enable this.
 
 \section{The test environment}
 
-A new virtual machine has been created for the test environment. It is using free and open source tools that run the application.
-Ubuntu 13.10 is used as the operating system. The virtual machine has a limited 512 MB of RAM, and a max. 10 GB storage. It's network card is hidden behind a NAT provided by the host computer. This makes easier to work on a laptop on different locations. Java Runtime Environment is installed on the virtual machine for Stardog and SOS. For the web application NodeJS has been set up.
+The system has been tested on multiple platforms. There was an Ubuntu Linux based virtual machine, which had a limited 512 MB of RAM, and a max. 10 GB storage. It's network card was hidden behind a NAT provided by the host computer. Java Runtime Environment was installed on the virtual machine for Stardog and SOS. For the web application NodeJS has been set up. 
 
-The chosen RDF database is Stardog Community edition. At first the software preallocates too much memory. The startup script had to be changed to make the software start. Changing this parameter have not decreases the performance significantly, compared to another computer with more memory. 
+The other platform was a Windows based computer. It had the same services (Stardog and SOS) running. The monitoring application requires NodeJs, which is a platform independent solution, so this did not mean any problem.
 
-The chosen SOS server is 52north SOS 4.0. This is a recent release of the software. The used development version enables JSON communication and other experimental tools. The server requires PostgreSQL database backend and Tomcat application server.
+The chosen RDF database is Stardog Community edition. At first the software preallocates too much memory. It might be required for heavy weight applications but in our case it was not necessary.  The startup script had to be changed to make the software start. Changing this parameter does not decreases the performance significantly, compared to another computer with more memory. 
 
-PostgreSQL 9.1.12 is used as the database backend for SOS. PostGIS environment had to be added. The databes can be administrated using pgAdmin III from the host computer using port forward. For the test environment no new users has been added, the SOS server uses the admin user to connect to the database. The database had to be created manually but tables and configuration is added during the installation automatically.
+The chosen SOS server is 52north SOS 4.1 This is a recent release of the software. The used development version enables JSON communication. The server requires PostgreSQL database backend and Tomcat application server.
+
+PostgreSQL 9.1.12 is used as the database backend for SOS. PostGIS environment had to be added. The databese can be administrated using pgAdmin III from the host computer using port forward. For the linux test environment no new users has been added, the SOS server uses the admin user to connect to the database. The database had to be created manually but tables and configuration is added during the installation automatically.
 
 Tomcat 7 is installed to support SOS. To keep the system separated a new user is created to run the container and the application. The Stardog database is also running in Tomcat like environment that is why it is started by the same user as the SOS server. 
 
 \section{NodeJS: The base of the connector application}
 
-The connector application is written in JavaScript. The frontend and the backend of the application is the same language. Since the V8 engine exists JavaScript can be compiled and run significantly faster\cite{v8}. NodeJS builds upon the V8 engine and lets JavaScript run on backend. Another advantage is that NodeJS is single threaded, however event driven. That enables running applications faster, without worrying about thread safety. The architecture of the NodeJS environment can be seen on figure \ref{fig:node}. To keep the integrator separated a different user is added to run server side code. No web application container is needed to run a NodeJS application. The software itself handles TCP connections and other modules help do it similar to Java Servlets. Because it has smaller overhead and dependencies, the created application should run faster than a Java Web application. NodeJS has an easy to use packaging system that makes dependency handling simple. All necessary modules names are added to the related part of the package.json file and required packages are downloaded using the npm install command from a central repository. 
+The connector application is written in JavaScript. This way the frontend and the backend application can be written using the same programming language. 
+Since the V8 engine exists JavaScript can be compiled and run significantly faster\cite{v8} than before. 
+The engine was introduced in 2008 and it caused a breakthrough in Javascript language. It has some new solutions that made V8 more effective, these are:
+\begin{itemize}
+\item \textbf{Hidden classes}: In V8 every object is a class. They are stored in a tree based structure and can be recalled faster.
+\item \textbf{Dynamic Machine Code Generation}: V8 generates machine code from source without any intermediate bytecode language, like in Java.
+\item \textbf{Inline cache}: It has a built in inline cache for resolving method names quicker.
+\item \textbf{Efficient Garbage Collection}:Garbage collection freezes code execution and has a detailed map of the variable, however each garbage collection phase would only clear some part of the memory, it does not run full garbage collection every time.
+\end{itemize}
+NodeJS builds upon this V8 engine and lets JavaScript run on backend. Another advantage is that NodeJS has a single threaded, event driven core. This enables running applications faster, without worrying about thread safety. The architecture of the NodeJS environment can be seen on figure \ref{fig:node}. To keep the integrator separated a different user is added to run server side code on the Linux system. No web application container or web server is needed to run a NodeJS application. The software itself handles TCP connections and other modules help do it similar to Java Servlets. Because it has smaller overhead and dependencies, the created application should run faster than a rich Java Web application. NodeJS has an easy to use packaging system that makes dependency handling simple, like maven for Java. All necessary modules names are added to the related part of the package.json file and required packages are downloaded using the npm install command from a central repository. 
 
 \begin{figure}[h]
 \centering
@@ -33,16 +43,19 @@ The connector application is written in JavaScript. The frontend and the backend
 \section{Dependent modules}
 
 There are external modules that handle HTTP requests, creates responses and read JSON data. There is also a database connector for Stardog. 
+\begin{itemize}
 
-The ExpressJS module acts as the Servler engine for JavaScript. It handles incomming connections and parsed HTTP request are passed to a callback function which generates the responses. Different urls can have different callback functions to do routing. Express also supports many templating engines. EJS is a popular, easy to understand templating engine that was chosen for the project.
+\item The ExpressJS module acts as the Servler engine for JavaScript. It handles incomming connections and parsed HTTP request are passed to a callback function which generates the responses. Different urls can have different callback functions to do routing. Express also supports many templating engines. EJS is a popular, easy to understand templating engine that was chosen for the project.
 
-Restler is an easy to use module that can asynchronously read a web page and parse it as JSON data and return it to the callback function. This can be used to communicate with the SOS server.
+\item Restler is an easy to use module that can asynchronously read a web page and parse it as JSON data and return it to the callback function. This can be used to communicate with the SOS server.
 
-Stardog.JS is Stardog database servers own connector to get SPARQL queries. It is in early stages, however all the necessary functions are working. 
+\item Stardog.JS is Stardog database servers own connector to get SPARQL queries. It is in early stages, however all the necessary functions are working. 
 
-Nodemon is a utility that runs JavaScript codes automatically restarts them on error or code changes. This makes development easier, because every time the source is changed the application automatically restarts. It can be configured to restart on errors to make applications fail safe.
+\item Nodemon and Forever are utilities that run JavaScript codes automatically restarts them on error or code changes. This makes development easier, because every time the source is changed the application automatically restarts. It can be configured to restart on errors to make applications fail safe.
 
-AngularJS is not a server side module, but plays a very important role in the software. This tool is for the browser and it puts a MVC layer on top of the webpage. With the help of Angular, parts of a page can be changed asynchronously based on the value read from the model. It makes the pageload faster by firstly loading the frame of the application and only later inserting the read data from the database. Angular is maintained by Google and it is used in many of their web applications.
+\item AngularJS is not a server side module, but plays a very important role in the software. This tool is for the browser and it puts a MVC layer on top of the webpage. With the help of Angular, parts of a page can be changed asynchronously based on the value read from the model. It makes the pageload faster by firstly loading the frame of the application and only later inserting the read data from the database. Angular is maintained by Google and it is used in many of their web applications.
+
+\end{itemize}
 
 \section{RDF representation of the SOS data}
 
