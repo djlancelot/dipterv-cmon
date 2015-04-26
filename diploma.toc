@@ -34,10 +34,6 @@
 \select@language {english} \contentsline {section}{\numberline {4.6}RDF representation of the SOS data}{42}{section.4.6}
 \select@language {english} \contentsline {section}{\numberline {4.7}Architecture of the monitoring system}{43}{section.4.7}
 \select@language {english} \contentsline {section}{\numberline {4.8}Architecture of the backend web service}{43}{section.4.8}
-\select@language {english} \contentsline {section}{\numberline {4.9}Using the RDF database}{43}{section.4.9}
-\select@language {english} \contentsline {section}{\numberline {4.10}Connecting the SOS server}{44}{section.4.10}
-\select@language {english} \contentsline {section}{\numberline {4.11}Solving the challenge}{44}{section.4.11}
-\select@language {english} \contentsline {section}{\numberline {4.12}Using the Software}{44}{section.4.12}
-\select@language {english} \contentsline {chapter}{\numberline {5}Summary}{45}{chapter.5}
-\select@language {english} \contentsline {chapter}{Acknowledgement}{47}{chapter*.25}
-\select@language {english} \contentsline {chapter}{Bibliography}{49}{chapter*.26}
+\select@language {english} \contentsline {chapter}{\numberline {5}Summary}{47}{chapter.5}
+\select@language {english} \contentsline {chapter}{Acknowledgement}{49}{chapter*.25}
+\select@language {english} \contentsline {chapter}{Bibliography}{51}{chapter*.26}

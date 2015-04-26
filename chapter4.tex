@@ -64,6 +64,16 @@ receive queries.
 
 The ExpressJS module is serving the static files from the backend. The webpage itself is a single page web application which means that it consists of one html page and some partial pages that are loaded on the client side by a JavaScript framework. The framework that loads the different modules is called AngularJS. It was acquired by Google and now the project is maintained by them\cite{angular}. It's main advantage is that it implements a clear Model-View-Controller pattern. It dynamically changes the views, the HTML page based on the changes in the model, without additional coding.
 
+For manipulating the user interface some external packages has been added to Angular. The most important of those are the following:
+\begin{itemize}
+\item \textbf{Chart.js}: This is a module that can be used to draw line charts or other kind of charts. This has an Angular integration and can be used to display the measured data in a time series plot. It can automatically smooth the curves. This is an open source project using HTML5.
+\item \textbf{Angular Bootstrap DateTime picker}: This module has been chosen to select the time period to display. This is an open source project too.
+\item \textbf{NG Tags Input}: This module can display tags in a search box and can handle autocomplete. 
+\end{itemize}
+
+For formatting the page the Bootstrap template is used. 
+This library has some built in styles that are displayed the same in every browser. It has support for mobile devices.
+
 \section{RDF representation of the SOS data}
 
 \begin{figure}[h]
@@ -104,43 +114,50 @@ The backend services are called using HTTP POST and GET request. The POST body i
 \caption{Detailed architecture of the backend services.\label{fig:backarch}}
 \end{figure}
 
-\section{Using the RDF database}
+As the backend service is also providing the basic web server features, it has a built in static module, which in case there is no other web service by the provided location, it is serving a file from a given folder. If the file specified in the location does not exist the default index.html is returned. 
+This ensures that Angular's custom routes are redirected to the same page. This feature is provided by ExpressJS.
 
-To connect to the database the Stardog.js library has been used. The statically retrieved web page asynchronously requested the list API call to get a list of the filterable properties and their range. The ranges can be either other entities, doubles, integers or strings. Depending on what the range of the property is a corresponding input box shall be rendered.
-
-When the AJAX call responds the Angular script reloads the data with the response. 
-
-On the backend a separate module handles the API calls, connects to the database and runst the SPARQL request. The result and additional information is returned as JSON response.
-
-% TODO: SPARQL queries, sequence diagram, etc.
-
-\section{Connecting the SOS server}
-
-The JSON API can be reached easily using the Restler module to retrieve information from the SOS server. The server responds to the GetCapabilities queries with its list of the sensors and their parameters. However, yet there has not been progress in implementing the GetObservation command in the JSON interface. The JSON API is still under heavy development, thus further connection using this interface can not be done.
-
-\section{Solving the challenge}
-
-To solve the issue of connecting to the JSON interface there can be three different ways. 
-
-The first one is to connect to the SOS server using another interface. There are SOAP interfaces implemented for NodeJS, by adding this layer the GetObservation method can be queried.
-
-The second method is to implement the GetObservation method in the 52north SOS server. The development environment has been already set up, after examining the code the changes shoul be made easily. 
-
-Because of the many changes that are needed to display SOS data changing to an existing SOS client should be a great step forward. The existing client can be extended by semantic functions using the Stardog library provided and the some SPARQL queries. The development environment for the SWE Client is also ready to use.
-
-\section{Using the Software}
-
-Thanks to NodeJS package management the software is easy to deploy. After installing NodeJS - in Windows there is a straight-forward installer, for Ubuntu it can be easily installed using apt - the git project has to be cloned to the server. In the project directory (sensormonitor)  the npm install command installs the missing modules and the npm start command starts the application with Nodemon. The url of the rdf database can be changed in rdf\_parser.js. The installation commands are shown on listing \ref{lst:install}
-
-\begin{lstlisting}[caption={Install steps for the software\label{lst:install}}]
-#0. install NodeJS and npm
-sudo apt-get install nodejs
-#1. clone the project to your destination
-git clone --depth 1 https://djlancelot@bitbucket.org/djlancelot/sensormonitor.git
-#2. change into project folder
-cd sensormonitor
-#3. install missing dependencies
-npm install
-#4. start the application
-npm start
+In the sensor browser page, there is a search module where you can start typing in the name of the wanted category. After 3 letters a query is sent to the Autocomplete backend service which tries to find the matching categories and returns a list of the result. The Autocomplete module is using the Mydog module to get the data from Stardog. 
+The query searches for every descendant of the sensor class and returns the result if found. The SPARQL query for that can be seen on Listing \ref{lst:autosparql}. 
+\begin{lstlisting}[caption={SPARQL query for Autocomplete on the "wea" string\label{lst:autosparql}}]
+SELECT ?name ?label {?name rdfs:subClassOf+ mit:sensor ; rdfs:label ?label. FILTER regex(?label, "wea","i")}';
 \end{lstlisting}
+
+The Capabilities module receives a procedure and returns all the information that describe the sensor in some way. This is similar to what SOS getCapabilities would return but with additional information. It is done using SPARQL in the RDF store. The result of this service call is used in other parts of the application. The SPARQL query for this can be seen on Listing \ref{lst:capsparql}. The result will be given as a JSON object. It will contain the sensor name, the procedure name, the offering of the procedure, the feature of interest of the procedure, the label of the feature of interest, the observed property URI, its name, and the name of the type of the observed property. 
+
+
+\begin{lstlisting}[caption={SPARQL query for Capabilities\label{lst:capsparql}}]
+SELECT ?label ?procedure ?offering ?foi ?flabel ?observable ?obs_name ?tlabel 
+WHERE { <procedure/name> demo:procedure ?procedure ;
+ rdfs:label ?label;
+ demo:offering ?offering;
+ demo:observedProperty ?obs ; 
+ mit:hasLoc ?loc.
+?loc demo:foi ?foi;
+ rdfs:label ?flabel. 
+?obs demo:observedPropertyURI ?observable ;
+ rdfs:label ?obs_name ; mit:hasObservedPropertyType ?type .
+?type rdfs:label ?tlabel}
+\end{lstlisting}
+
+The search module filters the sensor list. By default it will return the list of all sensors in the system. If there is an additional parameter list given in a given format the system will modify the query accordingly. This format is an array of  JSON objects which have three fields: 
+\begin{itemize}
+\item[text] The displayed name of the given parameter, it is not used.
+\item[value] The class URI which identifies the class itself. This is added to the query.
+\item[type] The type of the parameter. Yet it can have the value of "sensortype" only. 
+\end{itemize}
+The SPARQL query for retrieving the objects can be seen on Listing \ref{lst:searchsparql} The example SPARQL is using two categories for filtering. The result is always the union of the given categories. 
+
+\begin{lstlisting}[caption={SPARQL query for Search\label{lst:searchsparql}}]
+SELECT ?procedure ?name ?offering
+    { ?class rdfs:subClassOf+ mit:sensor  .
+     ?procedure rdf:type  ?class ; rdfs:label ?name ; demo:offering ?offering 
+     { ?class rdfs:subClassOf* <category_one> } UNION { ?class rdfs:subClassOf* <category_two> }
+    }
+\end{lstlisting}
+
+%TODO continue backend modules
+
+%TODO describe frontend modules
+
+%TODO write user manual
