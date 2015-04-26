@@ -66,14 +66,44 @@ The ExpressJS module is serving the static files from the backend. The webpage i
 
 \section{RDF representation of the SOS data}
 
-The general SISRO representation was missing some data of the example use case at the time of writing. To bridge this problem the monitoring application is using a different ontology that has been created to enable sensor browsing. This ontology contains only the necessary information to query sensor information.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/implrdf.png}
+\caption{The Ontology used in the monitoring system.\label{fig:implrdf}}
+\end{figure}
 
-The first one is to create a tree on top of the sensors manually to describe the connections between each sensor. This often needs to be changed when new sensors arrive in the system. However, this tree can be exported and shared with others just like DBPedia ontologies. This can be also efficiently queried.
+The general SISRO representation was missing some data of the example use case at the time of writing. To bridge this problem the monitoring application is using a different ontology that has been created to enable sensor browsing. This ontology contains only the necessary information to query sensor information. The elements can be seen on Figure \ref{fig:implrdf}. Some parts of the ontology hasn't been used in the monitoring system, the key components are:
 
-The second approach is to use a less redundant way by only creating rules that make sensors part of groups. These rules add a virtual groups based on the conditions defined. This is a resource intensive process that has to be re-run at every query. 
-
-For the experiment the first way is used on a small sample ontology. The hierarchy was manually created and some properties have been added. These properties were annotated as filterable or observable. Observable meaning that the property can be seen from the monitoring system and filterable meaning that its value can be given to advance the query. The structure of the translation is not as straight forward as the created database, however it can be represented in the same way using rules. 
+\begin{itemize}
+\item \textbf{Sensor}: This object is the ancestor of all sensor types. It has the Weather and Other sensors and their children. The instances of the child classes are the actual sensors. Figure \ref{fig:implrdf} shows that a final sensor can have multiple measurement, thus it can have multiple parents. Eco sensors are instances of the CPSCorridorEcoSensor and door state sensors are Instances of CPSDoorStateSensors. 
+\item \textbf{loc}: This object stores location information, like URI of the feature of interest property in SOS and the name of the location. 
+\item \textbf{ObservedProperty}: This is the observed feature of a sensor. There can be multiple observed properties for one sensor, like Battey voltage, Motion sensors, Speech text. The object instance contains the URI for the ObservedProperty in SOS and the type of the observed property.
+\item \textbf{ObservedPopertyType}: This is the type of the observed property it has 3 instances in the example application: quantity, text, boolean.
+\end{itemize}
  
+The sensors of the use case are introduced in the end of the previous chapter, so those won't be covered here in details.
+  
+\section{Architecture of the monitoring system}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/softwareArch.png}
+\caption{Overall architecture of the monitoring system.\label{fig:overallarch}}
+\end{figure}
+
+The overall architecture can be seen on Figure \ref{fig:overallarch}. The user communicates through the single page web application. The web application dynamically loads the elements by sending requests to the backend service. The backend service connects to the two different databases and returns the data to the frontend. Initially the client side pages are also served by the backend service. 
+
+\section{Architecture of the backend web service}
+
+The backend services are called using HTTP POST and GET request. The POST body is always a JSON object. The detailed architecture of the backend services can be seen on Figure \ref{fig:backarch}.
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]{figures/backendarch.png}
+\caption{Detailed architecture of the backend services.\label{fig:backarch}}
+\end{figure}
+
 \section{Using the RDF database}
 
 To connect to the database the Stardog.js library has been used. The statically retrieved web page asynchronously requested the list API call to get a list of the filterable properties and their range. The ranges can be either other entities, doubles, integers or strings. Depending on what the range of the property is a corresponding input box shall be rendered.

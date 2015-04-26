@@ -7,6 +7,7 @@ A level-1 auxiliary file: chapter1.aux
 A level-1 auxiliary file: chapter2.aux
 A level-1 auxiliary file: chapter3.aux
 A level-1 auxiliary file: chapter4.aux
+A level-1 auxiliary file: summary.aux
 A level-1 auxiliary file: acknowledgement.aux
 The style file: plain.bst
 A level-1 auxiliary file: appendices.aux
@@ -25,12 +26,14 @@ Warning--entry type for "rdf" isn't style-file defined
 --line 47 of file mybib.bib
 Warning--entry type for "v8" isn't style-file defined
 --line 54 of file mybib.bib
+Warning--entry type for "angular" isn't style-file defined
+--line 60 of file mybib.bib
 Warning--entry type for "g2d2" isn't style-file defined
---line 61 of file mybib.bib
+--line 67 of file mybib.bib
 Warning--entry type for "g2d4" isn't style-file defined
---line 69 of file mybib.bib
+--line 75 of file mybib.bib
 Warning--entry type for "g6d1" isn't style-file defined
---line 83 of file mybib.bib
+--line 89 of file mybib.bib
 Too many commas in name 1 of "Szarvas Attila, Dr. Kovácsházy Tamás, Erd?s Csanád, Dr. Dabóczi Tamás, Wacha Gábor, Kovács Kristóf András" for entry g6d1
 while executing---line 1049 of file plain.bst
 Too many commas in name 1 of "Szarvas Attila, Dr. Kovácsházy Tamás, Erd?s Csanád, Dr. Dabóczi Tamás, Wacha Gábor, Kovács Kristóf András" for entry g6d1
