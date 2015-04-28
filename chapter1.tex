@@ -61,7 +61,25 @@ To have a general structure for the data, there is an abstract hierarchy that re
 
 This way gives as enough abstraction to separate the measured properties, the physical properties, the actual sensors and the results from each other.
 
-It is able to define the location of the sensor, the timestamp of the measurement and the sensor data itself, with many additional information. The data can be stored in SOS servers that can retrieve the data on different interfaces.
+It is able to define the location of the sensor, the timestamp of the measurement and the sensor data itself, with many additional information. The data can be stored in SOS servers that can retrieve the measurements on different interfaces. There are additional other services\cite{g4d3} that are present to add demanded functionalities to the service. These other service models are SAS, SPS and WNS, which are introduced below and SOS will be covered in details.
+
+\section{Sensor Alerting Service}
+This service model takes care of the broadcast of the messages. The clients can subscribe to some special messages or alerts and they will be notified if such an event has occurred. SAS is some kind of event notification service.
+
+\section{Sensos Planning Service}
+ 
+ This service provides a standard interface for controlling sensors and simulations. The SPS service implements the following tasks:
+ \begin{itemize}
+\item Description of the Tasks.
+\item Verification of the feasibility of the tasks.
+\item Status check of the running tasks.
+\item Update or modification of running tasks.
+\item Removal of tasks.
+\end{itemize}
+
+\section{Web Notification Service}
+This service connects users with the sensor informations. This model provides a standard interface for communication between clients and the service through HTTP, instant messaging, e-mail, SMS, phone or fax. 
+ 
  
 \section{Server Observation Service}
 

@@ -34,16 +34,22 @@ Warning--entry type for "g2d4" isn't style-file defined
 --line 75 of file mybib.bib
 Warning--entry type for "g6d1" isn't style-file defined
 --line 89 of file mybib.bib
-Too many commas in name 1 of "Szarvas Attila, Dr. Kovácsházy Tamás, Erd?s Csanád, Dr. Dabóczi Tamás, Wacha Gábor, Kovács Kristóf András" for entry g6d1
+Warning--entry type for "g4d3" isn't style-file defined
+--line 96 of file mybib.bib
+Too many commas in name 1 of "Eredics Péter, Györke Péter, Förhécz András, Sz?ke Ákos" for entry g4d3
 while executing---line 1049 of file plain.bst
 Too many commas in name 1 of "Szarvas Attila, Dr. Kovácsházy Tamás, Erd?s Csanád, Dr. Dabóczi Tamás, Wacha Gábor, Kovács Kristóf András" for entry g6d1
 while executing---line 1049 of file plain.bst
 Too many commas in name 1 of "Szarvas Attila, Dr. Kovácsházy Tamás, Erd?s Csanád, Dr. Dabóczi Tamás, Wacha Gábor, Kovács Kristóf András" for entry g6d1
 while executing---line 1049 of file plain.bst
 Too many commas in name 1 of "Szarvas Attila, Dr. Kovácsházy Tamás, Erd?s Csanád, Dr. Dabóczi Tamás, Wacha Gábor, Kovács Kristóf András" for entry g6d1
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Eredics Péter, Györke Péter, Förhécz András, Sz?ke Ákos" for entry g4d3
 while executing---line 1090 of file plain.bst
 Too many commas in name 1 of "Szarvas Attila, Dr. Kovácsházy Tamás, Erd?s Csanád, Dr. Dabóczi Tamás, Wacha Gábor, Kovács Kristóf András" for entry g6d1
 while executing---line 1090 of file plain.bst
 Too many commas in name 1 of "Szarvas Attila, Dr. Kovácsházy Tamás, Erd?s Csanád, Dr. Dabóczi Tamás, Wacha Gábor, Kovács Kristóf András" for entry g6d1
 while executing---line 1090 of file plain.bst
-(There were 6 error messages)
+Too many commas in name 1 of "Szarvas Attila, Dr. Kovácsházy Tamás, Erd?s Csanád, Dr. Dabóczi Tamás, Wacha Gábor, Kovács Kristóf András" for entry g6d1
+while executing---line 1090 of file plain.bst
+(There were 8 error messages)
