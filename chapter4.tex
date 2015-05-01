@@ -62,7 +62,8 @@ receive queries.
 
 \section{AngularJS: the frontend of the monitoring application}
 
-The ExpressJS module is serving the static files from the backend. The webpage itself is a single page web application which means that it consists of one html page and some partial pages that are loaded on the client side by a JavaScript framework. The framework that loads the different modules is called AngularJS. It was acquired by Google and now the project is maintained by them\cite{angular}. It's main advantage is that it implements a clear Model-View-Controller pattern. It dynamically changes the views, the HTML page based on the changes in the model, without additional coding.
+The ExpressJS module is serving the static files from the backend. The webpage itself is a single page web application which means that it consists of one HTML page and some partial pages that are loaded on the client side by a JavaScript framework. The framework that loads the different modules is called AngularJS. It was acquired by Google and now the project is maintained by them\cite{angular}. It's main advantage is that it implements a clear Model-View-Controller pattern. It dynamically changes the views, the HTML page based on the changes in the model, without additional coding.
+It is using dependency injection to be easily extensible.
 
 For manipulating the user interface some external packages has been added to Angular. The most important of those are the following:
 \begin{itemize}
@@ -74,11 +75,19 @@ For manipulating the user interface some external packages has been added to Ang
 For formatting the page the Bootstrap template is used. 
 This library has some built in styles that are displayed the same in every browser. It has support for mobile devices.
 
+There are different building blocks for AngularJS. 
+\begin{itemize}
+\item \textbf{Module}
+\item \textbf{Controller}
+\item \textbf{Directive}
+\item \textbf{Filter}
+\end{itemize}
+
 \section{RDF representation of the SOS data}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.6\textwidth]{figures/implrdf.png}
+\includegraphics[width=0.9\textwidth]{figures/implrdf.png}
 \caption{The Ontology used in the monitoring system.\label{fig:implrdf}}
 \end{figure}
 
@@ -103,27 +112,30 @@ The sensors of the use case are introduced in the end of the previous chapter, s
 
 The overall architecture can be seen on Figure \ref{fig:overallarch}. The user communicates through the single page web application. The web application dynamically loads the elements by sending requests to the backend service. The backend service connects to the two different databases and returns the data to the frontend. Initially the client side pages are also served by the backend service. 
 
-\section{Architecture of the backend web service}
+\section{The backend web service}
 
 The backend services are called using HTTP POST and GET request. The POST body is always a JSON object. The detailed architecture of the backend services can be seen on Figure \ref{fig:backarch}.
 
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.6\textwidth]{figures/backendarch.png}
+\includegraphics[width=0.9\textwidth]{figures/backendarch.png}
 \caption{Detailed architecture of the backend services.\label{fig:backarch}}
 \end{figure}
 
+\subsection{Serving static files}
 As the backend service is also providing the basic web server features, it has a built in static module, which in case there is no other web service by the provided location, it is serving a file from a given folder. If the file specified in the location does not exist the default index.html is returned. 
 This ensures that Angular's custom routes are redirected to the same page. This feature is provided by ExpressJS.
 
-In the sensor browser page, there is a search module where you can start typing in the name of the wanted category. After 3 letters a query is sent to the Autocomplete backend service which tries to find the matching categories and returns a list of the result. The Autocomplete module is using the Mydog module to get the data from Stardog. 
+\subsection{Autocomplete service}
+In the sensor browser page, there is a search module where you can start typing in the name of the wanted category. After 3 letters a query is sent to the Autocomplete backend service which tries to find the matching categories and returns a list of the result. The Autocomplete service is using the Mydog module to get the data from Stardog. 
 The query searches for every descendant of the sensor class and returns the result if found. The SPARQL query for that can be seen on Listing \ref{lst:autosparql}. 
 \begin{lstlisting}[caption={SPARQL query for Autocomplete on the "wea" string\label{lst:autosparql}}]
 SELECT ?name ?label {?name rdfs:subClassOf+ mit:sensor ; rdfs:label ?label. FILTER regex(?label, "wea","i")}';
 \end{lstlisting}
 
-The Capabilities module receives a procedure and returns all the information that describe the sensor in some way. This is similar to what SOS getCapabilities would return but with additional information. It is done using SPARQL in the RDF store. The result of this service call is used in other parts of the application. The SPARQL query for this can be seen on Listing \ref{lst:capsparql}. The result will be given as a JSON object. It will contain the sensor name, the procedure name, the offering of the procedure, the feature of interest of the procedure, the label of the feature of interest, the observed property URI, its name, and the name of the type of the observed property. 
+\subsection{Capabilities service}
+The Capabilities service receives a procedure and returns all the information that describe the sensor in some way. This is similar to what SOS getCapabilities would return but with additional information. It is done using SPARQL in the RDF store. The result of this service call is used in other parts of the application. The SPARQL query for this can be seen on Listing \ref{lst:capsparql}. The result will be given as a JSON object. It will contain the sensor name, the procedure name, the offering of the procedure, the feature of interest of the procedure, the label of the feature of interest, the observed property URI, its name, and the name of the type of the observed property. 
 
 
 \begin{lstlisting}[caption={SPARQL query for Capabilities\label{lst:capsparql}}]
@@ -140,11 +152,12 @@ WHERE { <procedure/name> demo:procedure ?procedure ;
 ?type rdfs:label ?tlabel}
 \end{lstlisting}
 
-The search module filters the sensor list. By default it will return the list of all sensors in the system. If there is an additional parameter list given in a given format the system will modify the query accordingly. This format is an array of  JSON objects which have three fields: 
+\subsection{Search service}
+The search service filters the sensor list. By default it will return the list of all sensors in the system. If there is an additional parameter list given in a given format the system will modify the query accordingly. This format is an array of  JSON objects which have three fields: 
 \begin{itemize}
-\item[text] The displayed name of the given parameter, it is not used.
+\item[text] The displayed name of the given parameter, it is not used in the backend.
 \item[value] The class URI which identifies the class itself. This is added to the query.
-\item[type] The type of the parameter. Yet it can have the value of "sensortype" only. 
+\item[type] The type of the parameter. Yet it can have the value of "sensortype" only. This may contain additional values if new features provide more conditions for filtering. 
 \end{itemize}
 The SPARQL query for retrieving the objects can be seen on Listing \ref{lst:searchsparql} The example SPARQL is using two categories for filtering. The result is always the union of the given categories. 
 
@@ -156,8 +169,77 @@ SELECT ?procedure ?name ?offering
     }
 \end{lstlisting}
 
-%TODO continue backend modules
+\subsection{Observe service}
+The Observe service queries sensor observations and returns them to the frontend.
+The time range can be given to the query allowing the frontend to narrow down the data to a manageable level. The service uses the SOS component. It is expecting an object similar to the result of the Capabilities service as an input parameter, and also two datetime strings in ISO 8601 format, which are the start and end times of the observations. The service automatically decreases the number of results to a displayable number of 50 results if more has been found. The result will be two array and some metadata: one array for the date (x field) and another array for the measurements (y field). Boolean results are automatically converted to a series of zeros and ones. The text fields are returned as string values in the y array.
 
-%TODO describe frontend modules
+\subsection{Location service}
+The Location service queries only the positions of the given object. The object should be given in a format similar to the result of the Capabilities service. The service uses the SOS component to query the featureOfInterest's position and return it as an object. Yet, it can only retrieve point like sensors.
 
-%TODO write user manual
+\subsection{State service}
+This service retrieves the current status of the system. The status is queried by the Status component from time to time. The service is simply returning the result in a response and some additional metadata about showable fields.
+
+\section{The backend components}
+There are three main components for the monitoring system. They all provide needed functionalities the the web services describe before to shae some common tasks.
+
+\subsection{SOS component}
+This component provides connectivity to the SOS server. Connection parameters are given in the global config file. The component has two main functions:
+\begin{itemize}
+\item \textbf{getObservation} queries the SOS database for the result objects in a given timerange for the given sensor.
+\item \textbf{getFeatureOfInterest} gets the location of a given sensor and sends it back as an object.
+\end{itemize}
+The component handles connections using the Restler Node module, which has JSON POST request capabilities.
+
+\subsection{MyDog component}
+This component gives helper functions for communicating with the Stardog RDF store. It has one important method, the getConnectin function, which returns a connection to the Stardog database. It has one boolean parameter which is set to true if reasoning functionality is needed in Stardog. The queries are put together in the services themselves. There are some additional helper variables, like the list of prefixes for the SPARQL queries and the database name that is used for the semantic store. Stardog database related settings are also stored in the global configuration.
+
+\subsection{Status component}
+This component handles  the status updates for the sensors. Yet it is only prepared to handle small number of sensors for the special use case. The module starts when the whole system starts. 
+In a given interval specified in the configuration file it will query all the sensors in the system using the MyDog RDF store and the query on Listing \ref{lst:statussparql}.
+After that it is going through all the possible devices and reads observations using the SOS component in the past given period. This period can be set in the global configuration too. 
+If there is no data in the given period the sensor is said to be down, otherwise the sensor is marked as up. The current state is maintained in the modules states array. If there has been a change an event can be triggered.
+\begin{lstlisting}[caption={SPARQL query for querying all sensors\label{lst:statussparql}}]
+SELECT ?procedure ?name ?offering ?foi ?observable ?obs_name ?obs 
+    { ?class rdfs:subClassOf+ mit:sensor  .
+     ?procuri rdf:type  ?class;demo:procedure ?procedure ; rdfs:label ?name ; demo:offering ?offering;  demo:observedProperty ?obs ; mit:hasLoc ?loc.
+     ?loc demo:foi ?foi. ?obs demo:observedPropertyURI ?observable ; rdfs:label ?obs_name ; mit:hasObservedPropertyType ?type .
+     ?type rdfs:label ?type_label}
+\end{lstlisting}
+
+\section{Components of the frontend}
+
+The frontend is using the mentioned AngularJS framework to provide responsive, dynamically changing web pages to the user. The initial entry point is the index.html file which is a standard HTML page extended with Angular functionalities. Used modules, stylesheets and javascripts are partly added dynamically during the build process done by Grunt build system. 
+Angular has a built in routing system which can call the needed modules depending on the URL given. Each module has a controller which loads the template of the module (the View). The frontend components can be seen on Figure \ref{fig:frontarch}.
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/frontend.png}
+\caption{Detailed architecture of the frontend components.\label{fig:frontarch}}
+\end{figure}
+
+\subsection{Main component}
+The main component renders the opening page with the application help. This page does not have any dynamic property. This is the default route.
+
+\subsection{List component}
+This component contains the template to list all the sensors and filter the elements. The template contains a search box directive called ng-taginput which was mentioned before. The filter part uses the backend autocomplete service. The results are loaded using the search backend service. The list is updated every time the filter button is clicked.
+The sensor names are clickable and they redirect the users to the show component with the additional procedure parameter. This component can be found on /list route.
+
+\subsection{Status component}
+
+This component lists the result of the periodic status checks. 
+It is communicating with the status backend service to get the list and state of the sensors.
+There are built in Angular directives that make listing and ordering possible. Some parameters were modified to make custom ordering possible. This component is under the route /status.
+
+\subsection{Show component}
+
+This component accepts one parameter, the identifier of the procedure and shows all the related measurements. It queries the necessary parameters using the capabilities backend service. The service returns all the possible measurements and as a second step it invokes the measurement plotter directive called sosplot for all the possible observable properties.
+It also displays the position of the sensor using Google Maps. 
+The data date and time range can be selected by a third party datetime AngularJS plugin. After selecting the time the charts are automatically updated. This component highly depends on the two directives Sosplot and Sosmap.
+
+\subsection{Sosplot component}
+This component is an Angular directive. These directives act as new custom designed HTML elements, which Angular will transform into standard web page elements. The Sosplot directive is used to display measurement data. It needs three parameters, an object which contains the details of the observed property and the start and end time. Using this information it uses the backend observe service to query the measurements and then display the results using the previously mentioned Chart.JS third party chart plotter module. If the data is not plottable, like if we have text property type, the directive automatically loads a different template that will render a list of the text messages. 
+
+\subsection{Sosmap component}
+The Sosmap component is an Angular directive which is using the Google Maps API to display the position of the sensor. The directive is using the location backend service. Now it is capable of displaying single points on a map.
+
