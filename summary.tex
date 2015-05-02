@@ -13,7 +13,13 @@ If the site is opened a welcome message greets the visitor. There is a short des
 By clicking the elements the user will be redirected to the pages accordingly.
 
 \subsection{Sensor browser page}
-This page gives an overview of all the sensors that exist in the system. A list can be seen on the page, and after clicking the details of the selected sensor is shown. 
+This page gives an overview of all the sensors that exist in the system. A list can be seen on the page, and after clicking the details of the selected sensor is shown. A screenshot of the page can be seen on Figure \ref{fig:shbrowser}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/shbrowser.png}
+\caption{Screenshot of the sensor browser page.\label{fig:shbrowser}}
+\end{figure}
 
 It is possible to filter on certain categories. For that the input field has to be used at the top of the page. By typing more than 3 letters into the field, an Autocomplete list will drop down with the possible completion of the phrase. If nothing is found, there won't be any drop down menus. The user has to click on the wanted item from the list to add a new filter condition. After selecting one or multiple filters the Filter button has to be pushed to apply the changes. The list will refresh and show the union of all the given categories. The system can not parse those items in the input field which are not selected through the list.  
 
@@ -25,6 +31,14 @@ The page lists all the observed properties measured by the sensor. It can list q
 Note, that at most 50 measurements are  displayed on each chart to keep them readable.
 
 The page also shows a map, where the current position of the sensor can be seen. The map is using Google Maps to display the data.
+
+A screenshot can be seen on Figure \ref{fig:shshow}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/shshow.png}
+\caption{Screenshot of the sensor details page.\label{fig:shshow}}
+\end{figure}
 
 \subsection{Status page}
 
@@ -39,6 +53,14 @@ By clicking the checkbox below the title the sensors and observed properties whi
 The time period for checking the sensors and the time limit from which the sensor is considered dead can be set using the configuration. 
 
 The page does not reload automatically as the time between each check should not be too often (recommended to be at least 15 minutes). The page has to be manually reloaded from time to time.
+
+A screenshot of the page can be seen on Figure \ref{fig:shstat}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/shstatus.png}
+\caption{Screenshot of the sensor status page.\label{fig:shstat}}
+\end{figure}
 
 
 \subsection{Configuration of the monitoring system}
@@ -99,6 +121,8 @@ More data can be displayed in each chart. The chart could contain more than 50 m
 The system could send mail alerts on status change event. The application was prepared to do that, in the status module there is a marked line where such events can be triggered. The application could log the events in a file or send an email to the administrator.
 
 The state of each sensor should be stored in a different database. In the current system the states are stored in an array in the application, which could be a problem if the number of sensors would be greatly increased. For this reason the states should be stored in a database, perhaps in the RDF store.
+
+The state page should also check if there is connection available to the SOS server and the RDF server to detect server failures. These errors can be detected by simply using the web page but the error messages may not be straight forward.
 
 \section{Conclusion}
 During the thesis project the author could see the steps of implementing a test environment to a cyberphisical system. Standard description format for sensor data storage of such systems got known. Databases for storing those data was investigated. The one with the most features and plarform independent implementation was chosen. The standard way to describe semantic description for such data and possible database solutions for such systems were also explained. A semantic database with great number of features and Javascript interface has been chosen. After the basics were introduced an actual use case for such a system was shown which was part of the BUTE ETIK project. The implementation of the monitoring system was based on this project. The used technologies were shared and a description of the monitoring system has been given. These technologies were NodeJS with AngularJS frontend using the previously introduced databases. 

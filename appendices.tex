@@ -1,3 +1,45 @@
 %----------------------------------------------------------------------------
 \appendix
 %----------------------------------------------------------------------------
+\chapter{Development and deployment}
+\section*{Setting up the environment for development}
+The project has been created in NodeJs and JavaScript. To compile or run it NodeJs or IOJS has to be installed on the system. The sources are sored in Github using git version control system. The backend development is using the Node's package manager, npm. The frontend is using bower package management. To build the whole system grunt-cli has to be installed. If both databases are installed the development steps for setting up the dev environment only are the following:
+\begin{enumerate}
+\item Install NodeJS or IOJS on the computer ( \url{https://nodejs.org/})
+\item Install Git to be able to clone the project to the computer ( \url{http://git-scm.com/} )
+\item Install Ruby for SASS ( \url{https://www.ruby-lang.org} )
+\item Copy the project to your machine using git:
+git clone https://github.com/djlancelot/dipterv-webapp.git
+\item Install Node dependencies as administrator using command line: 
+\begin{itemize}
+\item \texttt{npm install -g grunt-cli}
+\item \texttt{npm install -g bower}
+\end{itemize}
+\item Install SASS for compiling SCSS stylesheets using Rubies package manager \texttt{gem install sass}
+\item Install local backend packages using \texttt{npm install} in the application folder
+\item Install local frontend packages using \texttt{bower install}
+\item Change the configuration in \texttt{server/config/environment} folder
+\item Compile or run the code:
+\begin{itemize}
+\item Compile production version into dist folder using grunt build command
+\item Run the application for testing as development version using grunt serve command
+\end{itemize}
+\end{enumerate}
+If you need to add the RDF database dump to your Stardog instance you need to run \texttt{stardog data add --remove-all -v sont info\\sensor-schema.rdf info\\demo-sensors.rdf} inside the application folder. If the database is missing too it has to be created using \texttt{stardog-admin db create -n sont info\\sensor-schema.rdf info\\demo-sensors.rdf} command.
+
+\section{Setting up the production version}
+
+To run the application on a server you need to have Node or IOJS installed and a supervisor that can run the application. The application starts by running the \texttt{server/app.js} file. The environment has to be specified as an environment variable beforehand. The steps are he following:
+\begin{enumerate}
+\item Install NodeJS or IOJS
+\item copy the files from the dist folder (after compiling) to the destination computer
+\item Install forever Node supervisor using npm install -g forever (on Windows you might also need npm insall -g forever-win)
+\item Set Node environment variable to production.
+\begin{itemize}
+\item On Windows you run \texttt{set NODE\_ENV=production}
+\item On Linux simply add \texttt{NODE\_ENV=production} prefix before the forever start command
+\end{itemize}
+\item Start using forever with \texttt{forever start server/app.js}
+\item Check if the application is running using forever list or the browser
+\end{enumerate}
+If there has been a build error you can try starting the development versiont which starts with the same command but one level up from the dist folder. (Right in the application folder.)
