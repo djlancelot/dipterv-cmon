@@ -75,12 +75,12 @@ For manipulating the user interface some external packages has been added to Ang
 For formatting the page the Bootstrap template is used. 
 This library has some built in styles that are displayed the same in every browser. It has support for mobile devices.
 
-There are different building blocks for AngularJS. 
+There are different building blocks for AngularJS. Those blocks that have been used as part of the development are the following:
 \begin{itemize}
-\item \textbf{Module}
-\item \textbf{Controller}
-\item \textbf{Directive}
-\item \textbf{Filter}
+\item \textbf{Module} is the main building block of Angular. It is paired to the HTML page and this invokes controllers based on the location provided. The global dependencies are injected into the module and they are inherited by the controllers afterwards.
+\item \textbf{Controller} pairs the view to the models. They modify and view according to the model and they load the model if needed. The controller does that using the \$scope global variable, which is shared with the views. The controller sets the template of the inner content(dynamic part) of the web page too.
+\item \textbf{Directive}'s are custom defined page elements that can be injected in any page. They have their own controller and template. Custom complex UI elements can be directives.
+\item \textbf{Filter}'s can be applied to format the view of the model. Filters can do uppercase, lowercase on strings, sorting of array, format currencies, etc. They are an applied function on a given input data.
 \end{itemize}
 
 \section{RDF representation of the SOS data}

@@ -34,30 +34,34 @@
 \select@language {english} \contentsline {section}{\numberline {4.3}NodeJS: The backend of the monitoring application}{42}{section.4.3}
 \select@language {english} \contentsline {section}{\numberline {4.4}Dependent modules}{43}{section.4.4}
 \select@language {english} \contentsline {section}{\numberline {4.5}AngularJS: the frontend of the monitoring application}{43}{section.4.5}
-\select@language {english} \contentsline {section}{\numberline {4.6}RDF representation of the SOS data}{44}{section.4.6}
-\select@language {english} \contentsline {section}{\numberline {4.7}Architecture of the monitoring system}{45}{section.4.7}
+\select@language {english} \contentsline {section}{\numberline {4.6}RDF representation of the SOS data}{45}{section.4.6}
+\select@language {english} \contentsline {section}{\numberline {4.7}Architecture of the monitoring system}{46}{section.4.7}
 \select@language {english} \contentsline {section}{\numberline {4.8}The backend web service}{46}{section.4.8}
 \select@language {english} \contentsline {subsection}{\numberline {4.8.1}Serving static files}{46}{subsection.4.8.1}
-\select@language {english} \contentsline {subsection}{\numberline {4.8.2}Autocomplete service}{46}{subsection.4.8.2}
+\select@language {english} \contentsline {subsection}{\numberline {4.8.2}Autocomplete service}{47}{subsection.4.8.2}
 \select@language {english} \contentsline {subsection}{\numberline {4.8.3}Capabilities service}{47}{subsection.4.8.3}
 \select@language {english} \contentsline {subsection}{\numberline {4.8.4}Search service}{47}{subsection.4.8.4}
 \select@language {english} \contentsline {subsection}{\numberline {4.8.5}Observe service}{48}{subsection.4.8.5}
 \select@language {english} \contentsline {subsection}{\numberline {4.8.6}Location service}{48}{subsection.4.8.6}
 \select@language {english} \contentsline {subsection}{\numberline {4.8.7}State service}{48}{subsection.4.8.7}
-\select@language {english} \contentsline {section}{\numberline {4.9}The backend components}{48}{section.4.9}
-\select@language {english} \contentsline {subsection}{\numberline {4.9.1}SOS component}{48}{subsection.4.9.1}
+\select@language {english} \contentsline {section}{\numberline {4.9}The backend components}{49}{section.4.9}
+\select@language {english} \contentsline {subsection}{\numberline {4.9.1}SOS component}{49}{subsection.4.9.1}
 \select@language {english} \contentsline {subsection}{\numberline {4.9.2}MyDog component}{49}{subsection.4.9.2}
 \select@language {english} \contentsline {subsection}{\numberline {4.9.3}Status component}{49}{subsection.4.9.3}
-\select@language {english} \contentsline {section}{\numberline {4.10}Components of the frontend}{49}{section.4.10}
+\select@language {english} \contentsline {section}{\numberline {4.10}Components of the frontend}{50}{section.4.10}
 \select@language {english} \contentsline {subsection}{\numberline {4.10.1}Main component}{50}{subsection.4.10.1}
 \select@language {english} \contentsline {subsection}{\numberline {4.10.2}List component}{50}{subsection.4.10.2}
-\select@language {english} \contentsline {subsection}{\numberline {4.10.3}Status component}{50}{subsection.4.10.3}
-\select@language {english} \contentsline {subsection}{\numberline {4.10.4}Show component}{50}{subsection.4.10.4}
+\select@language {english} \contentsline {subsection}{\numberline {4.10.3}Status component}{51}{subsection.4.10.3}
+\select@language {english} \contentsline {subsection}{\numberline {4.10.4}Show component}{51}{subsection.4.10.4}
 \select@language {english} \contentsline {subsection}{\numberline {4.10.5}Sosplot component}{51}{subsection.4.10.5}
 \select@language {english} \contentsline {subsection}{\numberline {4.10.6}Sosmap component}{51}{subsection.4.10.6}
-\select@language {english} \contentsline {chapter}{\numberline {5}User Manual, conclusion and future plans}{53}{chapter.5}
+\select@language {english} \contentsline {chapter}{\numberline {5}Manual, future plans and conclusion}{53}{chapter.5}
 \select@language {english} \contentsline {section}{\numberline {5.1}User Manual for the Monitoring system}{53}{section.5.1}
-\select@language {english} \contentsline {section}{\numberline {5.2}Conclusion}{53}{section.5.2}
-\select@language {english} \contentsline {section}{\numberline {5.3}Future plans}{53}{section.5.3}
-\select@language {english} \contentsline {chapter}{Acknowledgement}{55}{chapter*.26}
-\select@language {english} \contentsline {chapter}{Bibliography}{57}{chapter*.27}
+\select@language {english} \contentsline {subsection}{\numberline {5.1.1}Sensor browser page}{53}{subsection.5.1.1}
+\select@language {english} \contentsline {subsection}{\numberline {5.1.2}Sensor details page}{54}{subsection.5.1.2}
+\select@language {english} \contentsline {subsection}{\numberline {5.1.3}Status page}{54}{subsection.5.1.3}
+\select@language {english} \contentsline {subsection}{\numberline {5.1.4}Configuration of the monitoring system}{54}{subsection.5.1.4}
+\select@language {english} \contentsline {section}{\numberline {5.2}Future plans}{55}{section.5.2}
+\select@language {english} \contentsline {section}{\numberline {5.3}Conclusion}{56}{section.5.3}
+\select@language {english} \contentsline {chapter}{Acknowledgement}{59}{chapter*.26}
+\select@language {english} \contentsline {chapter}{Bibliography}{61}{chapter*.27}
