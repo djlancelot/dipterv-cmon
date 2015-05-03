@@ -6,9 +6,9 @@
 The project has been created in NodeJs and JavaScript. To compile or run it NodeJs or IOJS has to be installed on the system. The sources are sored in Github using git version control system. The backend development is using the Node's package manager, npm. The frontend is using bower package management. To build the whole system grunt-cli has to be installed. If both databases are installed the development steps for setting up the dev environment only are the following:
 \begin{enumerate}
 \item Install NodeJS or IOJS on the computer ( \url{https://nodejs.org/})
-\item Install Git to be able to clone the project to the computer ( \url{http://git-scm.com/} )
+\item Install Git to be able to clone the project to the computer(\url{http://git-scm.com/})
 \item Install Ruby for SASS ( \url{https://www.ruby-lang.org} )
-\item Copy the project to your machine using git:
+\item Copy the project to your machine using git: \\
 git clone https://github.com/djlancelot/dipterv-webapp.git
 \item Install Node dependencies as administrator using command line: 
 \begin{itemize}
@@ -25,7 +25,7 @@ git clone https://github.com/djlancelot/dipterv-webapp.git
 \item Run the application for testing as development version using grunt serve command
 \end{itemize}
 \end{enumerate}
-If you need to add the RDF database dump to your Stardog instance you need to run \texttt{stardog data add --remove-all -v sont info\\sensor-schema.rdf info\\demo-sensors.rdf} inside the application folder. If the database is missing too it has to be created using \texttt{stardog-admin db create -n sont info\\sensor-schema.rdf info\\demo-sensors.rdf} command.
+If you need to add the RDF database dump to your Stardog instance you need to run \texttt{stardog data add --remove-all -v sont info/sensor-schema.rdf info/demo-sensors.rdf} inside the application folder. If the database is missing too it has to be created using \texttt{stardog-admin db create -n sont info/sensor-schema.rdf info/demo-sensors.rdf} command.
 
 \section{Setting up the production version}
 
@@ -40,10 +40,10 @@ To run the application on a server you need to have Node or IOJS installed and a
 \item On Linux simply add \texttt{NODE\_ENV=production} prefix before the forever start command
 \end{itemize}
 \item Start using forever with \texttt{forever start server/app.js}
-\item Check if the application is running using forever list or the browser
+\item Check if the application is running using \texttt{forever list} or the browser
 \end{enumerate}
-If there has been a build error you can try starting the development versiont which starts with the same command but one level up from the dist folder. (Right in the application folder.)
-
+If there has been a build error you can try starting the development version which starts with the same command but one level up from the dist folder. (Right in the application folder.)
+\newpage
 \section{Glossary}
 \begin{description}
 	\item[Audio stream] A series of network packets which transmit audio in a compressed format.
@@ -54,6 +54,8 @@ If there has been a build error you can try starting the development versiont wh
 	\item[Cyberphisical system] a system that represents the physical world in the cyberspace. The measurements can be used to describe the world, run simulations and get predictions.
 	
 	\item[Frontend] The UI related part of an application.
+	
+	\item[HTTP GET request] A basic HTTP request where the content of a specified URL is requested. Additional parameters may be appended to the URL.
 	
 	\item[HTTP POST request] This type of request is part of the HTTP standard. Using this kind of request the content is sent in the body of the request and not encoded in the URL of the request as in the GET requests.
 	
