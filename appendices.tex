@@ -32,7 +32,7 @@ If you need to add the RDF database dump to your Stardog instance you need to ru
 To run the application on a server you need to have Node or IOJS installed and a supervisor that can run the application. The application starts by running the \texttt{server/app.js} file. The environment has to be specified as an environment variable beforehand. The steps are he following:
 \begin{enumerate}
 \item Install NodeJS or IOJS
-\item copy the files from the dist folder (after compiling) to the destination computer
+\item Copy the files from the dist folder (after compiling) to the destination computer to run production version. To run development version the contents of the original folder is needed.
 \item Install forever Node supervisor using npm install -g forever (on Windows you might also need npm insall -g forever-win)
 \item Set Node environment variable to production.
 \begin{itemize}
@@ -43,3 +43,25 @@ To run the application on a server you need to have Node or IOJS installed and a
 \item Check if the application is running using forever list or the browser
 \end{enumerate}
 If there has been a build error you can try starting the development versiont which starts with the same command but one level up from the dist folder. (Right in the application folder.)
+
+\section{Glossary}
+\begin{description}
+	\item[Audio stream] A series of network packets which transmit audio in a compressed format.
+	\item[AVR microcontroller] A type of micro-controllers made by ATMEL Corporation. The microcontrollers are the main parts of an embeded system, they are one chip that has RAM, CPU, permanant store and input output peripherals embedded in one chip.
+	
+	\item[Backend] The server side, business logic based part of the application.
+	
+	\item[Cyberphisical system] a system that represents the physical world in the cyberspace. The measurements can be used to describe the world, run simulations and get predictions.
+	
+	\item[Frontend] The UI related part of an application.
+	
+	\item[HTTP POST request] This type of request is part of the HTTP standard. Using this kind of request the content is sent in the body of the request and not encoded in the URL of the request as in the GET requests.
+	
+	\item[JSON] JavaScript Object Notation is a format which describes JavaScript Object. Each object is given as a list of key value pair, where each value can be either a sub value or an array of values. Objects are written between curly brackets. Arrays are given in squared brackets, where values are divided by commas. The key and value is separated by a colon and those pairs are with a comma.
+	
+	\item[NAT] Network address translation is a method to hide and transform queries from behind a router or gateway to the Internet.
+	
+	\item[PostgreSQL] Open source relational database system, It has many features compared to MySQL or other open source database systems.
+	
+	\item[PWM] Pulse-Wave-Modulation is a kind of signal processing when modulation is done by changing the duty cycle of a squared signal. 
+\end{description}
