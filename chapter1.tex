@@ -35,6 +35,8 @@ Most physical quantities are measured with great accuracy on very basic devices.
  	 \item Temperature sensor: Inner and outer temperature.
  	 \item Humidity sensor: percentage of humidity.
  	 \item Barometer: Air pressure.
+ 	 \item Luminance: Measured brightness.
+ 	 \item Battery: State of the battery.
  	 \end{itemize}
  	 \item Beagleboard
  	 \begin{itemize}
@@ -56,10 +58,11 @@ To have a general structure for the data, there is an abstract hierarchy that re
 \item ObservedProperty: what type of physical property is measured, e.g. speed, temperature.
 \item Procedure: the virtual or real sensor itself that is providing the data.
 \item Offering: the property itself that has been measured, e.g. wind speed, air humidity, traffic size. 
-\item Result: the output of the procedure.
+\item Result: the output of the procedure, the value that the sensor measured for a given observedProperty and offering.
+\item ResultUnit: the measure of the result, like m/s, km/h for speed.
 \end{itemize}
 
-This way gives as enough abstraction to separate the measured properties, the physical properties, the actual sensors and the results from each other.
+This provider us enough abstraction to separate the measured properties, the physical properties, the actual sensors and the results from each other.
 
 It is able to define the location of the sensor, the timestamp of the measurement and the sensor data itself, with many additional information. The data can be stored in SOS servers that can retrieve the measurements on different interfaces. There are additional other services\cite{g4d3} that are present to add demanded functionalities to the service. These other service models are SAS, SPS and WNS, which are introduced below and SOS will be covered in details.
 
@@ -103,9 +106,9 @@ This implementation is done by the non profit organization with the identical na
 
 The new 4.2 version is easy to install, it has a graphical user interface to set up the database connection and initialize the database. PostgreSQL with PostGIS is required.  The basic usage is described on  52north webpage, but sample queries are shown in the built in test client. 
 
-The project is built with Maven and uses Spring framework too. The included unit tests ensure that the software's architecture is still consistent after compilation. The project was chosen to be part of Google's Summer of Code 2014 and the project gained a lot improvements from that. 
+The project is built with Maven and uses Spring framework too. The included unit tests ensure that the software's architecture is still consistent after compilation. The project was chosen to be part of Google's Summer of Code 2014 and it gained a lot improvements from that. 
 
-A request can be sent using the connector of each interface. This used to be done by adding the interface name to the application url but in recent versions the service automatically detects the interface from the HTTP metadata. For example http://152.66.253.152:8080/52n-sos-webapp/service is the url where all interface can be reached. The first part is the host of the server. The tomcat application server is listening on port 8080. 52n-sos-webapp is the default name of the web application, service it the default connector for the webservice. The sent HTTP content-type header marks the interface. A detailed description of the interfaces can be seen on table \ref{tab:services}.
+A request can be sent using the connector of each interface. This used to be done by adding the interface name to the application url but in recent versions the service automatically detects the interface from the HTTP metadata. For example http://152.66.253.152:8080/52n-sos-webapp/service is the url where all interface can be reached. The first part is the host of the server. The tomcat application server is listening on port 8080. 52n-sos-webapp is the default name of the web application, service it the default connector for the webservice. The sent HTTP content-type header marks the interface. A detailed description of the interfaces can be seen on table \ref{tab:services}. The response will contain the answers using the same standards found in the request.
 \begin{table}[h]
 \begin{center}
 \begin{tabular}{| l | l | p{8cm} |}
