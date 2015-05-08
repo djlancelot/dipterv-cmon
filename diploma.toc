@@ -33,7 +33,7 @@
 \select@language {english} \contentsline {section}{\numberline {4.2}The test environment}{41}{section.4.2}
 \select@language {english} \contentsline {section}{\numberline {4.3}NodeJS: The backend of the monitoring application}{42}{section.4.3}
 \select@language {english} \contentsline {section}{\numberline {4.4}Dependent modules}{43}{section.4.4}
-\select@language {english} \contentsline {section}{\numberline {4.5}AngularJS: the frontend of the monitoring application}{43}{section.4.5}
+\select@language {english} \contentsline {section}{\numberline {4.5}AngularJS: the frontend of the monitoring application}{44}{section.4.5}
 \select@language {english} \contentsline {section}{\numberline {4.6}RDF representation of the SOS data}{45}{section.4.6}
 \select@language {english} \contentsline {section}{\numberline {4.7}Architecture of the monitoring system}{46}{section.4.7}
 \select@language {english} \contentsline {section}{\numberline {4.8}The backend web service}{46}{section.4.8}
