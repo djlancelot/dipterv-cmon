@@ -44,7 +44,7 @@ Most physical quantities are measured with great accuracy on very basic devices.
  	 \end{itemize}
  \end{itemize}
 
-The examples show that a standard way to retrieve the measurements should include not only the measurement, but the type of the sensor, the measured unit, the location of the sensor and many additional information like this. 
+These examples show that a standard way to retrieve the measurements should include not only the measurement, but the type of the sensor, the measured unit, the location of the sensor and many additional information like this. 
 
 Storing and retrieving this information is done using the SensorML format.
 
@@ -104,7 +104,9 @@ All SOS servers and the whole SensorML standard is missing the semantic informat
 
 This implementation is done by the non profit organization with the identical name. The software supports many interfaces to query the information needed. The standard SOAP can be used to work with Java Web services. There are KVP and POX to retrieve or add data using standard GET queries. A big advantage is that 52north SOS supports JSON interface. It enables JSON queries to retrieve information efficiently in JavaScript, PHP, Python or other modern scripting languages.
 
-The new 4.2 version is easy to install, it has a graphical user interface to set up the database connection and initialize the database. PostgreSQL with PostGIS is required.  The basic usage is described on  52north webpage, but sample queries are shown in the built in test client. 
+The new 4.2 version is easy to install, it has a graphical user interface to set up the database connection and initialize the database storage backend. The software uses PostgreSQL to store data. There is a geospatial extension for PostgreSQL called PostGIS that is also required. PostgreSQL is one of the most used open source relational databases. There are non open source, enterprise versions that allow horizontal scaling of the database. It can be extended with modules like the PostGIS mentioned above.
+
+After setup, the basic usage is described on  52north webpage, but sample queries are shown in the built in test client. 
 
 The project is built with Maven and uses Spring framework too. The included unit tests ensure that the software's architecture is still consistent after compilation. The project was chosen to be part of Google's Summer of Code 2014 and it gained a lot improvements from that. 
 
