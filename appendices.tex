@@ -21,10 +21,13 @@ git clone https://github.com/djlancelot/dipterv-webapp.git
 \item Change the configuration in \texttt{server/config/environment} folder
 \item Compile or run the code:
 \begin{itemize}
-\item Compile production version into dist folder using grunt build command
-\item Run the application for testing as development version using grunt serve command
+\item Compile production version into dist folder using \texttt{grunt build --force} command
+\item Run the application for testing as development version using \texttt{grunt serve} command
 \end{itemize}
 \end{enumerate}
+
+The development environment will run on port 9000 and production version on port 8087 unless modified in server/config/environment directory.
+
 If you need to add the RDF database dump to your Stardog instance you need to run \texttt{stardog data add --remove-all -v sont info/sensor-schema.rdf info/demo-sensors.rdf} inside the application folder. If the database is missing too it has to be created using \texttt{stardog-admin db create -n sont info/sensor-schema.rdf info/demo-sensors.rdf} command.
 
 \section{Setting up the production version}
@@ -32,9 +35,9 @@ If you need to add the RDF database dump to your Stardog instance you need to ru
 To run the application on a server you need to have Node or IOJS installed and a supervisor that can run the application. The application starts by running the \texttt{server/app.js} file. The environment has to be specified as an environment variable beforehand. The steps are he following:
 \begin{enumerate}
 \item Install NodeJS or IOJS
-\item Copy the files from the dist folder (after compiling) to the destination computer to run production version. To run development version the contents of the original folder is needed.
+\item Copy the files from the dist folder (after compiling) to the destination computer to run production version. To run development version the contents of the original folder is needed, but production is preferred.
 \item Install forever Node supervisor using npm install -g forever (on Windows you might also need npm insall -g forever-win)
-\item Set Node environment variable to production.
+\item Set Node environment variable to production (for production version only).
 \begin{itemize}
 \item On Windows you run \texttt{set NODE\_ENV=production}
 \item On Linux simply add \texttt{NODE\_ENV=production} prefix before the forever start command
@@ -42,7 +45,7 @@ To run the application on a server you need to have Node or IOJS installed and a
 \item Start using forever with \texttt{forever start server/app.js}
 \item Check if the application is running using \texttt{forever list} or the browser
 \end{enumerate}
-If there has been a build error you can try starting the development version which starts with the same command but one level up from the dist folder. (Right in the application folder.)
+The production version will listen on port 8087.
 \newpage
 \section{Glossary}
 \begin{description}
