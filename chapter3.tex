@@ -49,7 +49,7 @@ The most expensive embedded computer is the BeagleBone in the project. This comp
 
 The sensors communicate with the 52n SOS server using POX GET requests. To reach the service the sensors have to be in the same network or VPN to make the connection secure. The service has its own client installed next to it.
 
-\section{RDF store}
+\section{RDF store\label{sec:rdfstore}}
 
 The ontology is stored in an RDF database. It is based on the ontology introduced in the previous Chapter. The SSN Ontology has been extended for the custom use cases. The introduced ontology is called SISRO. It extends the original ontology in two ways:
 \begin{itemize}
@@ -155,4 +155,4 @@ The speech sensor is the only virtual sensor in the system. It listens to the mi
 
 \section{Communication between the sensors and the databases}
 
-Each node has some kind of Linux based operating system. The example applications are all Java based, but other applications will be possible in the future.
+Each node has some kind of Linux based operating system. The example applications are all Java based, but other platforms will be supported in the future. The sensor measurements are sent using the KVP GET requests to the SOS database. The advantage of the GET requests that from a Linux system, new sensor data can be submitted using the curl command even from the command line.  The load data will be sent using the described support services in Section \ref{sec:rdfstore}. The service communicates using JSON objects and POST requests.

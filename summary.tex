@@ -102,11 +102,19 @@ checkinterval: 15
 };
 \end{lstlisting}
 
+\section{Responsiveness}
+
+The application has been tested on multiple devices. The page load time is minimized during the build process which causes huge performance gain when loading the webpage. The page has been tested using the \url{tools.pingdom.com} website and all requests load time were under 3 seconds using a computer which ran the Windows version of the test environment. 
+
+The website could be viewed on different screens. The content automatically scaled itself to fill the display of smaller mobile devices. For that purpose the two column structure is changed to a one column structure for the sake of readability.
+
 \section{Future plans}
 
 There are many ways to improve the application, because the time given limited the number of features that could be implemented. 
 
 There can be a separate user interface for modifying the ontology and pair new values to the SOS database. Yet it is done by modifying the RDF directly and loading it into the RDF store. 
+
+The monitoring service uses a previously implemented and extended simple ontology for the semantic connection. In the future it should be integrated with the SISRO ontology. Unfortunately in the sample system there was no connection between the two databases.
 
 An authentication layer can be added above the system, to hide the interface from unauthorized person. As there is no database modification is done using the monitoring system this is not necessary yet. Authentication can be solved by using HTTP proxy and HTTP basic authentication on the proxy server.
 
