@@ -156,3 +156,5 @@ The speech sensor is the only virtual sensor in the system. It listens to the mi
 \section{Communication between the sensors and the databases}
 
 Each node has some kind of Linux based operating system. The example applications are all Java based, but other platforms will be supported in the future. The sensor measurements are sent using the KVP GET requests to the SOS database. The advantage of the GET requests that from a Linux system, new sensor data can be submitted using the curl command even from the command line.  The load data will be sent using the described support services in Section \ref{sec:rdfstore}. The service communicates using JSON objects and POST requests.
+
+This means that each node is communicating with both the databases. From those databases the planner service plans the deployment of new devices and the monitoring system integrates the information of both databases as one information. The monitoring system is described in the next section.
