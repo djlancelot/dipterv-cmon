@@ -45,7 +45,7 @@ The next in computational power is the Raspberry PI computer. This computer was 
 The most expensive embedded computer is the BeagleBone in the project. This computer was developed by Texas instruments. It has a 600Mhz ARM Cortex 8 processor with 128 MB of RAM. It has built in features for sound and video processing. It costs around 150 USD. 
 
 
-\section{The Sensor Observation Service}
+\section{Sensor Observation Service}
 
 The sensors communicate with the 52n SOS server using POX GET requests. To reach the service the sensors have to be in the same network or VPN to make the connection secure. The service has its own client installed next to it.
 
@@ -123,7 +123,7 @@ The video capturing is done by a Raspberry PI device. The stream is sent to a Be
 The input image and the output state vector can be seen on Figure \ref{fig:switchwork}.
 
 
-\section{The building monitoring example application}
+\section{Building monitoring example application}
 
 The use case is a typical infrastructure monitoring system. It consists of such devices that can be used for intruder detection or measuring usage of certain rooms. It is a demo environment which have been built up in room IE322 and the third floor corridor at the University.
 Detailed description of the devices follows.
@@ -155,6 +155,12 @@ The speech sensor is the only virtual sensor in the system. It listens to the mi
 
 \section{Communication between the sensors and the databases}
 
-Each node has some kind of Linux based operating system. The example applications are all Java based, but other platforms will be supported in the future. The sensor measurements are sent using the KVP GET requests to the SOS database. The advantage of the GET requests that from a Linux system, new sensor data can be submitted using the curl command even from the command line.  The load data will be sent using the described support services in Section \ref{sec:rdfstore}. The service communicates using JSON objects and POST requests.
+Each node has some kind of Linux based operating system. The example applications are all Java based, but other platforms will be supported in the future. The sensor measurements are sent using the POX GET requests to the SOS database. The advantage of the GET requests that from a Linux system, new sensor data can be submitted using the curl command even from the command line.  The load data will be sent using the described support services in Section \ref{sec:rdfstore}. The service communicates using JSON objects and POST requests.
 
 This means that each node is communicating with both the databases. From those databases the planner service plans the deployment of new devices and the monitoring system integrates the information of both databases as one information. The monitoring system is described in the next section.
+
+\section{Bottlenecks in the current system}
+
+The system was built as a proof of concept for a cyberphisical system. The system works and proves that such a application can exist, however there are some things that can be improved in the future. 
+
+The application should be scalable. The described system is scalable in vertical way, bigger computers can serve bigger amount of data. The different services can be deployed to separate servers.

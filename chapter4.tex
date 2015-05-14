@@ -21,7 +21,7 @@ PostgreSQL 9.1.12 is used as the database backend for SOS. PostGIS environment h
 
 Tomcat 7 is installed to support SOS. To keep the system safe, on the Linux machine a new user is created to run the container and the application. The Stardog database is also running in a Tomcat like environment that is why it is started by the same user as the SOS server. 
 
-\section{NodeJS: The backend of the monitoring application}
+\section{NodeJS: backend of the monitoring application}
 
 The connector application is written in JavaScript. This way the frontend and the backend application can be written using the same programming language. 
 Since the V8 engine exists JavaScript can be compiled and run significantly faster\cite{v8} than before. 
@@ -60,7 +60,7 @@ receive queries.
 \item Nodemon, Forever or PM2 are utilities that run NodeJS codes automatically, restarts them on error or code changes. There is a support for development, that on any sourcecode change the changes are pushed to the browser without the need to refresh the browser. They can be configured to restart on error.
 \end{itemize}
 
-\section{AngularJS: the frontend of the monitoring application}
+\section{AngularJS: frontend of the monitoring application}
 
 The ExpressJS module is serving the static files from the backend. The webpage itself is a single page web application which means that it consists of one HTML page and some partial pages that are loaded on the client side by a JavaScript framework. The framework that loads the different modules is called AngularJS. It was acquired by Google and now the project is maintained by them\cite{angular}. It's main advantage is that it implements a clear Model-View-Controller pattern. It dynamically changes the views, the HTML page based on the changes in the model, without additional coding.
 It is using dependency injection to be easily extensible.
@@ -112,7 +112,7 @@ The sensors of the use case are introduced in the end of the previous chapter, s
 
 The overall architecture can be seen on Figure \ref{fig:overallarch}. The user communicates through the single page web application. The web application dynamically loads the elements by sending requests to the backend service. The backend service connects to the two different databases and returns the data to the frontend. Initially the client side pages are also served by the backend service. 
 
-\section{The backend web service}
+\section{Backend web service}
 
 The backend services are called using HTTP POST and GET request. The POST body is always a JSON object. The detailed architecture of the backend services can be seen on Figure \ref{fig:backarch}.
 
@@ -179,7 +179,7 @@ The Location service queries only the positions of the given object. The object 
 \subsection{State service}
 This service retrieves the current status of the system. The status is queried by the Status component from time to time. The service is simply returning the result in a response and some additional metadata about showable fields.
 
-\section{The backend components}
+\section{Backend components}
 There are three main components for the monitoring system. They all provide needed functionalities the the web services describe before to shae some common tasks.
 
 \subsection{SOS component}
