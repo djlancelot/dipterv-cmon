@@ -159,8 +159,22 @@ Each node has some kind of Linux based operating system. The example application
 
 This means that each node is communicating with both the databases. From those databases the planner service plans the deployment of new devices and the monitoring system integrates the information of both databases as one information. The monitoring system is described in the next section.
 
-\section{Bottlenecks in the current system}
+\section{Improvements for the current system}
 
 The system was built as a proof of concept for a cyberphisical system. The system works and proves that such a application can exist, however there are some things that can be improved in the future. 
 
-The application should be scalable. The described system is scalable in vertical way, bigger computers can serve bigger amount of data. The different services can be deployed to separate servers.
+\subsection{Scalability}
+
+The application should be scalable. The described system is scalable in vertical way, computers with larger processing and storage capacity can serve bigger amount of data. The different services can be deployed to separate servers, however these services can't be distributed. The real solution would be if those services would be horizontally scalable. This means that more computer would provide more capacity to the system. The used PostgreSQL database has a commercial version, which is horizontally scalable, however this can not be used without modifying the SOS servers source code.  
+
+The SOS server is a JAVA enterprise application it is scalable horizontally by deploying the application to multiple computers, however it can't be used with dynamic load balancing, because the session information can not be shared between the instances. The used RDF database has a commercial version which is also scalable.
+
+\subsection{Data integration}
+
+Currently the system communicates to two separate databases. These databases should be merged and provide a common interface towards the sensors which can send measurements and performance information on a common service. Currently the sensors upload measurements using a Java application which is running on the devices, but load reports are uploaded using ssh remote connection. An initiator connects to the device and calls the script which updates the database. This should be integrated on the device, not to depend on external support machines.
+
+In the semantic description two databases has been created. One for the sensor browser, which provides semantic connection between the sensors and one that has the SISRO description of the performance measures. These two databases should be merged into one database and provide a common way for reading and manipulating the data. In the current setup the provided and extended sensor connection description can't be joined with the SISRO database, because the data stored in each database is different. The former is about sensor data the latter is about device load.
+
+
+
+
