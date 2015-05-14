@@ -175,6 +175,6 @@ Currently the system communicates to two separate databases. These databases sho
 
 In the semantic description two databases has been created. One for the sensor browser, which provides semantic connection between the sensors and one that has the SISRO description of the performance measures. These two databases should be merged into one database and provide a common way for reading and manipulating the data. In the current setup the provided and extended sensor connection description can't be joined with the SISRO database, because the data stored in each database is different. The former is about sensor data the latter is about device load.
 
+\subsection{Authentication}
 
-
-
+In the current setup, anyone can post new measurements to the SOS database. The sensors are not authenticated, they can also add data to different sensors dataset or modify its data. The real system should have access rights which would select which user can write which part of the database. The RDF database has basic authentication but all sensors use the same credentials for that. Each sensor can change the data of any sensors.

@@ -32,6 +32,7 @@
 \select@language {english} \contentsline {section}{\numberline {3.11}Improvements for the current system}{40}{section.3.11}
 \select@language {english} \contentsline {subsection}{\numberline {3.11.1}Scalability}{40}{subsection.3.11.1}
 \select@language {english} \contentsline {subsection}{\numberline {3.11.2}Data integration}{40}{subsection.3.11.2}
+\select@language {english} \contentsline {subsection}{\numberline {3.11.3}Authentication}{41}{subsection.3.11.3}
 \select@language {english} \contentsline {chapter}{\numberline {4}The monitoring system}{43}{chapter.4}
 \select@language {english} \contentsline {section}{\numberline {4.1}Goal of the implementation}{43}{section.4.1}
 \select@language {english} \contentsline {section}{\numberline {4.2}The test environment}{43}{section.4.2}
