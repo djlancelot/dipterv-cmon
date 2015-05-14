@@ -3,7 +3,7 @@
 %----------------------------------------------------------------------------
 \chapter{Development and deployment}
 \section*{Setting up the environment for development}
-The project has been created in NodeJs and JavaScript. To compile or run it NodeJs or IOJS has to be installed on the system. The sources are sored in Github using git version control system. The backend development is using the Node's package manager, npm. The frontend is using bower package management. To build the whole system grunt-cli has to be installed. If both databases are installed the development steps for setting up the dev environment only are the following:
+The project was created in NodeJs and JavaScript. To compile or run it NodeJs or IOJS has to be installed on the system. The sources are stored in Github using git version control system. The backend development uses the Node's package manager, npm. The frontend uses bower package management. To build the whole system grunt-cli has to be installed. If both databases are installed the development steps for setting up only the dev environment are the following:
 \begin{enumerate}
 \item Install NodeJS or IOJS on the computer ( \url{https://nodejs.org/})
 \item Install Git to be able to clone the project to the computer(\url{http://git-scm.com/})
@@ -32,7 +32,7 @@ If you need to add the RDF database dump to your Stardog instance you need to ru
 
 \section{Setting up the production version}
 
-To run the application on a server you need to have Node or IOJS installed and a supervisor that can run the application. The application starts by running the \texttt{server/app.js} file. The environment has to be specified as an environment variable beforehand. The steps are he following:
+To run the application on a server you need to have Node or IOJS installed and a supervisor that can run the application. The application starts by running the \texttt{server/app.js} file. The environment has to be specified as an environment variable beforehand. The steps are the following:
 \begin{enumerate}
 \item Install NodeJS or IOJS
 \item Copy the files from the dist folder (after compiling) to the destination computer to run production version. To run development version the contents of the original folder is needed, but production is preferred.
@@ -51,7 +51,7 @@ The production version will listen on port 8087.
 \begin{description}
 	\item[Audio stream] A series of network packets which transmit audio in a compressed format.
 	
-	\item[AVR microcontroller] A type of micro-controllers made by ATMEL Corporation. The microcontrollers are the main parts of an embeded system, they are one chip that has RAM, CPU, permanant store and input output peripherals embedded in one chip.
+	\item[AVR microcontroller] A type of micro-controllers made by ATMEL Corporation. The microcontrollers are the main parts of an embedded system, they are one chip that has RAM, CPU, permanant store and input output peripherals embedded in one chip.
 	
 	\item[Backend] The server side, business logic based part of the application.
 	
@@ -61,25 +61,21 @@ The production version will listen on port 8087.
 	
 	\item[GIT] Popular open source version control system. It is similar to SVN, except that all users have all the versions of the source code.
 	
-	\item[Horizontal scaling] Using more computing resources to be able to store more data or to calculate faster.
-	
 	\item[HTTP GET request] A basic HTTP request where the content of a specified URL is requested. Additional parameters may be appended to the URL.
 	
 	\item[HTTP POST request] This type of request is part of the HTTP standard. Using this kind of request the content is sent in the body of the request and not encoded in the URL of the request as in the GET requests.
 	
-	\item[JSON] JavaScript Object Notation is a format which describes JavaScript Object. Each object is given as a list of key value pair, where each value can be either a sub value or an array of values. Objects are written between curly brackets. Arrays are given in squared brackets, where values are divided by commas. The key and value is separated by a colon and those pairs are with a comma.
+	\item[JSON] JavaScript Object Notation is a format which describes JavaScript Object. Each object is given as a list of key value pair, where each value can be either a sub value or an array of values. Objects are written between curly brackets. Arrays are given in squared brackets, where values are divided by commas. The key and value are separated by a colon and those pairs are with a comma.
 	
 	\item[Maven] Dependency manager for JAVA packages. An XML descriptor provides information about dependencies which are automatically downloaded from a central repository. It can be used to customize the build process too.
 	
 	\item[NAT] Network address translation is a method to hide and transform queries from behind a router or gateway to the Internet.
 	
-	\item[PostgreSQL] Open source relational database system, It has many features compared to MySQL or other open source database systems.
+	\item[PostgreSQL] Open source relational database system. It has many features compared to MySQL or other open source database systems.
 	
 	\item[PWM] Pulse-Wave-Modulation is a kind of signal processing when modulation is done by changing the duty cycle of a squared signal.
 	
 	\item[Spring] This Java based framework allows easy code injection and MVC implementation of application. It is an alternative to JavaEE standard.
 
-	\item[Tomcat]  Java Web application container. It runs Java WAR packages, provides dependency injection and some basic maintenance solutions. Can be easily expendable to support spring and databases.
-
-	\item[Vertical scaling] Using faster components in a single computer to provide faster results or more storage capacity.
+	\item[Tomcat]  Java Web application container. It runs Java WAR packages, provides dependency injection and some basic maintenance solutions. It can be easily expendable to support spring and databases.
 \end{description}

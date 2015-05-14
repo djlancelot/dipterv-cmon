@@ -3,9 +3,9 @@
 %----------------------------------------------------------------------------
 \section{Goals of observation gathering}
 %----------------------------------------------------------------------------
-Most physical quantities are measured with great accuracy on very basic devices. From the most basic sound measurements with microphone, to the nowadays popular inertial measurement units every data can be measured. There are also weather sensors and solar sensors available for everyone.
+Most physical quantities are measured with great accuracy on very basic devices. From the most basic sound measurements with microphone to the nowadays popular inertial measurement units every data can be measured. There are also weather sensors and solar sensors available for everyone.
 
- With the evolution of sensor fusion algorithms these data can be merged together to give an even better accuracy or a general knowledge of our environment. This data can be used to predict weather conditions by merging neighborhood sensors into one. It can be used to make predictions based on the weather conditions in an area and the direction of the wind on the location.
+ With the evolution of sensor fusion algorithms these data can be merged together to give an even better accuracy or a general knowledge of our environment. This data can be used to predict weather conditions by merging neighbourhood sensors into one. It can be used to make predictions based on the weather conditions in an area and the direction of the wind on the location.
  
  \begin{figure}[h]
  \centering
@@ -19,7 +19,7 @@ Most physical quantities are measured with great accuracy on very basic devices.
  
  \section{Types of sensors}
  
- Sensors are all around us. We have sensors in our cell phones or any handheld devices. Most of them are connected to the Internet or a network. The measurements of all of these devices can be stored and queried from a database. The usable data in some devices are:
+ Sensors are all around us. We have sensors in our cell phones or in any handheld devices. Most of them are connected to the Internet or to a network. The measurements of all of these devices can be stored and queried from a database. The usable data in some devices are:
  
  \begin{itemize}
  	\item Smartphone
@@ -46,7 +46,7 @@ Most physical quantities are measured with great accuracy on very basic devices.
 
 These examples show that a standard way to retrieve the measurements should include not only the measurement, but the type of the sensor, the measured unit, the location of the sensor and many additional information like this. 
 
-Storing and retrieving this information is done using the SensorML format.
+Storing and retrieving this information are done using the SensorML format.
 
 \section{SensorML}
 
@@ -56,24 +56,24 @@ To have a general structure for the data, there is an abstract hierarchy that re
 \begin{itemize}
 \item FeatureOfInterest: additional constraints provided for the measurement, e.g. time or location of measurement.
 \item ObservedProperty: what type of physical property is measured, e.g. speed, temperature.
-\item Procedure: the virtual or real sensor itself that is providing the data.
-\item Offering: the property itself that has been measured, e.g. wind speed, air humidity, traffic size. 
+\item Procedure: the virtual or real sensor itself that provides the data.
+\item Offering: the property itself that is measured, e.g. wind speed, air humidity, traffic size. 
 \item Result: the output of the procedure, the value that the sensor measured for a given observedProperty and offering.
 \item ResultUnit: the measure of the result, like m/s, km/h for speed.
 \end{itemize}
 
-This provider us enough abstraction to separate the measured properties, the physical properties, the actual sensors and the results from each other.
+This provides us enough abstraction to separate the measured properties, the physical properties, the actual sensors and the results from each other.
 
-It is able to define the location of the sensor, the timestamp of the measurement and the sensor data itself, with many additional information. The data can be stored in SOS servers that can retrieve the measurements on different interfaces. There are additional other services\cite{g4d3} that are present to add demanded functionalities to the service. These other service models are SAS, SPS and WNS, which are introduced below and SOS will be covered in details.
+It is able to define the location of the sensor, the timestamp of the measurement and the sensor data itself with many additional information. The data can be stored in SOS servers that can retrieve the measurements on different interfaces. There are additional other services\cite{g4d3} that are present to add demanded functionalities to the service. These other service models are SAS, SPS and WNS, which are introduced below and SOS will be covered in details.
 
 \section{Sensor Alerting Service}
-This service model takes care of the broadcast of the messages. The clients can subscribe to some special messages or alerts and they will be notified if such an event has occurred. SAS is some kind of event notification service.
+This service model takes care of the broadcast of the messages. The clients can subscribe to some special messages or alerts and they will be notified if such an event occurs. SAS is some kind of event notification service.
 
 \section{Sensor Planning Service}
  
  This service provides a standard interface for controlling sensors and simulations. The SPS service implements the following tasks:
  \begin{itemize}
-\item Description of the Tasks.
+\item Description of the tasks.
 \item Verification of the feasibility of the tasks.
 \item Status check of the running tasks.
 \item Update or modification of running tasks.
@@ -84,15 +84,15 @@ This service model takes care of the broadcast of the messages. The clients can 
 This service connects users with the sensor informations. This model provides a standard interface for communication between clients and the service through HTTP, instant messaging, e-mail, SMS, phone or fax. 
  
  
-\section{Server Observation Service}
+\section{Sensor Observation Service}
 
-Server Observation Servers store SensorML data and let others query, manipulate and add sensors to the database. These sensors can be derived sensors. Such derived sensors are called procedures. A procedure can be a traffic information based on the CCTV camera. An SOS server should be able to handle dependencies based on which procedure requires other procedures to provide data. Sometimes derived sensors are also called virtual sensors, because they don't do physical measurement but provide a derived value.
+Sensor Observation Servers store SensorML data and let others query, manipulate and add sensors to the database. These sensors can be derived sensors. Such derived sensors are called procedures. A procedure can be a traffic information based on the CCTV camera. An SOS server should be able to handle dependencies based on which procedure requires other procedures to provide data. Sometimes derived sensors are also called virtual sensors, because they don't do physical measurement but provide a derived value.
 
 There are many closed and open source implementations of SOS servers. Some open source implementations are introduced here.
 
-The \textbf{MapServer} is written in C, C++, however it can be extended in many other languages\cite{mapserver}. It has a built in GUI to view data, however it is not yet available for the SOS implementation. The server can only be reached by one interface. It was originally developed by University of Minnesota. In the time of writing the paper the code is maintained and supported by the Open Source Geospatial Foundation. It is mostly used for mapping not for serving data for derived sensors. It was used in some projects between NASA and the University of Minnesota. 
+The \textbf{MapServer} is written in C, C++, however it can be extended in many other languages\cite{mapserver}. It has a built in GUI to view data, however, it is not yet available for the SOS implementation. The server can only be reached by one interface. It was originally developed by the University of Minnesota. In the time of writing the paper the code is maintained and supported by the Open Source Geospatial Foundation. It is mostly used for mapping not for serving data for derived sensors. It was used in some projects between NASA and the University of Minnesota. 
 
-\textbf{istSOS} is another implementation in Python\cite{istsos}. It runs its scripts from Apache web server just like MapServer. It uses PostgreSQL database backend to store values. It has a nice GUI for administration. Only supports standard SensorML interface to retrieve data. It is a project of the SUPSI University in Switzerland.
+\textbf{istSOS} is another implementation in Python\cite{istsos}. It runs its scripts from Apache web server just like MapServer. It uses PostgreSQL database backend to store values. It has a nice GUI for administration and only supports standard SensorML interface to retrieve data. It is a project of the SUPSI University in Switzerland.
 
 \textbf{OOSThetys} is a basic toolkit for enabling SensorML communication. It is written in Perl and Java. It is fairly documentated and seems to be abandoned because there has been no new release since the February of 2012.
 
@@ -106,19 +106,19 @@ This implementation is done by the non profit organization with the identical na
 
 The new 4.2 version is easy to install, it has a graphical user interface to set up the database connection and initialize the database storage backend. The software uses PostgreSQL to store data. There is a geospatial extension for PostgreSQL called PostGIS that is also required. PostgreSQL is one of the most used open source relational databases. There are non open source, enterprise versions that allow horizontal scaling of the database. It can be extended with modules like the PostGIS mentioned above.
 
-After setup, the basic usage is described on  52north webpage, but sample queries are shown in the built in test client. 
+After setup, the basic usage is described on 52north webpage, but sample queries are shown in the built in test client. 
 
 The project is built with Maven and uses Spring framework too. The included unit tests ensure that the software's architecture is still consistent after compilation. The project was chosen to be part of Google's Summer of Code 2014 and it gained a lot improvements from that. 
 
-A request can be sent using the connector of each interface. This used to be done by adding the interface name to the application url but in recent versions the service automatically detects the interface from the HTTP metadata. For example http://152.66.253.152:8080/52n-sos-webapp/service is the url where all interface can be reached. The first part is the host of the server. The tomcat application server is listening on port 8080. 52n-sos-webapp is the default name of the web application, service it the default connector for the webservice. The sent HTTP content-type header marks the interface. A detailed description of the interfaces can be seen on table \ref{tab:services}. The response will contain the answers using the same standards found in the request.
+A request can be sent using the connector of each interface. This used to be done by adding the interface's name to the application url, but in recent versions the service automatically detects the interface from the HTTP metadata. For example http://152.66.253.152:8080/52n-sos-webapp/service is the url where all interface can be reached. The first part is the host of the server. The Tomcat application server is listening on port 8080. 52n-sos-webapp is the default name of the web application, service it the default connector for the webservice. The sent HTTP content-type header marks the interface. A detailed description of the interfaces can be seen on table \ref{tab:services}. The response will contain the answers using the same standards found in the request.
 \begin{table}[h]
 \begin{center}
 \begin{tabular}{| l | l | p{8cm} |}
 \hline
 Interface  & Content type & Description \\ \hline \hline
-SOAP & application/soap+xml & Standard SOAP request mostly used in JAVA, it is sending the request in XML format using POST request. \\ \hline
-POX & application/xml & Very similar to SOAP but has a different XML format. \\ \hline
-KVP & application/xml & This is a GET request, meaning that all request parameters are encoded in the URL. The answer is in XML format. \\ \hline
+SOAP & application/soap+xml & Standard SOAP request mostly used in JAVA, it sends the request in XML format using POST request. \\ \hline
+POX & application/xml & Very similar to SOAP but it has a different XML format. \\ \hline
+KVP & application/xml & This is a GET request meaning that all request parameters are encoded in the URL. The answer is in XML format. \\ \hline
 JSON & applicaton/json & This is a POST request which sends and receives information using JSON objects. Most programming languages can easily parse this type of request.\\ \hline
 \end{tabular}
 \caption{Interfaces for 52n SOS server\label{tab:services}}
@@ -129,12 +129,12 @@ JSON & applicaton/json & This is a POST request which sends and receives informa
 \section{SOS commands}
 There are many commands to query or manipulate the SOS server. In this section some of them will be shown using the JSON interface. 
 
-The GetCapabilities command (shown on Listing \ref{lst:getcap}) allows the clients to retrieve a list of the reachable sensors of the server and their configuration. This command lists all the available measurements on the server too. This call does not have any required parameters, only if the details of the response should be controlled. Such detail is the section to be displayed. There are 4 different sections:
+The GetCapabilities command (shown on Listing \ref{lst:getcap}) allows the clients to retrieve a list of the reachable sensors of the server and their configuration. This command lists all the available measurements on the server too. This call does not have any required parameters only if the details of the response should be controlled. Such detail is the section to be displayed. There are 4 different sections:
 \begin{itemize}
-\item ServiceIdentification: the list of profiles that the server has been using. These profiles describe the format that the data is represented in.
-\item ServiceProvider: in this section is the contact information for the operator of the SOS service.
+\item ServiceIdentification: the list of profiles that the server uses. These profiles describe the format that the data is represented in.
+\item ServiceProvider: in this section there is the contact information for the operator of the SOS service.
 \item OperationMetadata: this section provides the available options and their possible values.
-\item FilterCapabilities: what fields are available for filtering. Can be spatial filtering for location or temporal filtering for time range.
+\item FilterCapabilities: what fields are available for filtering. They can be spatial filtering for location or temporal filtering for time range.
 \item Contents: summary of the type and FOI of each procedure. 
 \end{itemize}
 
@@ -223,7 +223,7 @@ After knowing the necessary parameters the getObservation property can be called
 }
 \end{lstlisting}
 
-The response (on Listing \ref{lst:sendobs}) will contain the usual header which is contained by all the responses. It tells the requester the version of the response. After that comes the list of the observations that fit the conditions given. In the observation objects there are the procedures that measured the result, the feature of interests and the observable property that has been measured. The result object contains the uom field which is an abbreviation for the unit of measurement and the specific value. It can be an integer value, floating point or some encoded binary data.
+The response (on Listing \ref{lst:sendobs}) will contain the usual header which is contained by all the responses. It tells the requester the version of the response. Then comes the list of observations that fits the conditions given. In the observation objects there are the procedures that measured the result, the feature of interests and the observable property that is measured. The result object contains the uom field which is an abbreviation for the unit of measurement and the specific value. It can be an integer value, floating point or some encoded binary data.
 
 \begin{lstlisting}[caption={JSON GetObservation response\label{lst:sendobs}}]
 {
@@ -287,7 +287,7 @@ The response (on Listing \ref{lst:sendobs}) will contain the usual header which 
 }
 \end{lstlisting}
 
-If only the result fields are important to the user the shorter GetResult command can be used. It is shown on Figure \ref{lst:getresult}.
+If only the result fields are important to the user, the shorter GetResult command can be used. It is shown on Figure \ref{lst:getresult}.
 
 \begin{lstlisting}[caption={JSON minimal GetResult POST request\label{lst:getresult}}]
 
@@ -300,7 +300,7 @@ If only the result fields are important to the user the shorter GetResult comman
 }
 \end{lstlisting}
 
-The response will be a list of values of the last measurement for the queried properties. The results will be given as a concatenated string where each measurement is separated by a comma and in each measurement the value and its timestamp is separated by a hash mark. It can be seen on Figure \ref{lst:sendresult}.
+The response will be a list of values of the last measurement for the queried properties. The results will be given as a concatenated string where each measurement is separated by a comma, and in each measurement the value and its timestamp are separated by a hash mark. It can be seen on Figure \ref{lst:sendresult}.
 
 \begin{lstlisting}[caption={JSON GetResult response\label{lst:sendresult}}]
 {
@@ -327,10 +327,10 @@ Client applications use these services to communicate with the servers. These ap
 
 \section{SOS client applications}
 
-As the format introduced before is hard to decode for human there are various tools to display stored data in a user friendly way. With these tools measurements can be plotted in time, compared with each other and sensor locations can be displayed using a map. Even measurements can be plotted to a map giving a nice visual aid for processing the measured data. 
+As the format introduced before is hard to decode for humans there are various tools to display stored data in a user friendly way. With these tools measurements can be plotted in time, compared with each other and sensor locations can be displayed using a map. Even measurements can be plotted to a map giving a nice visual aid for processing the measured data. 
 
 52north has an official client application for the SOS server called 52n Sensorweb Client. This is a Java web application that can be configured to connect to multiple hosts and display their sensor data on maps and charts. It is developed using the same tools as the SOS server. 
-This means that the application can be installed next to the SOS server without any extra needs. This client can be opened in a web browser, but some parts run on the backend. This is a relatively complex application that does not yet understand semantic connections between the procedures. A screenshot can be seen on Figure \ref{fig:sweclient}.
+This means that the application can be installed next to the SOS server without any extra needs. This client can be opened in a web browser, but some parts run on the backend. This is a relatively complex application that still does not understand semantic connections between the procedures. A screenshot can be seen on Figure \ref{fig:sweclient}.
 
 \begin{figure}[h]
 \centering
@@ -348,9 +348,9 @@ There is a JavaScript framework that enables users to use only client side tools
 \caption{Screenshot of sos.js\label{fig:sos-js}}
 \end{figure}
 
-There are external softwares that can display their own measurements but not the SensorML standard. To make them usable with 52north SOS the developers created tools to extend such existing softwares to be able to import data from SOS.
+There are external softwares that can display their own measurements but not the SensorML standard. To make them usable with 52north SOS developers created tools to extend such existing softwares to be able to import data from SOS.
 Such extension is the ArcGIS extension which makes SOS data available to ArcGIS server. This is also available to other programs such as $\mu$Dig. 
 
-There are other tools to export data to R language which is used to process large dataset for scientific purposes or to use with other Geographic Information Systems (GIS) softwares. However, the problem is that no client software has the ability to make search available by semantic connections. A client has to be extended with such information to enable convenient filtering when monitoring a cyberphisical system.
+There are other tools to export data to R language which is used to process large dataset for scientific purposes or to use with other Geographic Information Systems (GIS) softwares. However, the problem is that no client software has the ability to make search available by semantic connections. A client has to be extended with such information to enable convenient filtering when monitoring a cyberphysical system.
 
 Fortunately there are standards to describe such systems and convert knowledge from one way to the other. This is described in the next chapter.
