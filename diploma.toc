@@ -8,7 +8,7 @@
 \select@language {english} \contentsline {section}{\numberline {1.4}Sensor Alerting Service}{15}{section.1.4}
 \select@language {english} \contentsline {section}{\numberline {1.5}Sensor Planning Service}{16}{section.1.5}
 \select@language {english} \contentsline {section}{\numberline {1.6}Web Notification Service}{16}{section.1.6}
-\select@language {english} \contentsline {section}{\numberline {1.7}Server Observation Service}{16}{section.1.7}
+\select@language {english} \contentsline {section}{\numberline {1.7}Sensor Observation Service}{16}{section.1.7}
 \select@language {english} \contentsline {section}{\numberline {1.8}52north SOS server}{17}{section.1.8}
 \select@language {english} \contentsline {section}{\numberline {1.9}SOS commands}{18}{section.1.9}
 \select@language {english} \contentsline {section}{\numberline {1.10}SOS client applications}{22}{section.1.10}
@@ -29,7 +29,7 @@
 \select@language {english} \contentsline {section}{\numberline {3.8}Image processing example application}{37}{section.3.8}
 \select@language {english} \contentsline {section}{\numberline {3.9}Building monitoring example application}{38}{section.3.9}
 \select@language {english} \contentsline {section}{\numberline {3.10}Communication between the sensors and the databases}{40}{section.3.10}
-\select@language {english} \contentsline {section}{\numberline {3.11}Improvements for the current system}{40}{section.3.11}
+\select@language {english} \contentsline {section}{\numberline {3.11}Bottlenecks in the current system}{40}{section.3.11}
 \select@language {english} \contentsline {subsection}{\numberline {3.11.1}Scalability}{40}{subsection.3.11.1}
 \select@language {english} \contentsline {subsection}{\numberline {3.11.2}Data integration}{40}{subsection.3.11.2}
 \select@language {english} \contentsline {subsection}{\numberline {3.11.3}Authentication}{41}{subsection.3.11.3}
