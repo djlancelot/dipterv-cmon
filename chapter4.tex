@@ -3,21 +3,21 @@
 %----------------------------------------------------------------------------
 \section{Goal of the implementation}
 
-After introducing the data formats and the cyberphisical system implementation, in this part a sample application is shown that can handle connection to both data types and visualize the measured data in an easily understandable format. This visualization should be viewable on all modern browsers including mobile phones and tablets.
+After introducing the data formats and the cyberphysical system implementation, in this part a sample application is shown that can handle connection to both data types and visualize the measured data in an easily understandable format. This visualization should be viewable on all modern browsers including mobile phones and tablets.
 
 The goal was to show how a connection can be created from third party applications and used as a transparent system. In further chapters the integration of the different types will be shown. The meaning of this phase is to seek for new ways to implement a web application using the connectors provided and measure the needs for such a web application. A whole test system has been created to enable this.
 
 \section{The test environment}
 
-The system has been tested on multiple platforms. There was an Ubuntu Linux based virtual machine, which had a limited 512 MB of RAM, and a max. 10 GB storage. It's network card was hidden behind a NAT provided by the host computer. Java Runtime Environment was installed on the virtual machine for Stardog and SOS. For the web application NodeJS has been set up. 
+The system has been tested on multiple platforms. There was a Ubuntu Linux based virtual machine which had a limited 512 MB of RAM and a max. 10 GB storage. Its network card was hidden behind a NAT provided by the host computer. Java Runtime Environment was installed on the virtual machine for Stardog and SOS. For the web application NodeJS has been set up. 
 
-The other platform was a Windows based computer. It had the same services (Stardog and SOS) running. The monitoring application requires NodeJs, which is a platform independent solution, so this did not mean any problem. The Windows machine is located in the university and contains the SOS database with the real measurements provided by the sensors in the two locations described in the second use case. 
+The other platform was a Windows based computer. It had the same services (Stardog and SOS) running. The monitoring application requires NodeJs, which is a platform independent solution, so this did not mean any problem. The Windows machine is located in the University and contains the SOS database with the real measurements provided by the sensors in the two locations described in the second use case. 
 
-The chosen RDF database is Stardog Community edition. At first the software preallocates too much memory. It might be required for heavy weight applications but in our case it was not necessary.  The startup script had to be changed to make the software start. Changing this parameter does not decreases the performance significantly, compared to another computer with more memory. 
+The chosen RDF database is Stardog Community edition. At first the software preallocates too much memory. It might be required for heavy weight applications, but in our case it was not necessary. The startup script had to be changed to make the software start. Changing this parameter does not decrease the performance significantly compared to another computer with more memory. 
 
 The chosen SOS server is 52north SOS 4.1 This is a recent release of the software. The used development version enables JSON communication. The server requires PostgreSQL database backend and Tomcat application server.
 
-PostgreSQL 9.1.12 is used as the database backend for SOS. PostGIS environment had to be added. The database can be administrated using pgAdmin III from the host computer using port forward. For the Linux test environment no new users has been added, the SOS server uses the admin user to connect to the database. The database had to be created manually but tables and configuration is added during the installation automatically.
+PostgreSQL 9.1.12 is used as the database backend for SOS. PostGIS environment had to be added. The database can be administrated using pgAdmin III from the host computer using port forward. For the Linux test environment no new users are added, the SOS server uses the admin user to connect to the database. The database had to be created manually, but tables and configuration are added during the installation automatically.
 
 Tomcat 7 is installed to support SOS. To keep the system safe, on the Linux machine a new user is created to run the container and the application. The Stardog database is also running in a Tomcat like environment that is why it is started by the same user as the SOS server. 
 
@@ -30,12 +30,12 @@ The engine was introduced in 2008 and it caused a breakthrough in Javascript lan
 \item \textbf{Hidden classes}: In V8 every object is a class. They are stored in a tree based structure and can be recalled faster.
 \item \textbf{Dynamic Machine Code Generation}: V8 generates machine code from source without any intermediate bytecode language, like in Java.
 \item \textbf{Inline cache}: It has a built in inline cache for resolving method names quicker.
-\item \textbf{Efficient Garbage Collection}:Garbage collection freezes code execution and has a detailed map of the variable, however each garbage collection phase would only clear some part of the memory, it does not run full garbage collection every time.
+\item \textbf{Efficient Garbage Collection}:Garbage collection freezes code execution and has a detailed map of the variable, however, each garbage collection phase would only clear some part of the memory, it does not run full garbage collection every time.
 \end{itemize}
 NodeJS builds upon this V8 engine and lets JavaScript run on backend. Another advantage is that NodeJS has a single threaded, event driven core. This enables running applications faster, without worrying about thread safety. The architecture of the NodeJS environment can be seen on figure \ref{fig:node}. 
 To keep the integrator separated a different user is added to run server side code on the Linux system. 
 No web application container or web server is needed to run a NodeJS application. 
-The software itself handles TCP connections and other modules help do it similar to Java Servlets. 
+The software itself handles TCP connections and other modules help to do it similar to Java Servlets. 
 Because it has smaller overhead and dependencies, the created application should run faster than a rich Java Web application. 
 NodeJS has an easy to use packaging system that makes dependency handling simple, like maven for Java. All necessary modules names are added to the related part of the package.json file and required packages are downloaded using the npm install command from a central repository. On the Windows machine a fork of NodeJS, the IOJS engine was tested. It is a community driven alternative that is fully compatible with NodeJS.
  
@@ -47,7 +47,7 @@ NodeJS has an easy to use packaging system that makes dependency handling simple
 
 \section{Dependent modules}
 
-Using the NPM (Node Package Manager) new dependent packages can be easily downloaded from a central  repository. NodeJS has a great coverage of packages, people can easily share their own modules. It contained 143 300 packages at the time of writing. In the implementation of the monitoring application there was a need for an interface for the database communication, interface for generating the web services and serving web pages. The most important packages were the following: 
+Using the NPM (Node Package Manager) new dependent packages can be easily downloaded from a central repository. NodeJS has a great coverage of packages, people can easily share their own modules. It contained 143 300 packages at the time of writing. In the implementation of the monitoring application there was a need for an interface for the database communication, interface for generating the web services and serving web pages. The most important packages were the following: 
 \begin{itemize}
 
 \item The ExpressJS module acts as the Servler engine for JavaScript. It handles incomming connections and parsed HTTP request are passed to a callback function which generates the responses. Different urls can have different callback functions to do routing. Express also supports many templating engines, like EJS or JADE.
@@ -55,17 +55,17 @@ Using the NPM (Node Package Manager) new dependent packages can be easily downlo
 \item Restler is an easy to use module that can asynchronously read a web page and parse it as JSON data and return it to the callback function. This can be used to communicate with the SOS server as it has an interface that is using JSON post requests to 
 receive queries.
 
-\item Stardog.JS is Stardog database servers own connector to get SPARQL queries. It is in early stages, however all the necessary functions are working. 
+\item Stardog.JS is Stardog database servers own connector to get SPARQL queries. It is in early stages, however, all the necessary functions are working. 
 
-\item Nodemon, Forever or PM2 are utilities that run NodeJS codes automatically, restarts them on error or code changes. There is a support for development, that on any sourcecode change the changes are pushed to the browser without the need to refresh the browser. They can be configured to restart on error.
+\item Nodemon, Forever or PM2 are utilities that run NodeJS codes automatically, restarts them on error or code changes. There is a support for development that on any sourcecode change the changes are pushed to the browser without the need to refresh the browser. They can be configured to restart on error.
 \end{itemize}
 
 \section{AngularJS: frontend of the monitoring application}
 
-The ExpressJS module is serving the static files from the backend. The webpage itself is a single page web application which means that it consists of one HTML page and some partial pages that are loaded on the client side by a JavaScript framework. The framework that loads the different modules is called AngularJS. It was acquired by Google and now the project is maintained by them\cite{angular}. It's main advantage is that it implements a clear Model-View-Controller pattern. It dynamically changes the views, the HTML page based on the changes in the model, without additional coding.
-It is using dependency injection to be easily extensible.
+The ExpressJS module is serving the static files from the backend. The webpage itself is a single page web application which means that it consists of one HTML page and some partial pages that are loaded on the client side by a JavaScript framework. The framework that loads the different modules is called AngularJS. It was acquired by Google and now the project is maintained by them\cite{angular}. Its main advantage is that it implements a clear Model-View-Controller pattern. It dynamically changes the views, the HTML page based on the changes in the model, without additional coding.
+It uses dependency injection to be easily extensible.
 
-For manipulating the user interface some external packages has been added to Angular. The most important of those are the following:
+For manipulating the user interface some external packages are added to Angular. The most important of those are the following:
 \begin{itemize}
 \item \textbf{Chart.js}: This is a module that can be used to draw line charts or other kind of charts. This has an Angular integration and can be used to display the measured data in a time series plot. It can automatically smooth the curves. This is an open source project using HTML5.
 \item \textbf{Angular Bootstrap DateTime picker}: This module has been chosen to select the time period to display. This is an open source project too.
@@ -79,8 +79,8 @@ There are different building blocks for AngularJS. Those blocks that have been u
 \begin{itemize}
 \item \textbf{Module} is the main building block of Angular. It is paired to the HTML page and this invokes controllers based on the location provided. The global dependencies are injected into the module and they are inherited by the controllers afterwards.
 \item \textbf{Controller} pairs the view to the models. They modify and view according to the model and they load the model if needed. The controller does that using the \$scope global variable, which is shared with the views. The controller sets the template of the inner content(dynamic part) of the web page too.
-\item \textbf{Directive}'s are custom defined page elements that can be injected in any page. They have their own controller and template. Custom complex UI elements can be directives.
-\item \textbf{Filter}'s can be applied to format the view of the model. Filters can do uppercase, lowercase on strings, sorting of array, format currencies, etc. They are an applied function on a given input data.
+\item \textbf{Directive}s are custom defined page elements that can be injected in any page. They have their own controller and template. Custom complex UI elements can be directives.
+\item \textbf{Filter}s can be applied to format the view of the model. Filters can do uppercase, lowercase on strings, sorting of array, format currencies, etc. They are an applied function on a given input data.
 \end{itemize}
 
 \section{RDF representation of the SOS data}
@@ -91,7 +91,7 @@ There are different building blocks for AngularJS. Those blocks that have been u
 \caption{The Ontology used in the monitoring system.\label{fig:implrdf}}
 \end{figure}
 
-The general SISRO representation was missing some data of the example use case at the time of writing. To bridge this problem the monitoring application is using a different ontology that has been created to enable sensor browsing. This ontology contains only the necessary information to query sensor information. The elements can be seen on Figure \ref{fig:implrdf}. Some parts of the ontology hasn't been used in the monitoring system, the key components are:
+The general SISRO representation was missing some data of the example use case at the time of writing. To bridge this problem the monitoring application uses a different ontology that is created to enable sensor browsing. This ontology contains only the necessary information to query sensor information. The elements can be seen on Figure \ref{fig:implrdf}. Some parts of the ontology are not used in the monitoring system, the key components are:
 
 \begin{itemize}
 \item \textbf{Sensor}: This object is the ancestor of all sensor types. It has the Weather and Other sensors and their children. The instances of the child classes are the actual sensors. Figure \ref{fig:implrdf} shows that a final sensor can have multiple measurement, thus it can have multiple parents. Eco sensors are instances of the CPSCorridorEcoSensor and door state sensors are Instances of CPSDoorStateSensors. 
@@ -100,7 +100,7 @@ The general SISRO representation was missing some data of the example use case a
 \item \textbf{ObservedPopertyType}: This is the type of the observed property it has 3 instances in the example application: quantity, text, boolean.
 \end{itemize}
  
-The sensors of the use case are introduced in the end of the previous chapter, so those won't be covered here in details.
+The sensors of the use case are introduced at the end of the previous chapter so those are not be covered here in details.
   
 \section{Architecture of the monitoring system}
 
@@ -135,7 +135,7 @@ SELECT ?name ?label {?name rdfs:subClassOf+ mit:sensor ; rdfs:label ?label. FILT
 \end{lstlisting}
 
 \subsection{Capabilities service}
-The Capabilities service receives a procedure and returns all the information that describe the sensor in some way. This is similar to what SOS getCapabilities would return but with additional information. It is done using SPARQL in the RDF store. The result of this service call is used in other parts of the application. The SPARQL query for this can be seen on Listing \ref{lst:capsparql}. The result will be given as a JSON object. It will contain the sensor name, the procedure name, the offering of the procedure, the feature of interest of the procedure, the label of the feature of interest, the observed property URI, its name, and the name of the type of the observed property. 
+The Capabilities service receives a procedure and returns all the information that describes the sensor in some way. This is similar to what SOS getCapabilities would return but with additional information. It is done using SPARQL in the RDF store. The result of this service call is used in other parts of the application. The SPARQL query for this can be seen on Listing \ref{lst:capsparql}. The result will be given as a JSON object. It will contain the sensor name, the procedure name, the offering of the procedure, the feature of interest of the procedure, the label of the feature of interest, the observed property URI, its name, and the name of the type of the observed property. 
 
 
 \begin{lstlisting}[caption={SPARQL query for Capabilities\label{lst:capsparql}}]
@@ -153,7 +153,7 @@ WHERE { <procedure/name> demo:procedure ?procedure ;
 \end{lstlisting}
 
 \subsection{Search service}
-The search service filters the sensor list. By default it will return the list of all sensors in the system. If there is an additional parameter list given in a given format the system will modify the query accordingly. This format is an array of  JSON objects which have three fields: 
+The search service filters the sensor list. By default it will return the list of all sensors in the system. If there is an additional parameter list given in a given format the system will modify the query accordingly. This format is an array of JSON objects which have three fields: 
 \begin{itemize}
 \item[text] The displayed name of the given parameter, it is not used in the backend.
 \item[value] The class URI which identifies the class itself. This is added to the query.
@@ -171,7 +171,7 @@ SELECT ?procedure ?name ?offering
 
 \subsection{Observe service}
 The Observe service queries sensor observations and returns them to the frontend.
-The time range can be given to the query allowing the frontend to narrow down the data to a manageable level. The service uses the SOS component. It is expecting an object similar to the result of the Capabilities service as an input parameter, and also two datetime strings in ISO 8601 format, which are the start and end times of the observations. The service automatically decreases the number of results to a displayable number of 50 results if more has been found. The result will be two array and some metadata: one array for the date (x field) and another array for the measurements (y field). Boolean results are automatically converted to a series of zeros and ones. The text fields are returned as string values in the y array.
+The time range can be given to the query allowing the frontend to narrow down the data to a manageable level. The service uses the SOS component. It is expecting an object similar to the result of the Capabilities service as an input parameter, and also two datetime strings in ISO 8601 format, which are the start and end times of the observations. The service automatically decreases the number of results to a displayable number of 50 results if more has been found. The result will be two arrays and some metadata: one array for the date (x field) and another array for the measurements (y field). Boolean results are automatically converted to a series of zeros and ones. The text fields are returned as string values in the y array.
 
 \subsection{Location service}
 The Location service queries only the positions of the given object. The object should be given in a format similar to the result of the Capabilities service. The service uses the SOS component to query the featureOfInterest's position and return it as an object. Yet, it can only retrieve point like sensors.
@@ -180,7 +180,7 @@ The Location service queries only the positions of the given object. The object 
 This service retrieves the current status of the system. The status is queried by the Status component from time to time. The service is simply returning the result in a response and some additional metadata about showable fields.
 
 \section{Backend components}
-There are three main components for the monitoring system. They all provide needed functionalities the the web services describe before to shae some common tasks.
+There are three main components for the monitoring system. They all provide needed functionalities the web services described before to share some common tasks.
 
 \subsection{SOS component}
 This component provides connectivity to the SOS server. Connection parameters are given in the global config file. The component has two main functions:
@@ -235,11 +235,11 @@ There are built in Angular directives that make listing and ordering possible. S
 
 This component accepts one parameter, the identifier of the procedure and shows all the related measurements. It queries the necessary parameters using the capabilities backend service. The service returns all the possible measurements and as a second step it invokes the measurement plotter directive called sosplot for all the possible observable properties.
 It also displays the position of the sensor using Google Maps. 
-The data date and time range can be selected by a third party datetime AngularJS plugin. After selecting the time the charts are automatically updated. This component highly depends on the two directives Sosplot and Sosmap.
+The data date and time range can be selected by a third party datetime AngularJS plugin. After selecting the time, the charts are automatically updated. This component highly depends on the two directives Sosplot and Sosmap.
 
 \subsection{Sosplot component}
-This component is an Angular directive. These directives act as new custom designed HTML elements, which Angular will transform into standard web page elements. The Sosplot directive is used to display measurement data. It needs three parameters, an object which contains the details of the observed property and the start and end time. Using this information it uses the backend observe service to query the measurements and then display the results using the previously mentioned Chart.JS third party chart plotter module. If the data is not plottable, like if we have text property type, the directive automatically loads a different template that will render a list of the text messages. 
+This component is an Angular directive. These directives act as new custom designed HTML elements, which Angular will transform into standard web page elements. The Sosplot directive is used to display measurement data. It needs three parameters, an object which contains the details of the observed property, and the start and the end time. Using this information it uses the backend observe service to query the measurements and then display the results using the previously mentioned Chart.JS third party chart plotter module. If the data is not plottable, like if we have text property type, the directive automatically loads a different template that will render a list of the text messages. 
 
 \subsection{Sosmap component}
-The Sosmap component is an Angular directive which is using the Google Maps API to display the position of the sensor. The directive is using the location backend service. Now it is capable of displaying single points on a map.
+The Sosmap component is an Angular directive which uses the Google Maps API to display the position of the sensor. The directive uses the location backend service. Now it is capable of displaying single points on a map.
 

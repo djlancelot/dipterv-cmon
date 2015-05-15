@@ -21,16 +21,16 @@ This page gives an overview of all the sensors that exist in the system. A list 
 \caption{Screenshot of the sensor browser page.\label{fig:shbrowser}}
 \end{figure}
 
-It is possible to filter on certain categories. For that the input field has to be used at the top of the page. By typing more than 3 letters into the field, an Autocomplete list will drop down with the possible completion of the phrase. If nothing is found, there won't be any drop down menus. The user has to click on the wanted item from the list to add a new filter condition. After selecting one or multiple filters the Filter button has to be pushed to apply the changes. The list will refresh and show the union of all the given categories. The system can not parse those items in the input field which are not selected through the list.  
+It is possible to filter on certain categories. For that the input field has to be used at the top of the page. By typing more than 3 letters into the field, an Autocomplete list will drop down with the possible completion of the phrase. If nothing is found, there will not be any drop down menus. The user has to click on the wanted item from the list to add a new filter condition. After selecting one or multiple filters the Filter button has to be pushed to apply the changes. The list will refresh and show the union of all the given categories. The system cannot parse those items in the input field which are not selected through the list.  
 
 \subsection{Sensor details page}
-If one sensor is clicked a details page is shown for the selected sensor. The  page shows two calendars from which the first one lets the user select the start date of the shown period, the second is for the end date of the period. The data between these two dates are shown on the charts. By default the past 6 hours are selected. 
+If one sensor is clicked a details page is shown for the selected sensor. The page shows two calendars from which the first one lets the user select the start date of the shown period, the second is for the end date of the period. The data between these two dates are shown on the charts. By default the past 6 hours are selected. 
 
 The page lists all the observed properties measured by the sensor. It can list quantities, boolean data type or text only. Quantities and boolean data is shown on a chart, while the text data is shown as a list of the messages with timestamps. The lists and charts automatically reload themselves if a different start or end time is selected. If there is no data in the given range, an error message is displayed above the chart. It will automatically disappear if the time period is changed to a range where data can be found. 
 
-Note, that at most 50 measurements are  displayed on each chart to keep them readable.
+Note, that at most 50 measurements are displayed on each chart to keep them readable.
 
-The page also shows a map, where the current position of the sensor can be seen. The map is using Google Maps to display the data.
+The page also shows a map where the current position of the sensor can be seen. The map is using Google Maps to display the data.
 
 A screenshot can be seen on Figure \ref{fig:shshow}.
 
@@ -48,7 +48,7 @@ The status page shows a table of the sensor names and observed properties. If th
 
 The table can be ordered based on the observed property name or the sensor name by clicking on the headers of the table row. 
 
-By clicking the checkbox below the title the sensors and observed properties which are alive can be hidden from the list to see the dead sources only.
+By clicking the checkbox below the title, the sensors and observed properties which are alive can be hidden from the list to see the dead sources only.
 
 The time period for checking the sensors and the time limit from which the sensor is considered dead can be set using the configuration. 
 
@@ -64,7 +64,7 @@ A screenshot of the page can be seen on Figure \ref{fig:shstat}.
 
 
 \subsection{Configuration of the monitoring system}
-The configuration of the system can be done by editing the config files in the  server/config/environment folder. Every environment has its own configuration file, Listing \ref{lst:devconf} shows an example for the development environment. The file merges the parameters set as a JSON object with the general configuration template and returns it to the program.
+The configuration of the system can be done by editing the config files in the server/config/environment folder. Every environment has its own configuration file, Listing \ref{lst:devconf} shows an example for the development environment. The file merges the parameters set as a JSON object with the general configuration template and returns it to the program.
 
 
 \begin{lstlisting}[caption={Sample configuration for development environment\label{lst:devconf}}]
@@ -104,7 +104,7 @@ checkinterval: 15
 
 \section{Responsiveness}
 
-The application has been tested on multiple devices. The page load time is minimized during the build process which causes huge performance gain when loading the webpage. The page has been tested using the \url{tools.pingdom.com} website and all requests load time were around 1 seconds from European servers using a computer which ran the Windows version of the test environment. 
+The application has been tested on multiple devices. The page load time is minimized during the build process which causes huge performance gain when loading the webpage. The page has been tested using the \url{tools.pingdom.com} website and all requests load time were around 1 second from European servers using a computer which ran the Windows version of the test environment. 
 
 The website could be viewed on different screens. The content automatically scaled itself to fill the display of smaller mobile devices. For that purpose the two column structure is changed to a one column structure for the sake of readability.
 
@@ -116,9 +116,9 @@ There can be a separate user interface for modifying the ontology and pair new v
 
 The monitoring service uses a previously implemented and extended simple ontology for the semantic connection. In the future it should be integrated with the SISRO ontology. Unfortunately in the sample system there was no connection between the two databases.
 
-An authentication layer can be added above the system, to hide the interface from unauthorized person. As there is no database modification is done using the monitoring system this is not necessary yet. Authentication can be solved by using HTTP proxy and HTTP basic authentication on the proxy server.
+An authentication layer can be added above the system to hide the interface from unauthorized person. As no database modification is done by using the monitoring system this is not necessary yet. Authentication can be solved by using HTTP proxy and HTTP basic authentication on the proxy server.
 
-The sensor list should have been filtered on multiple type. Now only the category of the sensor can be given. The system was prepared to handle multiple search criteria, it can be easily added to the system.
+The sensor list should have been filtered on multiple types. Now only the category of the sensor can be given. The system was prepared to handle multiple search criteria, it can be easily added to the system.
 
 The load of the sensors could be displayed on the sensor list page. As the data will be stored in the RDF database, the sensor list should be able to query the load of the sensors while searching them. At the time of the writing the Sensors did not report their condition to the sample database and the scheme of the destination RDF store was different from the used ontology, which made this approach impossible.
 
@@ -133,7 +133,7 @@ The state of each sensor should be stored in a different database. In the curren
 The state page should also check if there is connection available to the SOS server and the RDF server to detect server failures. These errors can be detected by simply using the web page but the error messages may not be straight forward.
 
 \section{Conclusion}
-During the thesis project the author could see the steps of implementing a test environment to a cyberphisical system. Standard description format for sensor data storage of such systems got known. Databases for storing those data was investigated. The one with the most features and plarform independent implementation was chosen. The standard way to describe semantic description for such data and possible database solutions for such systems were also explained. A semantic database with great number of features and Javascript interface has been chosen. After the basics were introduced an actual use case for such a system was shown which was part of the BUTE ETIK project. The implementation of the monitoring system was based on this project. The used technologies were shared and a description of the monitoring system has been given. These technologies were NodeJS with AngularJS frontend using the previously introduced databases. 
+During the thesis project the author could see the steps of implementing a test environment to a cyberphysical system. Standard description format for sensor data storage of such systems got known. Databases for storing those data was investigated. The one with the most features and plarform independent implementation was chosen. The standard way to describe semantic description for such data and possible database solutions for such systems were also explained. A semantic database with great number of features and Javascript interface has been chosen. After the basics were introduced an actual use case for such a system was shown which was part of the BUTE ETIK project. The implementation of the monitoring system was based on this project. The used technologies were shared and a description of the monitoring system was given. These technologies were NodeJS with AngularJS frontend using the previously introduced databases. 
 
 The implementation showed that NodeJS is capable of serving the purpose of a monitoring system of Cyberphisical systems. Its great number of tools made it easy to add new features of the system. It is fast and it has great support for many interfaces. It can run with small overhead and it can be installed on most platforms. AngularJS is a great tool for Single page application, it is mobile friendly and supports most of the browsers. As web based technologies arise, this solution is a great way to write monitoring application. 
 
