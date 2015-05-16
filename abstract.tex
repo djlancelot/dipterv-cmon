@@ -4,7 +4,17 @@
 \selectlanguage{magyar}
 \chapter*{Kivonat}\addcontentsline{toc}{chapter}{Kivonat}
 
-Minden ember nap mint nap találkozik olyan szenzorokkal, melyek hálózatba kötve kommunikálnak egymással vagy egy központi egységgel. Ezek lehetnek akár idõjárás érzékelõk, utcai kamerák vagy mobiltelefonok. Az eszközök  "Internet of things" (dolgok internetje) részévé válnak, hogy aztán a méréseket kiértékelve következtetéseket vonjunk le, és automatikusan beavatkozhassunk a környezetünkbe. Az ilyen kiberfizikai rendszerek felett azonban nincsenek szemantikai kapcsolatok, általában a szenzorok információit csak adott feladatokra használják ki. Gazdaságosabb lehet az egyes szenzorokat több feladatra is felhasználni, ehhez azonban több dologra is szükség van. Egy részrõl szükséges egy szabványos elérés az adatok eléréséhez, ez a SensorML. Másodsorban szükséges egy értelmezési, szemantikai megközelítés ami alapján a szenzorok kereshetõek lehetnek. Nem utolsó sorban a két dolgot össze kell kapcsolni. A diplomamunkám témája az utóbbi részek megvalósításának jelen helyzete és egy mintaprogram kidolgozása, amivel ezek a kiberfizikai rendszerek monitorozhatóak.
+Minden ember nap mint nap találkozik olyan szenzorokkal, melyek hálózatba kötve kommunikálnak egymással vagy egy központi egységgel. Ezek lehetnek akár idõjárás érzékelõk, utcai kamerák vagy mobiltelefonok. Az eszközök  "Internet of things" (dolgok internetje) részévé válnak, hogy aztán a méréseket kiértékelve következtetéseket vonjunk le, és automatikusan beavatkozhassunk a környezetünkbe. Az ilyen rendszereket hívjuk kiberfizikai rendszernek. Ezek azonban többnyire elszigetelt adatbázisokból állnak, ahol a küönböz\H{o} adatbázisok között nincs kapcsolat, s\H{o}t különösebb el\H{o}nyt az összekapcsolás sem jelentene. A szenzoradaok felett egy olyan leírás is szükséges ehhez, mely ezeket a szemantikai kapcsolatokat írja le a szenzorok között. A szemantikai kapcsolat megléte esetén következtetni lehet számítógép segítségével az adatokból vagy könnyebb módon lehet keresni az adatbázisban. A dolgozat ennek megfelel\H{o}en 4 részb\H{o}l áll. 
+
+A bevezet\H{o} utáni els\H{o} rész bemutat egy szabványos nyelvet, mely alapján a szenzoradatok lekérdehet\H{o}ek a rendszerb\H{o}l, a SensorML-t. A fejezetben megismerhet\H{o} a SensorML eredete, felépítése és több implementált szolgáltatás ismertetésre kerül. Ezek közül az 52north megoldása kerül kiemelésre, mert ezt használja az egyetemen készített mintamegoldás.
+
+A második rész a szemantikai leírást megvalósító ontológiát ismerteti. Bevezetést nyújt az ontológia leírására használt RDF szabványra, és több RDF kiszolgáló bemutatásra kerül. Végül a projektben használt Stardog RDF adatbázis kezel\H{o} kerül részletes ismertetésre.
+
+A harmadik fejezet ismerteti az egyetemi projektet, melynek részét képezi a monitorozó rendszer. A projekt feladata, a felhasznált szenzorok és a köztük lév\H{o} kapcsolat kerül részletes bemutatásra. 
+
+Az összegzés el\H{o}tti fejezet írja le a monitorozó rendszer felépítését, a felhasznált modulokat és technológiákat.
+
+Az összegzés foglalja össze az elért eredményeket és mutatja be a rendszer használatát.
 
 %----------------------------------------------------------------------------
 % Abstract in english
@@ -12,6 +22,25 @@ Minden ember nap mint nap találkozik olyan szenzorokkal, melyek hálózatba kötve 
 \selectlanguage{english}
 \chapter*{Abstract}\addcontentsline{toc}{chapter}{Abstract}
 
-Most of us encounter different sensors every day that act together while connected into a network. These can be either weather sensors, CCTV cameras or smart-phones. These devices become part of the Internet of Things by evaluating their observations and interacting with its environment. Such cyber-physical systems do not contain semantic connections between its sensors, they are only used for one purpose. It would be more efficient to be able to use each sensor for several tasks. Many things are needed for that. Firstly, there should be a standard language for accessing information, this is called SensorML. Secondly, there shall exist a semantic knowledge about the sensors to make them easily searchable. In this thesis the latter parts are described and a sample implementation is introduced.
+Most of us encounter different sensors every day that act together while connected into a network. These can be either weather sensors, CCTV cameras or smart-phones. These devices become part of the Internet of Things by evaluating their observations and interacting with its environment.
+These are called cyberphysical systems. 
+These systems usually contain separate databases, where each database is not connected with the others in any way, moreover the existence of these connections would not gain any advantage.
+There should be such a description on top of the sensor data, which would describe such semantic connections between the sensors.
+While having such a description it would be possible to reason with the help of a computer using the data or it would make searching the database easier.
+This thesis consists of for part.
+
+The first section after the introduction describes a standard language for querying the database called the SensorML. The origins, the structure and multiple implementations are introduced in the section. 
+The solution of 52north organization is described in details, because it is used by the example solution done at the University.
+
+The second section shows the ontology used to create the semantic connection between the sensors.
+The RDF standard which is used to describe such ontologies and some popular RDF databases are introduced.
+The database engine used in the University project called Stardog is described in details in the end.
+
+The third chapter is about the University project itself. The monitoring system is an important building block of this project.
+The goal of the project, the used sensors and the connection between them is introduced in the section.
+
+The section before the summary describes the monitoring system itself. It describes the used modules and technologies.
+
+The summary contains the conclusion and the user manual for the system.
 \vfill
 
