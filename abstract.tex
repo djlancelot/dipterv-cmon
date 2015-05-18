@@ -4,18 +4,15 @@
 \selectlanguage{magyar}
 \chapter*{Kivonat}\addcontentsline{toc}{chapter}{Kivonat}
 
-Minden ember nap mint nap találkozik olyan szenzorokkal, melyek hálózatba kötve kommunikálnak egymással vagy egy központi egységgel. Ezek lehetnek akár idõjárás érzékelõk, utcai kamerák vagy mobiltelefonok. Az eszközök  "Internet of things" (dolgok internetje) részévé válnak, hogy aztán a méréseket kiértékelve következtetéseket vonjunk le, és automatikusan beavatkozhassunk a környezetünkbe. Az ilyen rendszereket hívjuk kiberfizikai rendszernek. Ezek azonban többnyire elszigetelt adatbázisokból állnak, ahol a küönböz\H{o} adatbázisok között nincs kapcsolat, s\H{o}t különösebb el\H{o}nyt az összekapcsolás sem jelentene. A szenzoradaok felett egy olyan leírás is szükséges ehhez, mely ezeket a szemantikai kapcsolatokat írja le a szenzorok között. A szemantikai kapcsolat megléte esetén következtetni lehet számítógép segítségével az adatokból vagy könnyebb módon lehet keresni az adatbázisban. A dolgozat ennek megfelel\H{o}en 4 részb\H{o}l áll. 
+Minden ember nap mint nap találkozik olyan szenzorokkal, melyek hálózatba kötve kommunikálnak egymással vagy egy központi egységgel. Ezek lehetnek akár idõjárás érzékelõk, utcai kamerák vagy mobiltelefonok. Az eszközök  "Internet of things" (dolgok internetje) részévé válnak, hogy aztán a méréseket kiértékelve következtetéseket vonjunk le, és automatikusan beavatkozhassunk a környezetünkbe. Az ilyen rendszereket hívjuk kiberfizikai rendszernek. Ezek azonban többnyire elszigetelt adatbázisokból állnak, ahol a küönböz\H{o} adatbázisok között nincs kapcsolat, s\H{o}t különösebb el\H{o}nyt az összekapcsolás sem jelentene. A szenzoradaok felett egy olyan leírás is szükséges ehhez, mely ezeket a szemantikai kapcsolatokat írja le a szenzorok között. A szemantikai kapcsolat megléte esetén következtetni lehet számítógép segítségével az adatokból vagy könnyebb módon lehet keresni az adatbázisban. Az egyetemi projekt kapcsán egy ilyen rendszer lett kiépítve, ehhez azonban több dolog szükséges. 
 
-A bevezet\H{o} utáni els\H{o} rész bemutat egy szabványos nyelvet, mely alapján a szenzoradatok lekérdehet\H{o}ek a rendszerb\H{o}l, a SensorML-t. A fejezetben megismerhet\H{o} a SensorML eredete, felépítése és több implementált szolgáltatás ismertetésre kerül. Ezek közül az 52north megoldása kerül kiemelésre, mert ezt használja az egyetemen készített mintamegoldás.
+Szükség van egy szabányos nyelvre, mely alapján a szenzoradatok lekérdehet\H{o}ek a rendszerb\H{o}l, ez a nyelv az OGC konzorcium által fenntartott SensorML. Ez egy XML alapú nyelv, melynek több nyílt forrású implementációja létezik. Ezek közül az 52north az egyik legelterjedtebb és legdinamikusabban fejl?d?, így ez lett felhasználva az egyetemi projekt kapcsán is.
 
-A második rész a szemantikai leírást megvalósító ontológiát ismerteti. Bevezetést nyújt az ontológia leírására használt RDF szabványra, és több RDF kiszolgáló bemutatásra kerül. Végül a projektben használt Stardog RDF adatbázis kezel\H{o} kerül részletes ismertetésre.
+A másik szükséges rész a szemantikai leírást megvalósító ontológia. Ennek tárolására az RDF a leggyakrabban használt leírási  módszer. Az ontológia tárolására is több adatbázis létezik, ezek közül az egyetemi projekt a Stardog RDF adatbázist használja, mely minden szüksége funkciót integrálva tartalmaz.
 
-A harmadik fejezet ismerteti az egyetemi projektet, melynek részét képezi a monitorozó rendszer. A projekt feladata, a felhasznált szenzorok és a köztük lév\H{o} kapcsolat kerül részletes bemutatásra. 
+A FIRST rövidítés? EU-s projekt keretén készült el, az ezen alkotóelemeket felhasználó kiberfizikai rendszer. A rendszer képes az adatok szemantikai leírására, a mérések tárolására és újabb alkalmazások telepítésére.
 
-Az összegzés el\H{o}tti fejezet írja le a monitorozó rendszer felépítését, a felhasznált modulokat és technológiákat.
-
-Az összegzés foglalja össze az elért eredményeket és mutatja be a rendszer használatát.
-
+A mért adatokat felhasználásához, a következtetések levonásához szükséges egy monitorozó rendszer, mely a felhasználó számára értelmezhet\H{o} formában jeleníti meg a mért értékeket. Egy ilyen web alapú, mobilbarát rendszer lett kialakítva és telepítve a meglév\H{o} rendszer mellé.  
 %----------------------------------------------------------------------------
 % Abstract in english
 %----------------------------------------------------------------------------
@@ -26,21 +23,15 @@ Most of us encounter different sensors every day that act together while connect
 These are called cyberphysical systems. 
 These systems usually contain separate databases, where each database is not connected with the others in any way, moreover the existence of these connections would not gain any advantage.
 There should be such a description on top of the sensor data, which would describe such semantic connections between the sensors.
-While having such a description it would be possible to reason with the help of a computer using the data or it would make searching the database easier.
-This thesis consists of for part.
+While having such a description it would be possible to reason with the help of a computer using the data or it would make searching the database easier. During the University project such a system was built, which required some additional things.
 
-The first section after the introduction describes a standard language for querying the database called the SensorML. The origins, the structure and multiple implementations are introduced in the section. 
-The solution of 52north organization is described in details, because it is used by the example solution done at the University.
+A standard language is needed, which makes querying, manipulating the data possible. This is SensorML, which is maintained by Open Geospatial Consortium. This is an XML based language which has many open source implementation. The most popular and rapidly developing one is 52north, which was used in the University project.
 
-The second section shows the ontology used to create the semantic connection between the sensors.
-The RDF standard which is used to describe such ontologies and some popular RDF databases are introduced.
-The database engine used in the University project called Stardog is described in details in the end.
+The other necessary part is the ontology which  is the semantic description of the system. The RDF standard is the most popular way to describe such properties. There are many RDF stores, from which the Stardog RDF has been used, which contains all necessary features integrated in an easy to use way.
 
-The third chapter is about the University project itself. The monitoring system is an important building block of this project.
-The goal of the project, the used sensors and the connection between them is introduced in the section.
+The cyberpysical system was created within the EU project FIRST. The system is capable of storing the description and the measurements and it can deploy new applications too.
 
-The section before the summary describes the monitoring system itself. It describes the used modules and technologies.
+To use the measured data and see the conclusion a user friendly monitoring system shall be created. Such a WEB based, mobile friendly system was designed and deployed next to the cyberphysical system.
 
-The summary contains the conclusion and the user manual for the system.
 \vfill
 
